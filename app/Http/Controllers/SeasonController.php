@@ -28,7 +28,7 @@ class SeasonController extends Controller
      * @return redirect
      */
     public function season_create(Request $request) {
-
+        echo "test";
         Season::create(["name" => $request->name]);
         return redirect("/seasons")->with("successMessage", "登録が完了しましたg");
     }
