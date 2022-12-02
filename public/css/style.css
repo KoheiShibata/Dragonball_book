@@ -1,0 +1,153 @@
+/* header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: fixed;
+    height: 58px;
+    border-bottom: solid 1px #cfcfcf;
+    top: 0;
+    right: 0;
+    left: 0;
+    align-items: center;
+    z-index: 1;
+    background-color: #EEEEEE;
+}
+
+.header-list {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 35px;
+    display: flex;
+}
+
+li {
+    list-style: none;
+    margin-left: 30px;
+}
+
+
+/* 管理画面のmain */
+.main {
+    width: 900px;
+    margin:auto;
+    margin-top: 60px;
+}
+
+.category_main {
+    width: 700px;
+    margin:auto;
+    margin-top: 62px;
+}
+
+.category_label {
+    width: 700px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom:2px dotted rgba(0,0,0,0.2);
+}
+
+.title {
+    font-family: "cursive";
+    font-size: 20px;
+    color:  rgba(0,0,0,0.7);
+    padding: 10px 0;
+    border-bottom:2px dashed rgba(0,0,0,0.5);
+}
+
+.info {
+    color: rgba(0,0,0,0.6);
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.form-control {
+    max-width: 400px;
+}
+
+.btn_button {
+    color: #fff;
+    background-color: #FF773E;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-top: 25px;
+    padding: 3px;
+    width: 100%;
+}
+
+.btn_button:hover {
+    background-color: #FFAD90;
+    transition: 0.5s;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    outline: none;
+    box-shadow: none;
+    border: 2px solid rgba(0,0,0,0.6);
+    background-color: #ffffff;
+  }
+
+input:focus::placeholder {
+    color: #000;
+}
+
+.errormessage {
+    color: red;
+}
+
+.edit {
+    margin: 10px 0;
+    border-top: 1px  solid rgba(0,0,0,0.6);
+    border-bottom: 1px  solid rgba(0,0,0,0.6);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit:hover {
+    background-color: #EEEEEE;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.edit img {
+    width: 25px;
+    opacity: 0.6;
+}
+
+.edit img:hover {
+    opacity: 0.9;
+}
+
+.season_name {
+    margin-bottom: 0;
+}
+
+/* modal */
+.modal-header {
+    padding:5px 2px;
+}
+.modal-title {
+    font-family: "MS ゴシック";
+    font-size: 15px;
+}
+
+.modal-body {
+    margin: 20px 0;
+}
+
+.modal-footer {
+    padding: 2px;
+}
+
+.modal-footer button {
+  margin: 1px 5px;
+}
+
+form {
+    margin-bottom: 0px;
+}
