@@ -27,13 +27,17 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function season_create(Request $request) {
-        echo "test";
+    public function create(Request $request) {
         Season::create(["name" => $request->name]);
-        return redirect("/seasons")->with("successMessage", "登録が完了しましたg");
+        return redirect("/seasons")->with("successMessage", "登録が完了しました");
     }
 
-
+    /**
+     * シーズン名を編集する
+     *
+     * @param Request $request
+     * @return red
+     */
     public function edit(Request $request) {
         $season = Season::where("id", "=", $request->id)->first();
 
@@ -46,6 +50,12 @@ class SeasonController extends Controller
         
     }
 
+    /**
+     * シーズンを削除する
+     *
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request) {
         Season::find($request->id)->delete();
         return redirect("/seasons")->with("successMessage", "削除に成功しました");

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>@yield("title")</title>
 </head>
+
 <body>
     <div class="header">
         <div class="header-logo">DRAGONBALL</div>
@@ -18,8 +20,12 @@
             <li><a href="">tribe</a></li>
         </div>
     </div>
-@yield("main")
+    @yield("main")
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @yield("js")
 </body>
+
 </html>
