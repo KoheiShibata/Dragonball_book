@@ -18,11 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get("/seasons", [App\Http\Controllers\SeasonController::class, "seasons"]);
-Route::post("/season_create", [App\Http\Controllers\SeasonController::class, "season_create"]);
+Route::post("/season_create", [App\Http\Controllers\SeasonController::class, "create"]);
 Route::post("/edit", [App\Http\Controllers\SeasonController::class, "edit"]);
 Route::get("/delete/{id}", [App\Http\Controllers\SeasonController::class, "delete"]);
 
-
+Route::get("/tribes", [App\Http\Controllers\TribeController::class, "tribes"]);
+Route::post("/tribe_create", [App\Http\Controllers\TribeController::class, "create"]);
+Route::post("/edit", [App\Http\Controllers\TribeController::class, "edit"]);
+Route::get("/delete/{id}", [App\Http\Controllers\TribeController::class, "delete"]);
 
 // Route::get("/character_create", [App\Http\Controllers\CharacterController::class, "character_create"]);
 // Route::post("/create", [App\Http\Controllers\CharacterController::class, "create"]);

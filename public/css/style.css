@@ -37,13 +37,13 @@ li {
     margin-top: 60px;
 }
 
-.category_main {
+.register_main {
     width: 700px;
     margin:auto;
     margin-top: 62px;
 }
 
-.category_label {
+.register_label {
     width: 700px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -69,6 +69,7 @@ li {
     max-width: 400px;
 }
 
+/* 登録ボタン */
 .btn_button {
     color: #fff;
     background-color: #FF773E;
@@ -80,6 +81,20 @@ li {
 
 .btn_button:hover {
     background-color: #FFAD90;
+    transition: 0.5s;
+}
+
+.btn_yellow {
+    color: #000;
+    background-color: #FFD700;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-top: 25px;
+    padding: 3px;
+    width: 100%;
+}
+
+.btn_yellow:hover {
+    background-color: #FFFF99;
     transition: 0.5s;
 }
 
@@ -98,6 +113,7 @@ input:focus::placeholder {
     color: red;
 }
 
+/* 一覧テーブル */
 .edit {
     margin: 10px 0;
     border-top: 1px  solid rgba(0,0,0,0.6);
@@ -123,9 +139,41 @@ input:focus::placeholder {
     opacity: 0.9;
 }
 
+.tribe_table {
+    margin: 10px;
+    border-top: 1px  solid rgba(0,0,0,0.6);
+    border-bottom: 1px  solid rgba(0,0,0,0.6);
+    padding: 0px 2px;
+    background-color: #FFDBC9;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tribe_table:hover {
+    background-color: #FF9872;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.tribe_table img {
+    width: 25px;
+    opacity: 0.6;
+}
+
+.tribe_table img:hover {
+    opacity: 0.9;
+}
+
 .season_name {
     margin-bottom: 0;
 }
+.tribe_name {
+    margin-bottom: 0;
+}
+
+
 
 /* modal */
 .modal-header {

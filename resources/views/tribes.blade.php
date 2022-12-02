@@ -1,29 +1,30 @@
 @extends("layouts.header_register")
 
-@section("title", "シーズンの登録")
+@section("title", "カテゴリーの登録")
 
 @section("main")
+@section("main")
 <div class="register_main">
-    <h1 class="title">★シーズン登録</h1>
+    <h1 class="title">★カテゴリー登録</h1>
     <p class="info">※入力情報は後から変更できます</p>
-    <form action="/season_create" method="post" id="form1" novalidate>
+    <form action="/tribe_create" method="post" id="form1" novalidate>
         @csrf
         <div class="form-group">
-            <label class="register_label" for="name">☆シーズン名</label><br>
+            <label class="register_label" for="name">☆カテゴリー名</label><br>
             <input type="text" class="form-control" name="name" id="name" value="" maxlength="30" autofocus required>
             <div class="valid-feedback">success!</div>
-            <div class="invalid-feedback">シーズン名を入力してください。</div>
+            <div class="invalid-feedback">カテゴリー名を入力してください。</div>
         </div>
-        <button type="submit" id="btnSubmit" class="btn_button">登録</button>
+        <button type="submit" id="btnSubmit" class="btn_yellow">登録</button>
     </form>
 
     <table>
-        <label class="register_label">☆シーズン一覧</label>
+        <label class="register_label">☆カテゴリー一覧</label>
         <div>
-            @foreach($seasons as $season)
-            <div class="edit" onclick="tableClick('{{$season->id}}', '{{$season->name}}')">
-                <p class="season_name">{{$season->name}}</p>
-                <img src="{{asset('/storage/img/trash-can-regular.svg')}}" class="child" onclick="deleteClick('{{$season->id}}', '{{$season->name}}')" alt="">
+            @foreach($tribes as $tribe)
+            <div class="tribe_table" onclick="tableClick('{{$tribe->id}}', '{{$tribe->name}}')">
+                <p class="tribe_name">{{$tribe->name}}</p>
+                <img src="{{asset('/storage/img/trash-can-regular.svg')}}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
             </div>
             @endforeach
         </div>
@@ -57,7 +58,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</h5>
                 </div>
                 <div class="modal-body">
-                    <p class="name" id="season_name"></p>
+                    <p class="name" id="tribe_name"></p>
                     <input type="hidden" name="id" id="modal_id">
                 </div>
                 <div class="modal-footer">
@@ -68,36 +69,13 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
+
     <script>
-        // successAlert
-        window.addEventListener("load", function() {
-            const isSuccess = @json(session("successMessage"));
-            if (isSuccess) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-center',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: false,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: isSuccess
-                })
-            }
-        })
-
-
-        $(".edit").on("click", () => {
+        $(".tribe_table").on("click", () => {
             const modal = new bootstrap.Modal(document.getElementById("modal-edit"), {
                 keyboard: false
             })
@@ -119,7 +97,7 @@
         }
         // 削除
         function deleteClick(id, name) {
-            document.getElementById("season_name").innerHTML = `シーズン名:${name}`
+            document.getElementById("tribe_name").innerHTML = `カテゴリー名:${name}`
             const deleted = document.getElementById("delete")
             deleted.setAttribute("href", `/delete/${id}`)
         }

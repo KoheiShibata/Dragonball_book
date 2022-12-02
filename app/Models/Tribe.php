@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tribe extends Model
 {
     use HasFactory;
+    // use SoftDeletes;
+
+    protected $table = "tribes";
+
+    protected $guarded = [
+        'id'
+    ];
 }
