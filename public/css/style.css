@@ -1,45 +1,12 @@
-/* header */
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-    position: fixed;
-    height: 58px;
-    border-bottom: solid 1px #cfcfcf;
-    top: 0;
-    right: 0;
-    left: 0;
-    align-items: center;
-    z-index: 1;
-    background-color: #EEEEEE;
+@font-face {
+    font-family: 'Saiyan-Sans';
+    src: url('../fonts/Saiyan-Sans.ttf');
 }
-
-.header-list {
-    display: flex;
-    align-items: center;
-}
-
-.header-logo {
-    width: 35px;
-    display: flex;
-}
-
-li {
-    list-style: none;
-    margin-left: 30px;
-}
-
 
 /* 管理画面のmain */
-.main {
-    width: 900px;
-    margin:auto;
-    margin-top: 60px;
-}
-
 .register_main {
     width: 700px;
-    margin:auto;
+    margin: auto;
     margin-top: 62px;
 }
 
@@ -48,19 +15,20 @@ li {
     margin-top: 20px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom:2px dotted rgba(0,0,0,0.2);
+    border-bottom: 2px dotted rgba(0, 0, 0, 0.2);
 }
 
 .title {
-    font-family: "cursive";
-    font-size: 20px;
-    color:  rgba(0,0,0,0.7);
+    font-family: "Saiyan-Sans";
+    font-size: 35px;
+    color: #EF7D01;
+    -webkit-text-stroke: 1px #000;
     padding: 10px 0;
-    border-bottom:2px dashed rgba(0,0,0,0.5);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.5);
 }
 
 .info {
-    color: rgba(0,0,0,0.6);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 15px;
     margin-bottom: 0px;
 }
@@ -72,8 +40,8 @@ li {
 /* 登録ボタン */
 .btn_button {
     color: #fff;
-    background-color: #FF773E;
-    border: 1px solid rgba(0,0,0,0.2);
+    background-color: #EF7D01;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     margin-top: 25px;
     padding: 3px;
     width: 100%;
@@ -84,26 +52,15 @@ li {
     transition: 0.5s;
 }
 
-.btn_yellow {
-    color: #000;
-    background-color: #FFD700;
-    border: 1px solid rgba(0,0,0,0.2);
-    margin-top: 25px;
-    padding: 3px;
-    width: 100%;
-}
-
-.btn_yellow:hover {
-    background-color: #FFFF99;
-    transition: 0.5s;
-}
-
-textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+textarea:focus,
+input:focus,
+input[type]:focus,
+.uneditable-input:focus {
     outline: none;
     box-shadow: none;
-    border: 2px solid rgba(0,0,0,0.6);
+    border: 2px solid rgba(0, 0, 0, 0.6);
     background-color: #ffffff;
-  }
+}
 
 input:focus::placeholder {
     color: #000;
@@ -116,16 +73,18 @@ input:focus::placeholder {
 /* 一覧テーブル */
 .edit {
     margin: 10px 0;
-    border-top: 1px  solid rgba(0,0,0,0.6);
-    border-bottom: 1px  solid rgba(0,0,0,0.6);
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    transition: 0.5s;
 }
 
 .edit:hover {
-    background-color: #EEEEEE;
+    background-color: #FFDBC9;
     transition: 0.5s;
     cursor: pointer;
 }
@@ -140,19 +99,20 @@ input:focus::placeholder {
 }
 
 .tribe_table {
-    margin: 10px;
-    border-top: 1px  solid rgba(0,0,0,0.6);
-    border-bottom: 1px  solid rgba(0,0,0,0.6);
+    margin: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     padding: 0px 2px;
-    background-color: #FFDBC9;
+    background-color: #FFFFFF;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: 0.5s;
 }
 
 .tribe_table:hover {
-    background-color: #FF9872;
+    background-color: #FFDBC9;
     transition: 0.5s;
     cursor: pointer;
 }
@@ -169,6 +129,7 @@ input:focus::placeholder {
 .season_name {
     margin-bottom: 0;
 }
+
 .tribe_name {
     margin-bottom: 0;
 }
@@ -177,8 +138,9 @@ input:focus::placeholder {
 
 /* modal */
 .modal-header {
-    padding:5px 2px;
+    padding: 10px 2px;
 }
+
 .modal-title {
     font-family: "MS ゴシック";
     font-size: 15px;
@@ -193,7 +155,7 @@ input:focus::placeholder {
 }
 
 .modal-footer button {
-  margin: 1px 5px;
+    margin: 1px 5px;
 }
 
 form {

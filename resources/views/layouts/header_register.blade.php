@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    @yield("header.css")
+    @yield("css")
     <title>@yield("title")</title>
 </head>
 
 <body>
     <div class="header">
-        <div class="header-logo">DRAGONBALL</div>
+        <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
         <div class="header-list">
-            <li><a href="">character</a></li>
-            <li><a href="">season</a></li>
-            <li><a href="">tribe</a></li>
+            <li><a href="/character_create">character</a></li>
+            <li><a href="/seasons">season</a></li>
+            <li><a href="/tribes">tribe</a></li>
         </div>
     </div>
     @yield("main")

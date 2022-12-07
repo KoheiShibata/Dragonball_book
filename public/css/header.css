@@ -1,0 +1,75 @@
+/* header */
+
+@font-face {
+    font-family: 'Saiyan-Sans';
+    src: url('../fonts/Saiyan-Sans Left Oblique.ttf');
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: fixed;
+    height: 58px;
+    border-bottom: solid 1px #cfcfcf;
+    top: 0;
+    right: 0;
+    left: 0;
+    align-items: center;
+    z-index: 1;
+    background-color: #EEEEEE;
+}
+
+.header-list {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 35px;
+    display: flex;
+    font-family: 'Saiyan-Sans';
+    font-size: 45px;
+    filter: drop-shadow(5px 5px 5px rgb(236, 123, 0));
+}
+
+.logo-1 {
+    color: rgb(250, 235, 8);
+    -webkit-text-stroke: 1px #000;
+}
+
+.logo-2 {
+    color: rgb(231, 0, 18);
+    -webkit-text-stroke: 1px #000;
+}
+
+.logo-3 {
+    -webkit-text-stroke: 1px #000;
+    color: #498DC5;
+}
+
+.header-list {
+    display: flex;
+    align-items: center;
+}
+
+.header-list a {
+    font-family: "Saiyan-Sans";
+    color: #000;
+    font-size: 23px;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: 0.5s;
+}
+
+.header-list a:hover {
+    background-color: #EF7400;
+    transition: 0.5s;
+}
+
+
+li {
+    list-style: none;
+    margin-left: 30px;
+}
