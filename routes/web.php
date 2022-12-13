@@ -27,7 +27,9 @@ Route::post("/tribe_create", [App\Http\Controllers\TribeController::class, "crea
 Route::post("/tribe_edit", [App\Http\Controllers\TribeController::class, "edit"]);
 Route::get("/tribe_delete/{id}", [App\Http\Controllers\TribeController::class, "delete"]);
 
-Route::get("/character_create",[App\Http\Controllers\CharacterController::class, "characters"]);
+Route::get("/character_create",[App\Http\Controllers\CharacterController::class, "character_create"]);
+Route::post("/character_register",[App\Http\Controllers\CharacterController::class, "character_register"]);
+Route::get("/character_list",[App\Http\Controllers\CharacterController::class, "character_list"]);
 
 
 // Route::get("/character_create", [App\Http\Controllers\CharacterController::class, "character_create"]);

@@ -55,6 +55,12 @@ input:focus::placeholder {
     border-bottom: 2px dotted rgba(0, 0, 0, 0.2);
 }
 
+.required::after {
+    content: " *";
+    color: red;
+    vertical-align: middle;
+  }
+
 .chart {
     height: 40px;
     width: 700px;
@@ -72,6 +78,10 @@ select option {
 
 select option:first-child {
     color: rgba(0, 0, 0, 0.3);
+}
+
+.input_area {
+    display: none;
 }
 
 .image_area {
@@ -94,27 +104,8 @@ select option:first-child {
 .preview-img {
     width: 100%;
     object-fit: contain;
-    border: 1px dotted rgba(0, 0, 0, 1.3);
+    border: 1px dotted rgba(0, 0, 0, 0.3);
 }
-
-.delete-button {
-     position: absolute;
-     top: 0;
-     right: 0;
-     background: rgba(0, 0, 0, 0.9);
-     text-decoration: none;
-     color: white;
-     padding: 5px;
-     margin: 0;
-     padding: 0 8px;
-     border: rgba(0, 0, 0, 0.2);
-     border-radius: 15px;
-}
-
-.delete-button:hover {
-    color: #EF7D01;
-}
-
 
 .filelabel {
     display: inline-block;
@@ -163,10 +154,6 @@ select option:first-child {
 }
 
 
-.input_area {
-    display: none;
-}
-
 .fileinput {
     display: none;
 }
@@ -174,4 +161,50 @@ select option:first-child {
 
 .file_radio {
     margin-left: 40px;
+}
+
+/* ボタン */
+.btn_button {
+    color: #fff;
+    background-color: #EF7D01;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 3px;
+    width: 100%;
+}
+
+.btn_button:hover {
+    background-color: #FFAD90;
+    transition: 0.5s;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    margin: 0;
+    padding: 0 8px;
+    border: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.delete-button:hover {
+    color: #EF7D01;
+}
+
+
+/* バリデーション */
+.form-invalid {
+    color: #f50000;
+    font-size: 12px;
+    padding-left: 12px;
+}
+
+.input-invalid {
+    border: 1px solid #f50000;
 }

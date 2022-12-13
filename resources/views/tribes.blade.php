@@ -1,11 +1,11 @@
 @extends("layouts.header_register")
 
 @section('header.css')
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/header.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @endsection
 
 @section("title", "カテゴリーの登録")
@@ -80,7 +80,7 @@
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
-    <script src="{{asset('/js/checkSubmit.js')}}"></script>
+    <script src="{{asset('/js/doubleSubmit.js')}}"></script>
 
     <script>
         window.addEventListener("load", function() {

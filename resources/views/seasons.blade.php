@@ -80,7 +80,7 @@
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
-    <script src="{{asset('/js/checkSubmit.js')}}"></script>
+    <script src="{{asset('/js/doubleSubmit.js')}}"></script>
     
     <script>
         // successAlert
