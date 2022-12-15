@@ -20,15 +20,15 @@ input:focus::placeholder {
 .main {
     width: 700px;
     margin: auto;
-    margin-top: 65px;
+    margin-top: 60px;
 }
 
 .title {
     font-family: "Saiyan-Sans";
     font-size: 35px;
-    color: #EF7D01;
+    color: #FDA246;
     -webkit-text-stroke: 1px #000;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 2px dashed rgba(0, 0, 0, 0.5);
 }
 
@@ -40,7 +40,16 @@ input:focus::placeholder {
 
 .subtitle {
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px dotted rgba(0, 0, 0, 0.2);
+}
+
+.top-label {
+    width: 700px;
+    font-weight: normal;
+    margin-top: 10px;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 2px dotted rgba(0, 0, 0, 0.2);
@@ -49,7 +58,7 @@ input:focus::placeholder {
 .register-label {
     width: 700px;
     font-weight: normal;
-    margin-top: 20px;
+    margin-top: 16px;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 2px dotted rgba(0, 0, 0, 0.2);
@@ -59,7 +68,7 @@ input:focus::placeholder {
     content: " *";
     color: red;
     vertical-align: middle;
-  }
+}
 
 .chart {
     height: 40px;
@@ -81,7 +90,7 @@ select option:first-child {
 }
 
 .input_area {
-    display: none;
+    display: block;
 }
 
 .image_area {
@@ -98,13 +107,15 @@ select option:first-child {
 .preview-list {
     position: relative;
     display: flex;
-    width: 140px;
-    height: 140px;
+    width: 20%;
 }
 
 .preview-img {
-    width: 100%;
+    width: 136px;
+    height: 136px;
     object-fit: contain;
+    /* background-color: #EEEEEE; */
+    border-radius: 3px;
     border: 1px dotted rgba(0, 0, 0, 0.3);
 }
 
@@ -116,7 +127,7 @@ select option:first-child {
     width: 700px;
     border-radius: 8px;
     transition: all 0.5s;
-    margin-top: 35px;
+    margin-top: 25px;
     text-align: center;
 }
 
@@ -131,7 +142,7 @@ select option:first-child {
 }
 
 .filelabel:hover {
-    background-color: #EF7D01;
+    background-color: #FDA246;
     transition: 0.5s;
     cursor: pointer;
 }
@@ -196,6 +207,22 @@ select option:first-child {
 
 .delete-button:hover {
     color: #EF7D01;
+}
+
+.returnBtn {
+    position: fixed;
+    z-index: 1;
+    top: 65px;
+    left: 5px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.returnBtn:hover {
+    background-color: #DDDDDD;
+    color: #000;
 }
 
 

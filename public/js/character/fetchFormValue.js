@@ -123,4 +123,9 @@ function getRadioCheckYes() {
     return radioCheckYes
 }
 
+// characteridを取得
+function getCharacterId() {
+    return document.getElementById("characterId").value
+}
+
 

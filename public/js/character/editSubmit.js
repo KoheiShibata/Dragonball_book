@@ -4,8 +4,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     btnSubmit.addEventListener("click", (e) => {
         let base64Images = new Array();
-        btnSubmit.disabled = true
         let validations = "ture"
+        btnSubmit.disabled = true
 
 
         // キャラクター名バリデーション
@@ -71,11 +71,15 @@ window.addEventListener('DOMContentLoaded', () => {
             base64Images.push(data.src)
         })
 
+        // 編集するキャラクタ―のidを取得
+        const characterId = getCharacterId()
+
         const radioCheckNo = getRadioCheckNo()
         const radioCheckYes = getRadioCheckYes()
         // 画像なしが選択されていたら
         if (radioCheckNo.checked) {
             let param = {
+                id: characterId,
                 name: asName(),
                 content: asContent(),
                 height: asHeight(),
@@ -90,16 +94,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "/character_register",
+                url: "/character_update",
                 type: "POST",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
                     window.location.href= ("/character_list")
+                    // const Toast = Swal.mixin({
+                    //     toast: true,
+                    //     position: 'top-center',
+                    //     showConfirmButton: false,
+                    //     timer: 3000,
+                    //     timerProgressBar: false,
+                    //     didOpen: (toast) => {
+                    //         toast.addEventListener('mouseenter', Swal.stopTimer)
+                    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    //     }
+                    // })
+
+                    // Toast.fire({
+                    //     icon: 'success',
+                    //     title: 'キャラクターを登録しました！'
+                    // })
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
+                    btnSubmit.disabled = false
                     Swal.fire({
                         icon: 'error',
                         text: '登録に失敗しました',
@@ -111,6 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // 画像ありが選択されていたら
         if (radioCheckYes.checked) {
             let param = {
+                id: characterId,
                 name: asName(),
                 content: asContent(),
                 height: asHeight(),
@@ -125,34 +147,20 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "./character_register",
+                url: "/character_update",
                 type: "POST",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
-                    // const Toast = Swal.mixin({
-                    //     toast: true,
-                    //     position: 'top-center',
-                    //     showConfirmButton: false,
-                    //     timer: 3000,
-                    //     timerProgressBar: false,
-                    //     didOpen: (toast) => {
-                    //         toast.addEventListener('mouseenter', Swal.stopTimer)
-                    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    //     }
-                    // })
-                    // Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'キャラクターを登録しました！'
-                    // })
                     window.location.href= ("/character_list")
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
+                    btnSubmit.disabled = false
                     Swal.fire({
                         icon: 'error',
-                        text: '登録に失敗しました',
+                        text: '更新に失敗しました',
                     })
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
@@ -160,6 +168,3 @@ window.addEventListener('DOMContentLoaded', () => {
     }, false);
 
 }, false);
-
-
-

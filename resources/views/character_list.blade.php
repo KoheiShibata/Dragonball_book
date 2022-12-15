@@ -17,7 +17,7 @@
     <div class="characterList">
         @foreach($characters as $character)
         <div class="character">
-            <img src="{{ $character->image_path }}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="imageClick({{ json_encode($character) }})">
+            <img src="{{ $character->image_path }}" id="characterData" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" onclick="imageClick({{ json_encode($character) }}, `{!! nl2br(e($character->content)) !!}`)">
             <p class="characterName">{{$character->name}}</p>
         </div>
         @endforeach
@@ -45,43 +45,68 @@
                         <div class="characterDetail">
                             <label class="subtitle-label">height</label>
                             <p class="modalHeight" id="height"></p>
-    
+
                             <label class="subtitle-label">weight</label>
                             <p class="modalWeight" id="weight"></p>
-    
+
                             <label class="subtitle-label">tribe</label>
                             <p class="modalTribe" id="tribe"></p>
-    
+
                             <label class="subtitle-label">season</label>
                             <p class="modalSeason" id="season"></p>
                         </div>
-    
+
                         <div class="characterStatus">
                             <label class="subtitle-label">attack</label>
                             <p class="modalStatus" id="attack"></p>
-    
+
                             <label class="subtitle-label">defense</label>
                             <p class="modalStatus" id="defense"></p>
-    
+
                             <label class="subtitle-label">ability</label>
                             <p class="modalStatus" id="ability"></p>
-    
+
                             <label class="subtitle-label">popularity</label>
                             <p class="modalStatus" id="popularity"></p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="" class="edit">edit</a>
+                    <a href="" class="edit" id="edit">edit</a>
                     <a href="javascript:void(0)" class="delete" id="deleteBtn" onclick="deleteAlert()">delete</a>
                 </div>
             </div>
         </div>
     </div>
     @endsection
+
     @section("js")
     <script src="{{asset('/js/doubleSubmit.js')}}"></script>
     <script src="{{asset('/js/character/modal.js')}}"></script>
+
+    <script>
+        // successAlert
+        window.addEventListener("load", function() {
+            const isSuccess = @json(session("successMessage"));
+            if (isSuccess) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-center',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: false,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: isSuccess
+                })
+            }
+        })
+    </script>
     @endsection
 
 </div>

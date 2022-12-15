@@ -72,7 +72,7 @@ function tribeValidate() {
     const errorMsgTribe = getErrorMsgTribe()
     errorMsgTribe.classList.add("form-invalid")
     errorMsgTribe.textContent = "";
-    if(tribe == "") {
+    if(!tribe) {
         errorMsgTribe.textContent = "カテゴリーを選択してください。"
         return false
     }
@@ -84,7 +84,7 @@ function seasonValidate() {
     const errorMsgSeason = getErrorMsgSeason()
     errorMsgSeason.classList.add("form-invalid")
     errorMsgSeason.textContent = "";
-    if(season == "") {
+    if(!season) {
         errorMsgSeason.textContent = "シーズンを選択してください。"
         return false
     }
@@ -96,7 +96,7 @@ function attackValidate() {
     const errorMsgAttack = getErrorMsgAttack()
     errorMsgAttack.classList.add("form-invalid")
     errorMsgAttack.textContent = "";
-    if(attack == "") {
+    if(!attack) {
         errorMsgAttack.textContent = "攻撃を選択してください。"
         return false
     }
@@ -108,7 +108,7 @@ function defenseValidate() {
     const errorMsgDefence = getErrorMsgDefence()
     errorMsgDefence.classList.add("form-invalid")
     errorMsgDefence.textContent = "";
-    if(defence == "") {
+    if(!defence) {
         errorMsgDefence.textContent = "守備を選択してください。"
         return false
     }
@@ -120,7 +120,7 @@ function abilityValidate() {
     const errorMsgAbility = getErrorMsgAbility()
     errorMsgAbility.classList.add("form-invalid")
     errorMsgAbility.textContent = "";
-    if(ability == "") {
+    if(!ability) {
         errorMsgAbility.textContent = "潜在能力を選択してください。"
         return false
     }
@@ -131,7 +131,7 @@ function popularityValidate() {
     const errorMsgPopularity = getErrorMsgPopularity()
     errorMsgPopularity.classList.add("form-invalid")
     errorMsgPopularity.textContent = "";
-    if(popularity == "") {
+    if(!popularity) {
         errorMsgPopularity.textContent = "人気度を選択してください。"
         return false
     }
