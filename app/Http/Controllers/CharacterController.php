@@ -6,19 +6,214 @@ use Illuminate\Http\Request;
 
 use App\Models\Character;
 
+use App\Models\CharacterImage;
+
+use App\Models\Season;
+
+use App\Models\Tribe;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\FuncCall;
+
 class CharacterController extends Controller
 {
+
     /**
      * キャラクター新規登録をHTMLで出力
      *
      * @return view
      */
-    public function character_create() {
+    public function character_create()
+    {
+        $seasons = Season::whereNull("deleted_at")->get();
 
-        return view("/character_create");
+        $tribes = Tribe::whereNull("deleted_at")->get();
 
+        return view("/character_create", compact("seasons", "tribes"));
     }
 
 
+    /**
+     * キャラクターを新規登録
+     *
+     * @param Request $request
+     * @return reidrect
+     */
+    public function character_register(Request $request)
+    {
 
+        $param = Character::create([
+            "name" => $request->name,
+            "content" => $request->content,
+            "height" => $request->height,
+            "weight" => $request->weight,
+            "tribe_id" => $request->tribe_id,
+            "season_id" => $request->season_id,
+            "attack" => $request->attack,
+            "defense" => $request->defense,
+            "ability" => $request->ability,
+            "popularity" => $request->popularity,
+        ]);
+
+        $character_id = $param->id;
+
+        $files = [];
+        $files = $request->image;
+        $filePath = [];
+
+
+        if (!$files == []) {
+            foreach ($files as $file) {
+                preg_match('/data:image\/(\w+);base64,/', $file, $matches);
+                $extension = $matches[1];
+
+                $img = preg_replace('/^data:image.*base64,/', "", $file);
+                $img = str_replace(' ', '+', $img);
+
+                $fileName = md5($img);
+                $image_path = "/storage/character/" . $fileName . "." . $extension;
+                file_put_contents("." . $image_path, base64_decode($img));
+                $filePath[] = "/storage/character/" . $fileName . "." . $extension;
+
+                CharacterImage::create([
+                    "character_id" => $character_id,
+                    "image_path" => $image_path,
+                ]);
+            }
+        }
+        return redirect("character_list");
+    }
+
+
+    /**
+     * キャラクター一覧をHTMLで出力
+     *
+     * @return view
+     */
+    public function character_list()
+    {
+        $characters = DB::table("characters")
+            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
+            ->whereNull("characters.deleted_at")
+            ->get();
+
+        foreach ($characters as $character) {
+            $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
+            if ($character->image->isEmpty()) {
+                $character->image_path = asset("/storage/img/noimage.png");
+            }
+            if (!$character->image->isEmpty()) {
+                $character->image_path = asset($character->image[0]->image_path);
+            }
+        }
+        return view("character_list", compact("characters"));
+    }
+
+
+    /**
+     * キャラクター編集画面をHTMLで出力
+     *
+     * @param Request $request
+     * @return view
+     */
+    public function edit(Request $request)
+    {
+        $character = DB::table("characters")
+            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
+            ->where("characters.id", "=", $request->id)
+            ->first();
+
+        $seasons = Season::whereNull("deleted_at")->get();
+        $tribes = Tribe::whereNull("deleted_at")->get();
+
+        $character->image = CharacterImage::select("image_path")->where("character_id", $request->id)->whereNull("deleted_at")->get();
+
+        foreach ($character->image as $images) {
+            $character->image_path[] = $images->image_path;
+        }
+
+        return view("character_edit", compact("character", "seasons", "tribes"));
+    }
+
+
+    /**
+     * キャラクターの情報を更新する
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        $character = Character::where("id", "=", $request->id)->first();
+        // 更新した値を代入
+        $character->name = $request->name;
+        $character->content = $request->content;
+        $character->height = $request->height;
+        $character->weight = $request->weight;
+        $character->tribe_id = $request->tribe_id;
+        $character->season_id = $request->season_id;
+        $character->attack = $request->attack;
+        $character->defense = $request->defense;
+        $character->ability = $request->ability;
+        $character->popularity = $request->popularity;
+
+        // 画像以外の情報を更新
+        $character->save();
+        
+        // 画像の処理
+        $files = [];
+        $files = $request->image;
+        $filePath = [];
+        
+        // 選択されたidのキャラクタ―画像を削除する
+        $character->character_images()->delete();
+
+        if (!$files == []) {
+            foreach ($files as $file) {
+                // base64形式以外の画像がrequestされた場合
+                if(!preg_match('/data:image\/(\w+);base64,/', $file)) {
+                    // /storageより前の文字列を削除する
+                    $file = strstr($file, "/storage");
+                    $image_path = $file;
+                }
+
+                //base64形式で画像がrequestされた時 
+                if(preg_match('/data:image\/(\w+);base64,/', $file)) {
+                    preg_match('/data:image\/(\w+);base64,/', $file, $matches);
+                    $extension = $matches[1];
+    
+                    $img = preg_replace('/^data:image.*base64,/', "", $file);
+                    $img = str_replace(' ', '+', $img);
+    
+                    $fileName = md5($img);
+                    $image_path = "/storage/character/" . $fileName . "." . $extension;
+                    file_put_contents("." . $image_path, base64_decode($img));
+                    $filePath[] = "/storage/character/" . $fileName . "." . $extension;
+                }
+                CharacterImage::create([
+                    "character_id" => $request->id,
+                    "image_path" => $image_path,
+                ]);
+            }
+        }
+        
+    }
+
+
+    /**
+     * キャラクターを削除する
+     *
+     * @param Request $request
+     * @return redirect
+     */
+    public function delete(Request $request)
+    {
+        $character = Character::find($request->id);
+        $character->delete();
+
+        return redirect("character_list")->with("successMessage", "削除に成功しました");
+    }
 }

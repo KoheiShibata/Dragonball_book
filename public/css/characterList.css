@@ -1,0 +1,167 @@
+@font-face {
+    font-family: 'Saiyan-Sans';
+    src: url('../fonts/Saiyan-Sans.ttf');
+}
+
+.main {
+    width: 800px;
+    margin: auto;
+    margin-top: 65px;
+}
+
+.title {
+    font-family: "Saiyan-Sans";
+    font-size: 32px;
+    color: #EF7D01;
+    -webkit-text-stroke: 1px #000;
+    padding: 10px 0;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.characterList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    /* justify-content: space-between; */
+
+}
+
+.character {
+    width: 24%;
+}
+
+.characterName {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.character img {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    background-color: #EEEEEE;
+     /* border: 1px dotted rgba(0, 0, 0, 0.3); */
+    border-radius: 5px;
+}
+
+.character img:hover {
+    opacity: 0.5;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
+/* modal */
+
+.modal-header {
+    padding: 3px 5px;
+}
+
+.modal-body {
+    overflow-x: hidden;
+}
+
+.modal-title {
+    font-family: "Saiyan-Sans";
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.8);
+    /* color: #EF7D01; */
+    padding-top: 3px;
+    -webkit-text-stroke: 1px #000;
+}
+
+.modal-body {
+    padding: 0 5px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 2px 5px;
+}
+
+
+.subtitle-label {
+    font-family: "Saiyan-Sans";
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 10px;
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
+    /* padding-bottom: 5px; */
+    /* border-bottom: 2px dotted rgba(0, 0, 0, 0.2); */
+}
+
+.contentTitle {
+    font-family: "Saiyan-Sans";
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 3px;
+    /* border-bottom: 2px dotted rgba(0, 0, 0, 0.2); */
+}
+
+.modalContent {
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+#imageBox {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+}
+
+#imageBox img {
+    width: 155px;
+    height: 155px;
+    object-fit: contain;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+}
+
+.modalImage {
+    width: 20%;
+    visibility: hidden;
+}
+
+.characterInfo {
+    display: flex;
+    gap: 400px;
+}
+
+.characterInfo p {
+    margin-bottom: 2px;
+    font-size: 6px;
+}
+
+.modal-footer a {
+    font-family: "Saiyan-Sans";
+    -webkit-text-stroke: 1px #000;
+    text-decoration: none;
+    font-size: 17px;
+    margin: 1px;
+    padding: 2px 30px;
+    border-radius: 5px;
+}
+
+.edit {
+    color: #0090D6;
+    background-color: #D9E5FF;
+}
+
+.delete {
+    color: #FF0000;
+    background-color: #FFD5EC;
+}
+
+.edit:hover {
+    background-color: #498DC5;
+}
+
+.delete:hover {
+    background-color: #DA284C;
+    color: #FF0000;
+}

@@ -1,13 +1,20 @@
 @extends("layouts.header_register")
 
+@section('header.css')
+<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+@endsection
+
+@section('css')
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+@endsection
+
 @section("title", "カテゴリーの登録")
 
 @section("main")
-@section("main")
 <div class="register_main">
-    <h1 class="title">★カテゴリー登録</h1>
+    <h1 class="title">★Tribe registration</h1>
     <p class="info">※入力情報は後から変更できます</p>
-    <form action="/tribe_create" method="post" id="form1" novalidate>
+    <form action="/tribe_create" method="post" id="form1" onsubmit="return checkSubmit();" novalidate>
         @csrf
         <div class="form-group">
             <label class="register_label" for="name">☆カテゴリー名</label><br>
@@ -15,7 +22,7 @@
             <div class="valid-feedback">success!</div>
             <div class="invalid-feedback">カテゴリー名を入力してください。</div>
         </div>
-        <button type="submit" id="btnSubmit" class="btn_yellow">登録</button>
+        <button type="submit" id="btnSubmit" class="btn_button">登録</button>
     </form>
 
     <table>
@@ -36,7 +43,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
                 </div>
-                <form action="/edit" method="post">
+                <form action="/tribe_edit" method="post">
                     @csrf
                     <div class="modal-body">
                         <input type="text" class="form-control" name="name" id="modal_name">
@@ -73,8 +80,32 @@
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
+    <script src="{{asset('/js/doubleSubmit.js')}}"></script>
 
     <script>
+        window.addEventListener("load", function() {
+            const isSuccess = @json(session("successMessage"));
+            if (isSuccess) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-center',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: false,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: isSuccess
+                })
+            }
+        })
+
+
         $(".tribe_table").on("click", () => {
             const modal = new bootstrap.Modal(document.getElementById("modal-edit"), {
                 keyboard: false
@@ -99,7 +130,7 @@
         function deleteClick(id, name) {
             document.getElementById("tribe_name").innerHTML = `カテゴリー名:${name}`
             const deleted = document.getElementById("delete")
-            deleted.setAttribute("href", `/delete/${id}`)
+            deleted.setAttribute("href", `/tribe_delete/${id}`)
         }
     </script>
     @endsection

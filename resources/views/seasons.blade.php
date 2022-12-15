@@ -1,12 +1,20 @@
 @extends("layouts.header_register")
 
+@section('header.css')
+<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+@endsection
+
+@section('css')
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+@endsection
+
 @section("title", "シーズンの登録")
 
 @section("main")
 <div class="register_main">
-    <h1 class="title">★シーズン登録</h1>
+    <h1 class="title">★season registration</h1>
     <p class="info">※入力情報は後から変更できます</p>
-    <form action="/season_create" method="post" id="form1" novalidate>
+    <form action="/season_create" method="post" id="form1" onsubmit="return checkSubmit();" novalidate>
         @csrf
         <div class="form-group">
             <label class="register_label" for="name">☆シーズン名</label><br>
@@ -35,7 +43,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
                 </div>
-                <form action="/edit" method="post">
+                <form action="/season_edit" method="post">
                     @csrf
                     <div class="modal-body">
                         <input type="text" class="form-control" name="name" id="modal_name">
@@ -68,10 +76,12 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
+    <script src="{{asset('/js/doubleSubmit.js')}}"></script>
+    
     <script>
         // successAlert
         window.addEventListener("load", function() {
@@ -121,7 +131,7 @@
         function deleteClick(id, name) {
             document.getElementById("season_name").innerHTML = `シーズン名:${name}`
             const deleted = document.getElementById("delete")
-            deleted.setAttribute("href", `/delete/${id}`)
+            deleted.setAttribute("href", `/season_delete/${id}`)
         }
     </script>
     @endsection
