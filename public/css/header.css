@@ -72,8 +72,19 @@
     transition: 0.5s;
 }
 
-
 li {
     list-style: none;
     margin-left: 30px;
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        height: 45px;
+    }
+
+    .header-logo {
+        font-size: 25px;
+        width: 100%;
+    }
+
 }

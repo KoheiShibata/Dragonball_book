@@ -101,22 +101,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
                     window.location.href= ("/character_list")
-                    // const Toast = Swal.mixin({
-                    //     toast: true,
-                    //     position: 'top-center',
-                    //     showConfirmButton: false,
-                    //     timer: 3000,
-                    //     timerProgressBar: false,
-                    //     didOpen: (toast) => {
-                    //         toast.addEventListener('mouseenter', Swal.stopTimer)
-                    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    //     }
-                    // })
-
-                    // Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'キャラクターを登録しました！'
-                    // })
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {

@@ -27,13 +27,13 @@ function imageClick(jsonData, content) {
     for (let i = 0; i < 5; i++) {
         const imgSrc = document.getElementById(`imageList_${i}`)
         imgSrc.setAttribute("src", "")
-        imgSrc.style.visibility = "hidden"
+        imgSrc.style.display = "none"
     }
     // 登録画像がない場合
     if (jsonData.image_path = "http://127.0.0.1:8000/storage/img/noimage.png") {
         const noImage = document.getElementById("imageList_0")
         noImage.setAttribute("src", "http://127.0.0.1:8000/storage/img/noimage.png")
-        noImage.style.visibility = "visible"
+        noImage.style.display = "block"
     }
 
     // 登録画像表示
@@ -41,9 +41,15 @@ function imageClick(jsonData, content) {
     for (let i = 0; i < images.length; i++) {
         const characterImage = document.getElementById(`imageList_${i}`)
         characterImage.setAttribute("src", images[i].image_path)
-        characterImage.style.visibility = "visible"
+        characterImage.style.display = "block"
     }
+
 }
+
+
+
+
+
 
 
 // deleteAlert
@@ -94,8 +100,4 @@ function getdeleteBtn() {
 function getEdit() {
     return document.getElementById("edit")
 }
-
-// function getCharacterData() {
-//     return document.querySelector("#characterData").dataset.content
-// }
 

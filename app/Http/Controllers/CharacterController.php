@@ -18,7 +18,7 @@ class CharacterController extends Controller
 {
 
     /**
-     * キャラクター新規登録をHTMLで出力
+     * キャラクター新規登録画面をHTMLで出力
      *
      * @return view
      */
@@ -214,6 +214,6 @@ class CharacterController extends Controller
         $character = Character::find($request->id);
         $character->delete();
 
-        return redirect("character_list")->with("successMessage", "削除に成功しました");
+        return redirect("character_list");
     }
 }

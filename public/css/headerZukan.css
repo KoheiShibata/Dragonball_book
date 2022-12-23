@@ -5,18 +5,27 @@
     src: url('../fonts/Saiyan-Sans Left Oblique.ttf');
 }
 
+body {
+    background-image: url(../storage/img/background-3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* min-height: 100vh;
+    height: 100%;
+    overflow-y: scroll; */
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
     position: fixed;
-    height: 58px;
+    height: 50px;
     border-bottom: solid 1px #cfcfcf;
     top: 0;
     right: 0;
     left: 0;
     align-items: center;
-    z-index: 1;
+    z-index: 10;
     background-color: #EEEEEE;
 }
 
@@ -57,7 +66,7 @@
     align-items: center;
 }
 
-li {
+.header-list li {
     list-style: none;
     margin-left: 30px;
 }
@@ -71,4 +80,263 @@ li {
     opacity: 0.6;
     transform: translateY(-5px);
     transition-duration: 0.5s;
+}
+
+
+/* モーダル検索 */
+.modal-content form {
+    margin-bottom: 0;
+}
+
+.modal-body {
+    padding: 2px;
+    width: 455px;
+    margin: auto;
+}
+
+.modal-header {
+    padding: 5px 8px;
+    background-color: #EEEEEE;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 2px;
+    background-color: #EEEEEE;
+}
+
+.modal-footer button {
+    color: white;
+}
+
+.modal-title {
+    font-size: 15px;
+    color: #000000;
+    text-align: center;
+}
+
+.modal-content {
+    border-radius: 5px;
+}
+
+.modal-title img {
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+.checkboxLabel {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #434343;
+    border-radius: 5px;
+    box-shadow: 3px 3px 0 0 #DDDDDD;
+    transform: translateY(-3px);
+    margin-left: 5px;
+    font-size: 12px;
+    height: 30px;
+    width: 104px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.checkboxLabel:hover {
+    box-shadow: 1px 1px 0 0 #DDDDDD;
+    /* transition: 0.5s; */
+    transform: translateY(-1px);
+}
+
+.freewordBox input {
+    margin: 0 5px;
+    margin-bottom: 10px;
+    width: 98%;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0, 0.8);
+    font-size: 12px;
+    padding: 4px 2px;
+}
+
+.seasonCheckBox input {
+    display: none;
+}
+
+.tribeCheckBox input {
+    display: none;
+}
+
+.tribeCheckBox {
+    margin-bottom: 5px;
+}
+
+.titleName {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-family: 'Saiyan-Sans';
+    margin: 5px 0;
+}
+
+.titleName img {
+    width: 40px;
+}
+
+.titleString {
+    margin-bottom: 2px;
+}
+
+.serchBtn {
+    border-radius: 5px;
+    font-size: 12px;
+    background-color: #EA8F00;
+    border: 8px;
+    height: 28px;
+    width: 104px;
+    margin: 0;
+    text-align: center;
+}
+
+.serchBtn:hover {
+    background-color: #EF7D01;
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.cancelBtn {
+    border-radius: 5px;
+    font-size: 12px;
+    border: 1px;
+    background-color: #0090D6;
+    height: 28px;
+    width: 104px;
+    text-align: center;
+    margin: 3px 0;
+}
+
+.cancelBtn:hover {
+    background-color: #4A90CA;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.resetBtn {
+    border-radius: 5px;
+    font-size: 12px;
+    border: 8px;
+    height: 28px;
+    width: 104px;
+    margin: 3px 0;
+    text-align: center;
+    background-color: #DA284C;
+    border: 1px solid #434343;
+    margin: 0;
+}
+
+.resetBtn:hover {
+    background-color: #FF0000;
+    transition: 0.5s;
+}
+
+
+.checkboxLabel_checkedBtn {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #434343;
+    border-radius: 5px;
+    box-shadow: 3px 3px 0 0 #dddddd;
+    transform: translateY(-3px);
+    margin-left: 5px;
+    font-size: 12px;
+    height: 30px;
+    width: 104px;
+    text-align: center;
+    margin-bottom: 10px;
+    /* checkbox選択状態css */
+    border: 1.5px solid rgb(234, 143, 0);
+    transform: translateY(-1px);
+    box-shadow: rgb(221, 221, 221) 1px 1px 0px 0px;
+    background-color: rgb(255, 219, 201);
+}
+
+.btn-close {
+    display: none;
+}
+
+
+@media screen and (max-width: 480px) {
+    body {
+        min-height: 100vh;
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .header {
+        height: 40px;
+        padding: 0 6px;
+    }
+
+    .header-logo {
+        font-size: 25px;
+        width: 100%;
+    }
+
+    .header-list img {
+        width: 25px;
+    }
+
+
+    /* 検索モーダル */
+    .modal-body {
+        width: 100%;
+    }
+
+    .titleName {
+        margin-bottom: 2px;
+        margin-top: 0px;
+    }
+
+    .titleName img {
+        width: 35px;
+    }
+
+    .searchArea {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 5px;
+    }
+
+    .checkboxLabel {
+        width: 45vw;
+    }
+
+    .checkboxLabel_checkedBtn {
+        width: 45vw;
+    }
+
+    .modal-footer {
+        padding: 6px 0;
+        flex-direction: row-reverse;
+    }
+
+    .modal-footer button {
+        width: 45vw;
+    }
+
+    .resetBtn {
+        background-color: #0090D6;
+    }
+
+    .resetBtn:hover {
+        background-color: #4A90CA;
+    }
+
+    .cancelBtn {
+        display: none;
+    }
+
+    .btn-close {
+        display: block;
+        height: 5px;
+    }
+
+
 }
