@@ -17,11 +17,37 @@
     <title>@yield("title")</title>
 </head>
 
+<!-------------------------------
+@todo ❗前提で知っておいて欲しい知識
+*reset.cssを使用してみよう 💁途中から入れると崩れるので,今回は使用しなくても良い
+参考サイト: https://coliss.com/articles/build-websites/operation/css/css-reset-for-modern-browser.html
+*BEMを使用してclass名を決めよう
+参考サイト: https://zenn.dev/nagan/articles/dac6fa662f4dab
+------------------------------->
+
 <body>
     @yield("loading")
     @yield("returnBtn")
+    <!-------------------------------
+    @todo
+    *headerタグを使用してね
+    ------------------------------->
     <div class="header">
-        <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
+        <!-------------------------------
+        @todo
+        *navタグでwrapしてね
+        ------------------------------->
+            <!-------------------------------
+            @todo
+            *class名ではなるべく番号は使わない。
+            *例: 赤色だったら font--redなど
+            ------------------------------->
+            <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
+
+        <!-------------------------------
+        @todo
+        *ulタグを使用しよう
+        ------------------------------->
         <div class="header-list">
             <li><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
             <li><a href="{{ SEASON_TOP }}">season</a></li>
@@ -32,6 +58,10 @@
     @yield("main")
 
     <!--==============JQuery読み込み===============-->
+    <!-------------------------------
+    @todo
+    *jQueryが2つあるのでどちらを読み込むか確認をしよう
+    ------------------------------->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
