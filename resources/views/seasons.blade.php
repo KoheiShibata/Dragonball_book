@@ -14,15 +14,14 @@
 <div class="register_main">
     <h1 class="title">★season registration</h1>
     <p class="info">※入力情報は後から変更できます</p>
-    <form action="/season_create" method="post" id="form1" onsubmit="return checkSubmit();" novalidate>
+    <form action="/season_create" method="post" id="form1">
         @csrf
         <div class="form-group">
             <label class="register_label" for="name">☆シーズン名</label><br>
-            <input type="text" class="form-control" name="name" id="name" value="" maxlength="30" autofocus required>
-            <div class="valid-feedback">success!</div>
-            <div class="invalid-feedback">シーズン名を入力してください。</div>
+            <input type="text" class="form-control" name="name" id="name" value="" autofocus>
+            <div class="errorMessage" id="errorMessage">シーズン名を30文字以内で、正しく入力してください。</div>
         </div>
-        <button type="submit" id="btnSubmit" class="btn_button">登録</button>
+        <button type="submit" id="btnSubmit" class="btn_button" onclick="doubleSolutionSubmit()">登録</button>
     </form>
 
     <table>
@@ -43,17 +42,17 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
                 </div>
-                <form action="/season_edit" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        <input type="text" class="form-control" name="name" id="modal_name">
-                        <input type="hidden" name="id" id="modal_id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                        <button type="submit" class="btn btn-primary">更新</button>
-                    </div>
-                </form>
+                <!-- <form action="/season_edit" method="post"> -->
+                @csrf
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="name" id="modal_name">
+                    <div class="errorMessage" id="modalSeasonErrorMessage">シーズン名を30以内で、正しく入力してください。</div>
+                    <input type="hidden" name="id" id="modal_editId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <button type="button" id="editSubmit" class="btn btn-primary">更新</button>
+                </div>
             </div>
         </div>
     </div>
@@ -66,11 +65,11 @@
                 </div>
                 <div class="modal-body">
                     <p class="name" id="season_name"></p>
-                    <input type="hidden" name="id" id="modal_id">
+                    <input type="hidden" name="id" id="modal_deleteId">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                    <a href="" class="btn btn-danger" id="delete">はい</a>
+                    <button type="button" class="btn btn-danger" id="deleteBtn" onclick="seasonDeleteBtnClick()">はい</button>
                 </div>
                 </form>
             </div>
@@ -80,8 +79,9 @@
 
     @section("js")
     <script src="{{asset('/js/validation.js')}}"></script>
-    <script src="{{asset('/js/doubleSubmit.js')}}"></script>
-    
+    <script src="{{asset('/js/seasonEdit.js')}}"></script>
+    <script src="{{asset('/js/deleteBtn.js')}}"></script>
+
     <script>
         // successAlert
         window.addEventListener("load", function() {
@@ -98,7 +98,6 @@
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 })
-
                 Toast.fire({
                     icon: 'success',
                     title: isSuccess
@@ -124,14 +123,12 @@
         // 編集
         function tableClick(id, name) {
             document.getElementById("modal_name").value = `${name}`
-            document.getElementById("modal_id").value = `${id}`
-
+            document.getElementById("modal_editId").value = `${id}`
         }
         // 削除
         function deleteClick(id, name) {
             document.getElementById("season_name").innerHTML = `シーズン名:${name}`
-            const deleted = document.getElementById("delete")
-            deleted.setAttribute("href", `/season_delete/${id}`)
+            document.getElementById("modal_deleteId").value = `${id}`
         }
     </script>
     @endsection

@@ -18,6 +18,7 @@ class TribeController extends Controller
         $tribes = Tribe::whereNull("deleted_at")->get();
         return view("/tribes", compact("tribes"));
     }
+    
 
     /**
      * カテゴリーを新規登録

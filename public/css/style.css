@@ -66,8 +66,11 @@ input:focus::placeholder {
     color: #000;
 }
 
-.errormessage {
+.errorMessage {
+    display: none;
     color: red;
+    font-size: 14px;
+    padding-left: 3px;
 }
 
 /* 一覧テーブル */

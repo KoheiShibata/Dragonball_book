@@ -5,10 +5,17 @@
     src: url('../fonts/Saiyan-Sans Left Oblique.ttf');
 }
 
+body {
+    background-image: url(../storage/img/background-3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* min-height: 100vh;
+    height: 100%;
+    overflow-y: scroll; */
+}
+
 .header {
     display: flex;
-    /* width: 1000px;
-    margin: auto; */
     justify-content: space-between;
     padding: 0 30px;
     position: fixed;
@@ -59,7 +66,7 @@
     align-items: center;
 }
 
-li {
+.header-list li {
     list-style: none;
     margin-left: 30px;
 }
@@ -97,6 +104,10 @@ li {
     justify-content: space-around;
     padding: 2px;
     background-color: #EEEEEE;
+}
+
+.modal-footer button {
+    color: white;
 }
 
 .modal-title {
@@ -153,7 +164,7 @@ li {
     display: none;
 }
 
-.tribeCheckBox { 
+.tribeCheckBox {
     margin-bottom: 5px;
 }
 
@@ -215,7 +226,7 @@ li {
     width: 104px;
     margin: 3px 0;
     text-align: center;
-    background-color: white;
+    background-color: #DA284C;
     border: 1px solid #434343;
     margin: 0;
 }
@@ -223,4 +234,109 @@ li {
 .resetBtn:hover {
     background-color: #FF0000;
     transition: 0.5s;
+}
+
+
+.checkboxLabel_checkedBtn {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #434343;
+    border-radius: 5px;
+    box-shadow: 3px 3px 0 0 #dddddd;
+    transform: translateY(-3px);
+    margin-left: 5px;
+    font-size: 12px;
+    height: 30px;
+    width: 104px;
+    text-align: center;
+    margin-bottom: 10px;
+    /* checkbox選択状態css */
+    border: 1.5px solid rgb(234, 143, 0);
+    transform: translateY(-1px);
+    box-shadow: rgb(221, 221, 221) 1px 1px 0px 0px;
+    background-color: rgb(255, 219, 201);
+}
+
+.btn-close {
+    display: none;
+}
+
+
+@media screen and (max-width: 480px) {
+    body {
+        min-height: 100vh;
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .header {
+        height: 40px;
+        padding: 0 6px;
+    }
+
+    .header-logo {
+        font-size: 25px;
+        width: 100%;
+    }
+
+    .header-list img {
+        width: 25px;
+    }
+
+
+    /* 検索モーダル */
+    .modal-body {
+        width: 100%;
+    }
+
+    .titleName {
+        margin-bottom: 2px;
+        margin-top: 0px;
+    }
+
+    .titleName img {
+        width: 35px;
+    }
+
+    .searchArea {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 5px;
+    }
+
+    .checkboxLabel {
+        width: 45vw;
+    }
+
+    .checkboxLabel_checkedBtn {
+        width: 45vw;
+    }
+
+    .modal-footer {
+        padding: 6px 0;
+        flex-direction: row-reverse;
+    }
+
+    .modal-footer button {
+        width: 45vw;
+    }
+
+    .resetBtn {
+        background-color: #0090D6;
+    }
+
+    .resetBtn:hover {
+        background-color: #4A90CA;
+    }
+
+    .cancelBtn {
+        display: none;
+    }
+
+    .btn-close {
+        display: block;
+        height: 5px;
+    }
+
+
 }
