@@ -56,6 +56,9 @@ function imageClick(jsonData, jsonImages, content) {
 function deleteAlert() {
     const deleteBtn = getdeleteBtn()
     const characterId = deleteBtn.value
+    const deleteForm = document.getElementById("character-delete-form");
+    document.getElementById("character_id").value = characterId;
+    deleteForm.action = `/character/${characterId}`;
     if (!characterId) return
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -75,7 +78,7 @@ function deleteAlert() {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            document.location.href = `/character_delete/${characterId}`
+            deleteForm.submit();
         } else {
             return false;
         }

@@ -40,7 +40,7 @@ Route::controller(CharacterController::class)->prefix("character")->group(functi
     Route::post("/", "create");
     Route::get("/character_edit/{id}", "edit");
     Route::post("/character_update", "update");
-    Route::get("/character_delete/{id}",  "delete" );
+    Route::delete("/{id}",  "delete" );
 });
 
 Route::controller(CharacterController::class)->prefix("characters")->group(function(){

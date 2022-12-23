@@ -91,6 +91,13 @@
                 </div>
             </div>
         </div>
+
+        <form action="" method="post" id="character-delete-form">
+            @csrf
+            @method("delete")
+            <input type="hidden" id="character_id">
+        </form>
+
         @endsection
 
         @section("js")

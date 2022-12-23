@@ -223,6 +223,6 @@ class CharacterController extends Controller
         $character = Character::find($request->id);
         $character->delete();
 
-        return redirect("character_list");
+        return redirect(CHARACTER_TOP);
     }
 }
