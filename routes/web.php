@@ -28,11 +28,11 @@ Route::controller(SeasonController::class)->group(function(){
     Route::get("/season_delete/{id}", "delete");
 });
 
-Route::controller(TribeController::class)->group(function(){
-    Route::get("/tribes", "tribes");
-    Route::post("/tribe_create", "create");
-    Route::post("/tribe_edit",  "edit");
-    Route::get("/tribe_delete/{id}", "delete");
+Route::controller(TribeController::class)->prefix("tribe")->group(function(){
+    Route::get("/", "tribeList");
+    Route::post("/", "create");
+    Route::put("/",  "edit");
+    Route::delete("/{id}", "delete");
 });
 
 Route::controller(CharacterController::class)->group(function(){
