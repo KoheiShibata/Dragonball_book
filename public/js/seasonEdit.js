@@ -25,6 +25,11 @@ window.addEventListener('DOMContentLoaded', () => {
             return
         }
 
+        const editForm = document.getElementById("editForm")
+        editForm.submit();
+
+        return;
+
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: `/season_edit/${editId}`,

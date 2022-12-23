@@ -1,8 +1,6 @@
 function seasonDeleteBtnClick() {
     getDeleteBtn().disabled = true
-    const deleteId = getDeleteId()
-
-    window.location.href = (`/season_delete/${deleteId}`)
+    document.getElementById("season-delete-form").submit()
 }
 
 function tribeDeleteBtnClick() {

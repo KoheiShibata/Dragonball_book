@@ -21,11 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller(SeasonController::class)->group(function(){
-    Route::get("/seasons", "seasons");
-    Route::post("/season_create", "create");
-    Route::post("/season_edit/{id}", "edit");
-    Route::get("/season_delete/{id}", "delete");
+Route::controller(SeasonController::class)->prefix("season")->group(function(){
+    Route::get("/", "seasonList");
+    Route::post("/", "create");
+    Route::put("/", "edit");
+    Route::delete("/{id}", "delete");
 });
 
 Route::controller(TribeController::class)->prefix("tribe")->group(function(){
