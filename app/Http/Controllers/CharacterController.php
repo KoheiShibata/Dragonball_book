@@ -101,25 +101,22 @@ class CharacterController extends Controller
      *
      * @return view
      */
-    public function character_list()
+    public function characterList()
     {
-        $characters = DB::table("characters")
-            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-            ->whereNull("characters.deleted_at")
-            ->get();
+        $selectedCharacterId = [];
+        $characterImages = [];
 
-        foreach ($characters as $character) {
-            $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
-            if ($character->image->isEmpty()) {
-                $character->image_path = asset("/storage/img/noimage.png");
+        $characters = Character::fetchAll();
+
+        foreach ($characters as $key => $character) {
+            $characterImages[$character->id][] = $character->formated_image_path;
+            if (in_array($character->id, $selectedCharacterId)) {
+                unset($characters[$key]);
+                continue;
             }
-            if (!$character->image->isEmpty()) {
-                $character->image_path = asset($character->image[0]->image_path);
-            }
+            $selectedCharacterId[] = $character->id;
         }
-        return view("character_list", compact("characters"));
+        return view("character_list", compact("characters", "characterImages"));
     }
 
 

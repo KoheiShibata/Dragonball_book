@@ -26,7 +26,7 @@
             <li><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
             <li><a href="{{ SEASON_TOP }}">season</a></li>
             <li><a href="{{ TRIBE_TOP }}">tribe</a></li>
-            <li><a href="/character_list">list</a></li>
+            <li><a href="{{ CHARACTER_TOP }}">list</a></li>
         </div>
     </div>
     @yield("main")

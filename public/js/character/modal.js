@@ -1,4 +1,4 @@
-function imageClick(jsonData, content) {
+function imageClick(jsonData, jsonImages, content) {
     document.getElementById("exampleModalLabel").innerHTML = `${jsonData.name}`
     document.getElementById("content").innerHTML = content
     getHeight().innerHTML = jsonData.height
@@ -30,17 +30,17 @@ function imageClick(jsonData, content) {
         imgSrc.style.display = "none"
     }
     // 登録画像がない場合
-    if (jsonData.image_path = "http://127.0.0.1:8000/storage/img/noimage.png") {
-        const noImage = document.getElementById("imageList_0")
-        noImage.setAttribute("src", "http://127.0.0.1:8000/storage/img/noimage.png")
-        noImage.style.display = "block"
-    }
+    // if (jsonData.image_path = "http://127.0.0.1:8000/storage/img/noimage.png") {
+    //     const noImage = document.getElementById("imageList_0")
+    //     noImage.setAttribute("src", "http://127.0.0.1:8000/storage/img/noimage.png")
+    //     noImage.style.display = "block"
+    // }
 
     // 登録画像表示
-    const images = jsonData.image
+    const images = jsonImages
     for (let i = 0; i < images.length; i++) {
         const characterImage = document.getElementById(`imageList_${i}`)
-        characterImage.setAttribute("src", images[i].image_path)
+        characterImage.setAttribute("src", images[i])
         characterImage.style.display = "block"
     }
 
