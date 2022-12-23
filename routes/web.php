@@ -35,9 +35,9 @@ Route::controller(TribeController::class)->prefix("tribe")->group(function(){
     Route::delete("/{id}", "delete");
 });
 
-Route::controller(CharacterController::class)->group(function(){
-    Route::get("/character_create", "character_create");
-    Route::post("/character_register", "character_register");
+Route::controller(CharacterController::class)->prefix("character")->group(function(){
+    Route::get("/", "createForm");
+    Route::post("/", "create");
     Route::get("/character_list", "character_list");
     Route::get("/character_edit/{id}", "edit");
     Route::post("/character_update", "update");

@@ -23,9 +23,9 @@
     <div class="header">
         <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
         <div class="header-list">
-            <li><a href="/character_create">character</a></li>
-            <li><a href="/seasons">season</a></li>
-            <li><a href="/tribes">tribe</a></li>
+            <li><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
+            <li><a href="{{ SEASON_TOP }}">season</a></li>
+            <li><a href="{{ TRIBE_TOP }}">tribe</a></li>
             <li><a href="/character_list">list</a></li>
         </div>
     </div>

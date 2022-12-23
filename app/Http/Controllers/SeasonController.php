@@ -18,7 +18,7 @@ class SeasonController extends Controller
     {
         $seasons = Season::fetchAll();
 
-        return view("/seasons", compact("seasons"));
+        return view("season.list", compact("seasons"));
     }
 
 

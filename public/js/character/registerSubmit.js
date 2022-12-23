@@ -90,20 +90,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "/character_register",
+                url: "/character",
                 type: "POST",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
-                    window.location.href= ("/character_list")
+                    if (data.successMessage) {
+                        showSweetAlert("success", data.successMessage)
+                        window.setTimeout(function(){
+                            window.location.href= ("/character")
+                        }, 3000);
+                    }
+                    if (data.errorMessage) {
+                        showSweetAlert("error", data.errorMessage)
+                        btnSubmit.disabled = false
+                        return
+                    }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
-                    Swal.fire({
-                        icon: 'error',
-                        text: '登録に失敗しました',
-                    })
+                    showSweetAlert("error", data.errorMessage)
+                    btnSubmit.disabled = false
+                    return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
 
@@ -125,35 +134,29 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "./character_register",
+                url: "./character",
                 type: "POST",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
-                    // const Toast = Swal.mixin({
-                    //     toast: true,
-                    //     position: 'top-center',
-                    //     showConfirmButton: false,
-                    //     timer: 3000,
-                    //     timerProgressBar: false,
-                    //     didOpen: (toast) => {
-                    //         toast.addEventListener('mouseenter', Swal.stopTimer)
-                    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    //     }
-                    // })
-                    // Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'キャラクターを登録しました！'
-                    // })
-                    window.location.href= ("/character_list")
+                    if (data.successMessage) {
+                        showSweetAlert("success", data.successMessage)
+                        window.setTimeout(function(){
+                            window.location.href= ("/character")
+                        }, 3000);
+                    }
+                    if (data.errorMessage) {
+                        showSweetAlert("error", data.errorMessage)
+                        btnSubmit.disabled = false
+                        return
+                    }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
-                    Swal.fire({
-                        icon: 'error',
-                        text: '登録に失敗しました',
-                    })
+                    showSweetAlert("error", data.errorMessage)
+                    btnSubmit.disabled = false
+                    return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
         }
