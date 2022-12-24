@@ -20,25 +20,6 @@
 <body>
     @yield("loading")
     @yield("returnBtn")
-    <!-- <div class="header">
-        <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
-        <div class="header-list">
-            <li><a href="/character_create">character</a></li>
-            <li><a href="/seasons">season</a></li>
-            <li><a href="/tribes">tribe</a></li>
-            <li><a href="/character_list">list</a></li>
-        </div>
-        <div class="openbtn" id="hamburgerBtn"><span></span><span></span><span></span></div>
-        <div class="header-list_hbm" id="hamburgerMenu">
-            <ul class="nav-items">
-                <li class="nav-item"><a href="/character_create">character</a></li>
-                <li class="nav-item"><a href="/seasons">season</a></li>
-                <li class="nav-item"><a href="/tribes">tribe</a></li>
-                <li class="nav-item"><a href="/character_list">list</a></li>
-            </ul>
-        </div>
-    </div> -->
-
     <header class="header">
         <div class="header-logo">
             <span class="font--yellow">DRAGON</span>
