@@ -198,8 +198,6 @@ body {
 
 
 
-
-
 @media screen and (max-width: 480px) {
     .main {
         width: 100%;
@@ -262,8 +260,8 @@ body {
     }
     
     #imagebox img {
-        width: calc(31vw - 3px);
-        height: calc(31vw - 3px);
+        width: calc(31vw - 4px);
+        height: calc(31vw - 4px);
         object-fit: cover;
     }
 
