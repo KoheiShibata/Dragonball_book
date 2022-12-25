@@ -14,9 +14,9 @@ class TribeController extends Controller
      *
      * @return view
      */
-    public function tribes() {
-        $tribes = Tribe::whereNull("deleted_at")->get();
-        return view("/tribes", compact("tribes"));
+    public function tribeList() {
+        $tribes = Tribe::fetchAll();
+        return view("tribes", compact("tribes"));
     }
     
 
@@ -27,8 +27,13 @@ class TribeController extends Controller
      * @return redirect
      */
     public function create(Request $request) {
-        Tribe::create(["name" => $request->name]);
-        return redirect("/tribes")->with("successMessage", "登録が完了しました");
+        try {
+            $param = $request->validate(config(TRIBE_REGISTRATION_VALIDATE));
+            Tribe::create($param);
+            return redirect(TRIBE_TOP)->with(SUCCESS_MESSAGE, REGISTRATION_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(TRIBE_TOP)->with(ERROR_MESSAGE, REGISTRATION_FAILED_MESSAGE);
+        }
     }
 
 
