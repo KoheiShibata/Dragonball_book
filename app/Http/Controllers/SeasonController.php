@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Season;
+use Hamcrest\Type\IsNumeric;
 
 class SeasonController extends Controller
 {
@@ -14,10 +15,9 @@ class SeasonController extends Controller
      *
      * @return view
      */
-    public function seasons() {
-        $seasons = Season::whereNull("deleted_at")->get();
-
-        return view("/seasons", compact("seasons"));
+    public function seasonList() {
+        $seasons = Season::fetchAll();
+        return view("seasons", compact("seasons"));
     }
 
 
@@ -27,9 +27,16 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function create(Request $request) {
-        Season::create(["name" => $request->name]);
-        return redirect("/seasons")->with("successMessage", "登録が完了しました");
+    public function create(Request $request) 
+    {
+        try {
+            $param = $request->validate(config(SEASON_REGISTRATION_VALIDATE));
+            Season::create($param);
+            return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, REGISTRATION_SUCCESS_MESSAGE);
+
+        } catch(\Exception $e) {
+            return redirect(SEASON_TOP)->with(ERROR_MESSAGE, REGISTRATION_FAILED_MESSAGE);
+        }
     }
 
     /**
@@ -38,15 +45,15 @@ class SeasonController extends Controller
      * @param Request $request
      * @return red
      */
-    public function edit(Request $request) {
-        $season = Season::where("id", "=", $request->id)->first();
-
-        // バリデーション
-        $this->validate($request, config("validator.season.edit"));
-        $season->name = $request->name;
-        $season->save();
-
-        return redirect("/seasons")->with("successMessage", "変更が完了しました");
+    public function edit(Request $request) 
+    {
+        try {
+            $param = $this->validate($request, config(SEASON_UPDATE_VALIDATE));
+            Season::updateRow($param);
+            return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, UPDATE_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(SEASON_TOP)->with(ERROR_MESSAGE, UPDATE_FAILED_MESSAGE);
+        }
         
     }
 
@@ -56,9 +63,20 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function delete(Request $request) {
-        Season::find($request->id)->delete();
-        return redirect("/seasons")->with("successMessage", "削除に成功しました");
+    public function delete($id) 
+    {
+        try {
+           if(empty($id) ||
+           !is_numeric($id)
+           ) {
+                throw new \Exception();
+           }
+           Season::deleteRow($id);
+           return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE); 
+        } catch (\Exception $e) {
+            return redirect(SEASON_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
+
+        }
 
     }
 }

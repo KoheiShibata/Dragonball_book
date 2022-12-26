@@ -71,7 +71,7 @@ class Tribe extends Model
     public function scopeDeleteRow(object $query, int $id):bool 
     {
         return $query
-        ->findorFail($id)
+        ->findOrFail($id)
         ->delete();
     }
 

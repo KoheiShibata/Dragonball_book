@@ -27,10 +27,10 @@
             <span class="font--blue">PBOOK</span>
         </div>
         <nav class="header-nav">
-            <ul class="header-nav-list">
+            <ul class="header-nav__list">
                 <li class="header-nav__item"><a href="/character_create">character</a></li>
-                <li class="header-nav__item"><a href="/seasons">season</a></li>
-                <li class="header-nav__item"><a href="/tribes">tribe</a></li>
+                <li class="header-nav__item"><a href="/season">season</a></li>
+                <li class="header-nav__item"><a href="/tribe">tribe</a></li>
                 <li class="header-nav__item"><a href="/character_list">list</a></li>
             </ul>
         </nav>

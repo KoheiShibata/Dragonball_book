@@ -14,7 +14,7 @@
 <div class="register_main">
     <h1 class="title">★Tribe registration</h1>
     <p class="info">※入力情報は後から変更できます</p>
-    <form action="/tribe_create" method="post" id="form1">
+    <form action="/tribe" method="post" id="form1">
         @csrf
         <div class="form-group">
             <label class="register_label" for="name">☆カテゴリー名</label><br>
@@ -30,7 +30,7 @@
             @foreach($tribes as $tribe)
             <div class="tribe_table" onclick="tableClick('{{$tribe->id}}', '{{$tribe->name}}')">
                 <p class="tribe_name">{{$tribe->name}}</p>
-                <img src="{{asset('/storage/img/trash-can-regular.svg')}}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
+                <img src="{{ DELETE_ICON_IMAGE_PATH }}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
             </div>
             @endforeach
         </div>
@@ -42,8 +42,9 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
                 </div>
-                <form action="/tribe_edit" method="post" id="editForm" onsubmit="return checkTribeEdit()">
+                <form action="/tribe" method="post" id="editForm" onsubmit="return checkTribeEdit()">
                     @csrf
+                    @method("put")
                     <div class="modal-body">
                         <input type="text" class="form-control" name="name" id="modal_name" value="">
                         <div class="errorMessage" id="modalTribeErrorMessage">カテゴリー名を30文字以内で、正しく入力してください。</div>
@@ -64,14 +65,17 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</h5>
                 </div>
-                <div class="modal-body">
-                    <p class="name" id="tribe_name"></p>
-                    <input type="hidden" name="id" id="modal_deleteId">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                    <button type="button" class="btn btn-danger" id="deleteBtn" onclick="tribeDeleteBtnClick()">はい</button>
-                </div>
+                <form action="" method="post" id="tribe-delete-form">
+                    @csrf
+                    @method("delete")
+                    <div class="modal-body">
+                        <p class="name" id="tribe_name"></p>
+                        <input type="hidden" name="id" id="modal_deleteId">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                        <button type="button" class="btn btn-danger" id="deleteBtn" onclick="tribeDeleteBtnClick()">はい</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -82,28 +86,20 @@
     <script src="{{asset('/js/validation.js')}}"></script>
     <script src="{{asset('/js/tribeEdit.js')}}"></script>
     <script src="{{asset('/js/deleteBtn.js')}}"></script>
+    <script src="{{asset('/js/sweetAlert.js')}}"></script>
 
 
     <script>
         window.addEventListener("load", function() {
-            const isSuccess = @json(session("successMessage"));
-            if (isSuccess) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-center',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: false,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: isSuccess
-                })
+            const successMessage = @json(session("successMessage"));
+            if(successMessage) {
+                showSweetAlert("success", successMessage)
+                return
+            }
+            const errorMessage = @json(session("errorMessage"));
+            if (errorMessage) {
+                showSweetAlert("error", errorMessage)
+                return
             }
         })
 
@@ -132,6 +128,7 @@
         function deleteClick(id, name) {
             document.getElementById("tribe_name").innerHTML = `カテゴリー名:${name}`
             document.getElementById("modal_deleteId").value = `${id}`
+            document.getElementById("tribe-delete-form").action = `/tribe/${id}`
         }
     </script>
     @endsection
