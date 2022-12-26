@@ -28,9 +28,9 @@
         </div>
         <nav class="header-nav">
             <ul class="header-nav__list">
-                <li class="header-nav__item"><a href="/character_create">character</a></li>
-                <li class="header-nav__item"><a href="/season">season</a></li>
-                <li class="header-nav__item"><a href="/tribe">tribe</a></li>
+                <li class="header-nav__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
+                <li class="header-nav__item"><a href="{{ SEASON_TOP }}">season</a></li>
+                <li class="header-nav__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
                 <li class="header-nav__item"><a href="/character_list">list</a></li>
             </ul>
         </nav>
@@ -40,9 +40,9 @@
         </div>
         <nav class="hamburger-nav" id="hamburgerNav">
             <ul class="hamburger-menu">
-                <li class="hamburger-menu__item"><a href="/character_create">character</a></li>
-                <li class="hamburger-menu__item"><a href="/seasons">season</a></li>
-                <li class="hamburger-menu__item"><a href="/tribes">tribe</a></li>
+                <li class="hamburger-menu__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
+                <li class="hamburger-menu__item"><a href="{{ SEASON_TOP }}">season</a></li>
+                <li class="hamburger-menu__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
                 <li class="hamburger-menu__item"><a href="character_list">characterlist</a></li>
             </ul>
         </nav>

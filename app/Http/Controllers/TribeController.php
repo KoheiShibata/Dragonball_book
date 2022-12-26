@@ -17,7 +17,7 @@ class TribeController extends Controller
      */
     public function tribeList() {
         $tribes = Tribe::fetchAll();
-        return view("tribes", compact("tribes"));
+        return view("tribe.list", compact("tribes"));
     }
     
 

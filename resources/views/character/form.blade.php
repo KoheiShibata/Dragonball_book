@@ -16,7 +16,7 @@
     <p class="info">入力情報は後から変更できます<span class="required">(</span>は必須です)</p>
     <div class="form-body">
         <h1 class="subtitle">☆キャラクター情報</h1>
-        <form action="/character_register" enctype="multipart/form-data" method="post">
+        <form action="/" enctype="multipart/form-data" method="post">
             @csrf
             <div class="form-group">
                 <label class="register-label required" for="name">☆キャラクター名</label><br>
@@ -57,7 +57,7 @@
             <select name="tribe" class="chart" id="tribe" required>
                 <option value="">選択してください</option>
                 @foreach($tribes as $tribe)
-                <option value="{{$tribe->id}}">{{$tribe->name}}</option>
+                <option value="{{ $tribe->id }}">{{ $tribe->name }}</option>
                 @endforeach
             </select>
             <div class="err-msg-tribe"></div>
@@ -65,40 +65,40 @@
             <select name="season" class="chart" id="season" required>
                 <option value="">選択してください</option>
                 @foreach($seasons as $season)
-                <option value="{{$season->id}}">{{$season->name}}</option>
+                <option value="{{ $season->id }}">{{ $season->name }}</option>
                 @endforeach
             </select>
             <div class="err-msg-season"></div>
             <label for="attack" class="register-label required">攻撃</label>
             <select name="attack" class="chart" id="attack" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-attack"></div>
             <label for="defence" class="register-label required">守備</label>
             <select name="defence" class="chart" id="defence" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-defence"></div>
             <label for="ability" class="register-label required">潜在能力</label>
             <select name="ability" class="chart" id="ability" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-ability"></div>
             <label for="popularity" class="register-label required">人気度</label>
             <select name="popularity" class="chart" id="popularity" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-popularity"></div>
             <button type="button" id="btnSubmit" class="btn_button">登録</button>
-            <!-- <input  type="hedden" value="[image_1,image_3,image_5]" name="file-name-id"> -->
+
         </form>
     </div>
     @endsection
@@ -108,6 +108,7 @@
     <script src="{{asset('/js/character/registerSubmit.js')}}"></script>
     <script src="{{asset('/js/character/fetchFormValue.js')}}"></script>
     <script src="{{asset('/js/character/validations.js')}}"></script>
+    <script src="{{asset('/js/sweetAlert.js')}}"></script>
 
     <script>
         addEvent(1)
