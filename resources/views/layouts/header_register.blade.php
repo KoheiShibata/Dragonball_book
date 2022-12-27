@@ -31,7 +31,7 @@
                 <li class="header-nav__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
                 <li class="header-nav__item"><a href="{{ SEASON_TOP }}">season</a></li>
                 <li class="header-nav__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                <li class="header-nav__item"><a href="{{ CHRACTER_TOP }}">list</a></li>
+                <li class="header-nav__item"><a href="{{ CHARACTER_TOP }}">list</a></li>
             </ul>
         </nav>
 
@@ -43,7 +43,7 @@
                 <li class="hamburger-menu__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
                 <li class="hamburger-menu__item"><a href="{{ SEASON_TOP }}">season</a></li>
                 <li class="hamburger-menu__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                <li class="hamburger-menu__item"><a href="{{ CHRACTER_TOP }}">characterlist</a></li>
+                <li class="hamburger-menu__item"><a href="{{ CHARACTER_TOP }}">characterlist</a></li>
             </ul>
         </nav>
     </header>

@@ -15,21 +15,12 @@ function imageClick(jsonData, jsonImages, content) {
     const deleteBtn = getdeleteBtn()
     deleteBtn.value = jsonData.id
 
-    if (jsonData.height == null) {
-        getHeight().innerHTML = "未登録"
-    }
-
-    if (jsonData.weight == null) {
-        getWeight().innerHTML = "未登録"
-    }
-
-
     for (let i = 0; i < 5; i++) {
         const imgSrc = document.getElementById(`imageList_${i}`)
         imgSrc.setAttribute("src", "")
         imgSrc.style.display = "none"
     }
- 
+
     // 登録画像表示
     const images = jsonImages
     for (let i = 0; i < images.length; i++) {
@@ -47,9 +38,11 @@ function imageClick(jsonData, jsonImages, content) {
 
 
 // deleteAlert
-function deleteAlert() {
+function deleteBtnClickAlert() {
     const deleteBtn = getdeleteBtn()
     const characterId = deleteBtn.value
+    const deleteForm = document.getElementById("character-delete-form")
+    deleteForm.action = `character/${characterId}`
     if (!characterId) return
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -69,7 +62,7 @@ function deleteAlert() {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            document.location.href = `/character_delete/${characterId}`
+            deleteForm.submit()
         } else {
             return false;
         }

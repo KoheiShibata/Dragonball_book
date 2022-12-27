@@ -47,6 +47,12 @@ Route::controller(CharacterController::class)->prefix("characters")->group(funct
     Route::get("/", "characterList");
 });
 
+Route::controller(CharacterController::class)->prefix("characterDetail")->group(function () {
+    Route::get("/{id}", "characterDetail");
+});
+
+
+
 
 
 Route::get("/dragonball_zukan", [App\Http\Controllers\ZukanController::class, "dragonball_zukan"]);

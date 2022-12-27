@@ -14,7 +14,7 @@ define("DELETE_FAILED_MESSAGE", "削除に失敗しました");
 define("TRIBE_TOP", "/tribe");
 define("SEASON_TOP", "/season");
 define("CHARACTER_CREATE_FORM", "/character");
-define("CHRACTER_TOP", "/characters");
+define("CHARACTER_TOP", "/characters");
 
 define("DELETE_ICON_IMAGE_PATH", asset('/storage/img/trash-can-regular.svg'));
 

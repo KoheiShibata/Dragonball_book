@@ -48,6 +48,32 @@ class Character extends Model
     }
 
     /**
+     * キャラクターの身長をフォーマット
+     *
+     * @return 
+     */
+    public function getFormatedHeightAttribute()
+    {
+        if(empty($this->height)) {
+            return "未登録";
+        }
+        return $this->height;
+    }
+
+    /**
+     * キャラクターの体重をフォーマット
+     *
+     * @return 
+     */
+    public function getFormatedWeightAttribute()
+    {
+        if(empty($this->weight)) {
+            return "未登録";
+        }
+        return $this->weight;
+    }
+
+    /**
      * 画像パスをフォーマット
      *
      * @return string
@@ -78,6 +104,32 @@ class Character extends Model
             ->orderBy("season_id", "asc")
             ->orderBy("id", "asc")
             ->get();
+    }
+
+
+    // public function scopeFetchUpdateRow(object $query, array $param):bool
+    // {
+    //     return $query
+    //         ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
+    //         ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
+    //         ->select($this->defaultFetchColumns)
+    //         ->where("characters.id", "=", )
+            
+    // }
+
+
+    /**
+     * 対象のIDのレコードに対して削除フラグを立てる
+     *
+     * @param object $query
+     * @param integer $id
+     * @return boolean
+     */
+    public function scopeDeleteRow(object $query, int $id):bool
+    {
+        return $query
+            ->findOrFail($id)
+            ->delete();
     }
 
 }

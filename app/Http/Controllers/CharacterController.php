@@ -102,28 +102,14 @@ class CharacterController extends Controller
      */
     public function characterList()
     {
-        // $characters = DB::table("characters")
-        //     ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-        //     ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-        //     ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-        //     ->whereNull("characters.deleted_at")
-        //     ->get();
-
-        // foreach ($characters as $character) {
-        //     $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
-        //     if ($character->image->isEmpty()) {
-        //         $character->image_path = asset("/storage/img/noimage.png");
-        //     }
-        //     if (!$character->image->isEmpty()) {
-        //         $character->image_path = asset($character->image[0]->image_path);
-        //     }
-        // }
         $selectedCharacterId = [];
         $characterImages = [];
         $characters = Character::fetchAll();
-
+        
         foreach ($characters as $key => $character) {
-            $characterImages[$character->id][] = $character->formated_image_path;
+            $character->height = $character->formatedHeight;
+            $character->weight = $character->formatedWeight;
+            $characterImages[$character->id][] = $character->formatedImagePath;
             if (in_array($character->id, $selectedCharacterId)) {
                 unset($characters[$key]);
                 continue;
@@ -140,7 +126,7 @@ class CharacterController extends Controller
      * @param Request $request
      * @return view
      */
-    public function edit(Request $request)
+    public function characterDetail(Request $request)
     {
         $character = DB::table("characters")
             ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
@@ -149,8 +135,8 @@ class CharacterController extends Controller
             ->where("characters.id", "=", $request->id)
             ->first();
 
-        $seasons = Season::whereNull("deleted_at")->get();
-        $tribes = Tribe::whereNull("deleted_at")->get();
+        $seasons = Season::fetchAll();
+        $tribes = Tribe::fetchAll();
 
         $character->image = CharacterImage::select("image_path")->where("character_id", $request->id)->whereNull("deleted_at")->get();
 
@@ -158,7 +144,7 @@ class CharacterController extends Controller
             $character->image_path[] = $images->image_path;
         }
 
-        return view("character_edit", compact("character", "seasons", "tribes"));
+        return view("character.edit", compact("character", "seasons", "tribes"));
     }
 
 
@@ -231,11 +217,19 @@ class CharacterController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $character = Character::find($request->id);
-        $character->delete();
+        try {
+            if(empty($id) ||
+            !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            Character::deleteRow($id);
+            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
 
-        return redirect("character_list");
+        }
     }
 }

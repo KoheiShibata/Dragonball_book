@@ -9,7 +9,7 @@ function showSweetAlert(status, message) {
         toast: true,
         position: 'top-center',
         showConfirmButton: false,
-        timer: 4000,
+        timer: 3000,
         timerProgressBar: false,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)

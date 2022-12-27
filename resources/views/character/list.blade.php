@@ -43,7 +43,7 @@
                     </div>
                     <div class="modal-body">
                         <label class="subtitle-label">☆character image</label>
-                        <div  id="imageBox">
+                        <div id="imageBox">
                             <img class="modalImage" src="" id="imageList_0" alt="">
                             <img class="modalImage" src="" id="imageList_1" alt="">
                             <img class="modalImage" src="" id="imageList_2" alt="">
@@ -86,17 +86,44 @@
                     </div>
                     <div class="modal-footer">
                         <a href="" class="edit" id="edit">edit</a>
-                        <a href="javascript:void(0)" class="delete" id="deleteBtn" onclick="deleteAlert()">delete</a>
+                        <a href="javascript:void(0)" class="delete" id="deleteBtn" onclick="deleteBtnClickAlert()">delete</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <form action="/" method="post" id="character-delete-form">
+            @csrf
+            @method("delete")
+            <input type="hidden" name="id" id="character_id">
+        </form>
+
         @endsection
 
         @section("js")
         <script src="{{asset('/js/doubleSubmit.js')}}"></script>
         <script src="{{asset('/js/character/modal.js')}}"></script>
         <script src="{{asset('/js/character/loading.js')}}"></script>
+        <script src="{{asset('/js/sweetAlert.js')}}"></script>
+
+        <script>
+            window.addEventListener("load", function() {
+                const successMessage = @json(session("successMessage"));
+                if (successMessage) {
+                    window.setTimeout(function() {
+                        showSweetAlert("success", successMessage)
+                        return
+                    }, 2000);
+                }
+                const errorMessage = @json(session("errorMessage"));
+                if (errorMessage) {
+                    window.setTimeout(function() {
+                        showSweetAlert("error", errorMessage)
+                        return
+                    }, 2000);
+                }
+            })
+        </script>
 
 
         @endsection
