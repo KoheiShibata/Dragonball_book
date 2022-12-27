@@ -29,8 +29,8 @@
         <div class="characterList">
             @foreach($characters as $character)
             <div class="character">
-                <img src="{{ $character->image_path }}" id="characterData" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" onclick="imageClick({{ json_encode($character) }}, `{!! nl2br(e($character->content)) !!}`)">
-                <p class="characterName">{{$character->name}}</p>
+                <img src="{{ $character->formated_image_path }}" id="characterData" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" onclick="imageClick( {{ json_encode($character) }}, {{ json_encode($characterImages[$character->id]) }}, `{!! nl2br(e($character->content)) !!}`)">
+                <p class="characterName">{{ $character->name }}</p>
             </div>
             @endforeach
         </div>

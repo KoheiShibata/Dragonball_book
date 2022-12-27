@@ -19,11 +19,26 @@ class Character extends Model
         'id'
     ];
 
+    
+    /**
+     * デフォルト取得カラム
+     *
+     * @var array
+     */
+    private $defaultFetchColumns = [
+        "characters.*",
+        "seasons.name as season_name",
+        "tribes.name as tribe_name",
+        "character_images.image_path",
+    ];
+    
+    
     public function character_images()
     {
         return $this->hasMany(CharacterImage::class);
     }
-
+    
+    
     public static function boot()
     {
         parent::boot();
@@ -31,4 +46,38 @@ class Character extends Model
             $character->character_images()->delete();
         });
     }
+
+    /**
+     * 画像パスをフォーマット
+     *
+     * @return string
+     */
+    public function getFormatedImagePathAttribute():string 
+    {
+        if(empty($this->image_path)) {
+            return asset("/storage/img/noimage.png");
+        }
+        return asset($this->image_path);
+    }
+
+    /**
+     * アクティブなキャラクターを全取得する
+     *
+     * @param object $query
+     * @return object
+     */
+    public function scopeFetchAll(object $query):object 
+    {
+        return $query
+            ->whereNull("characters.deleted_at")
+            ->whereNull("character_images.deleted_at")
+            ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
+            ->select($this->defaultFetchColumns)
+            ->orderBy("season_id", "asc")
+            ->orderBy("id", "asc")
+            ->get();
+    }
+
 }

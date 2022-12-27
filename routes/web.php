@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ZukanController;
 use App\Http\Controllers\SeasonController;
@@ -21,28 +22,32 @@ Route::get('/', function () {
 });
 
 
-Route::controller(TribeController::class)->prefix("tribe")->group(function(){
+Route::controller(TribeController::class)->prefix("tribe")->group(function () {
     Route::get("/", "tribeList");
     Route::post("/", "create");
     Route::put("/", "edit");
     Route::delete("/{id}", "delete");
 });
 
-Route::controller(SeasonController::class)->prefix("season")->group(function(){
+Route::controller(SeasonController::class)->prefix("season")->group(function () {
     Route::get("/", "seasonList");
     Route::post("/", "create");
     Route::put("/", "edit");
     Route::delete("/{id}", "delete");
 });
 
-Route::controller(CharacterController::class)->prefix("character")->group(function(){
+Route::controller(CharacterController::class)->prefix("character")->group(function () {
     Route::get("/", "createForm");
     Route::post("/", "create");
     Route::put("/", "edit");
     Route::delete("/{id}", "delete");
 });
 
+Route::controller(CharacterController::class)->prefix("characters")->group(function () {
+    Route::get("/", "characterList");
+});
 
 
-Route::get("/dragonball_zukan",[App\Http\Controllers\ZukanController::class, "dragonball_zukan"]);
-Route::get("/character_detail/{id}",[App\Http\Controllers\ZukanController::class, "character_detail"]);
+
+Route::get("/dragonball_zukan", [App\Http\Controllers\ZukanController::class, "dragonball_zukan"]);
+Route::get("/character_detail/{id}", [App\Http\Controllers\ZukanController::class, "character_detail"]);

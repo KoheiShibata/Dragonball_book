@@ -125,7 +125,7 @@ body {
 #imageBox img {
     width: 155px;
     height: 155px;
-    object-fit: contain;
+    object-fit: cover;
     background-color: #EEEEEE;
     border-radius: 5px;
 }
