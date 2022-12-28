@@ -86,6 +86,7 @@ class Character extends Model
         return asset($this->image_path);
     }
 
+    
     /**
      * アクティブなキャラクターを全取得する
      *
@@ -105,17 +106,41 @@ class Character extends Model
             ->orderBy("id", "asc")
             ->get();
     }
+    
+
+    /**
+     * 編集対象のIDのキャラクターを取得
+     *
+     * @param object $query
+     * @param integer $characterId
+     * @return object
+     */
+    public function scopeFetchUpdateRow(object $query, int $characterId):object
+    {
+        return $query
+            ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
+            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
+            ->where("characters.id", "=", $characterId)
+            ->first();
+    }
 
 
-    // public function scopeFetchUpdateRow(object $query, array $param):bool
-    // {
-    //     return $query
-    //         ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
-    //         ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
-    //         ->select($this->defaultFetchColumns)
-    //         ->where("characters.id", "=", )
-            
-    // }
+    /**
+     * レコードの更新処理
+     *
+     * @param object $query
+     * @param array $param
+     * @return boolean
+     */
+    public function scopeUpdateExecution(object $query, array $param):bool
+    {
+        return $query
+            ->findOrFail($param["id"])
+            ->fill($param)
+            ->save();
+    }
 
 
     /**

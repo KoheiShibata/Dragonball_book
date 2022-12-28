@@ -97,7 +97,7 @@ body {
 .subtitle-label {
     font-family: "Saiyan-Sans";
     color: rgba(0, 0, 0, 0.4);
-    font-size: 10px;
+    font-size: 15px;
     /* margin-top: 5px; */
     /* margin-bottom: 5px; */
     /* padding-bottom: 5px; */
@@ -112,7 +112,7 @@ body {
 }
 
 .modalContent {
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
@@ -142,7 +142,7 @@ body {
 
 .characterInfo p {
     margin-bottom: 2px;
-    font-size: 6px;
+    font-size: 11px;
 }
 
 .modal-footer a {
@@ -246,10 +246,6 @@ body {
 
     .subtitle-label {
         font-size: 15px;
-    }
-    
-    .modalContent {
-        font-size: 12px;
     }
     
     #imagebox {

@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     btnSubmit.addEventListener("click", (e) => {
         let base64Images = new Array();
-        let validations = "ture"
+        let validations = "true"
         btnSubmit.disabled = true
 
 
@@ -94,21 +94,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "/character_update",
-                type: "POST",
+                url: `/character/${characterId}`,
+                type: "PUT",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
-                    window.location.href= ("/character_list")
+                    if (data.successMessage) {
+                        showSweetAlert("success", data.successMessage)
+                        window.setTimeout(function () {
+                            window.location.href = ("/characters")
+                        }, 2000);
+                    }
+                    if (data.errorMessage) {
+                        showSweetAlert("error", data.errorMessage)
+                        btnSubmit.disabled = false
+                        return
+                    }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
+                    showSweetAlert("error", data.errorMessage)
                     btnSubmit.disabled = false
-                    Swal.fire({
-                        icon: 'error',
-                        text: '登録に失敗しました',
-                    })
+                    return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
 
@@ -131,21 +139,29 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "/character_update",
-                type: "POST",
+                url: `/character/${characterId}`,
+                type: "PUT",
                 data: param,
             })
                 // Ajaxリクエストが成功した時発動
                 .done((data) => {
-                    window.location.href= ("/character_list")
+                    if (data.successMessage) {
+                        showSweetAlert("success", data.successMessage)
+                        window.setTimeout(function () {
+                            window.location.href = ("/characters")
+                        }, 2000);
+                    }
+                    if (data.errorMessage) {
+                        showSweetAlert("error", data.errorMessage)
+                        btnSubmit.disabled = false
+                        return
+                    }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
+                    showSweetAlert("error", data.errorMessage)
                     btnSubmit.disabled = false
-                    Swal.fire({
-                        icon: 'error',
-                        text: '更新に失敗しました',
-                    })
+                    return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
         }

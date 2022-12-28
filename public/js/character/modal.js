@@ -10,7 +10,7 @@ function imageClick(jsonData, jsonImages, content) {
     document.getElementById("ability").innerHTML = jsonData.ability
     document.getElementById("popularity").innerHTML = jsonData.popularity
     // 編集ボタン
-    getEdit().setAttribute("href", `character_edit/${jsonData.id}`)
+    getEdit().setAttribute("href", `character/${jsonData.id}`)
     // 削除ボタン
     const deleteBtn = getdeleteBtn()
     deleteBtn.value = jsonData.id

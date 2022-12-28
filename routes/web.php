@@ -39,16 +39,13 @@ Route::controller(SeasonController::class)->prefix("season")->group(function () 
 Route::controller(CharacterController::class)->prefix("character")->group(function () {
     Route::get("/", "createForm");
     Route::post("/", "create");
-    Route::put("/", "edit");
+    Route::get("/{id}", "characterDetail");
+    Route::put("/{id}", "edit");
     Route::delete("/{id}", "delete");
 });
 
 Route::controller(CharacterController::class)->prefix("characters")->group(function () {
     Route::get("/", "characterList");
-});
-
-Route::controller(CharacterController::class)->prefix("characterDetail")->group(function () {
-    Route::get("/{id}", "characterDetail");
 });
 
 

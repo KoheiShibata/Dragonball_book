@@ -11,7 +11,7 @@
 @section("title", "$character->name の編集")
 
 @section("returnBtn")
-<a href="/character_list" class="returnBtn">＜ </a>
+<a href="{{ CHARACTER_TOP }}" class="returnBtn">＜ </a>
 @endsection
 
 @section("main")
@@ -20,8 +20,9 @@
     <span class="required"></span><span>は必須です</span>
     <div class="form-body">
         <!-- <h1 class="subtitle">☆キャラクター情報</h1> -->
-        <form action="/character_register" enctype="multipart/form-data" method="post">
+        <form action="/" enctype="multipart/form-data" method="post">
             @csrf
+            @method("put")
             <div class="form-group">
                 <input type="hidden" id="characterId" value="{{$character->id}}">
                 <label class="top-label required" for="name">☆キャラクター名</label><br>
@@ -36,11 +37,11 @@
             <div class="input_area" id="inputArea">
                 <div class="image_area">
                     <div id="preview-box">
-                        @if(!empty($character->image_path))
-                        @for($i=0;$i<count($character->image_path);$i++)
+                        @if(!empty($characterImage))
+                        @for($i=0;$i<count($characterImage);$i++)
                             <div class="preview-list" id="previewList_{{$i}}">
                                 <a href="javascript:void(0)" class="delete-button" onclick="onClickDeleteImage({{$i}})" id="deleteImage_{{$i}}">×</a>
-                                <img src="{{ asset($character->image_path[$i]) }}" class="preview-img" alt="">
+                                <img src="{{ asset($characterImage[$i]) }}" class="preview-img" alt="">
                             </div>
                             @endfor
                             @endif
@@ -111,7 +112,6 @@
             </select>
             <div class="err-msg-popularity"></div>
             <button type="button" id="btnSubmit" class="btn_button">更新</button>
-            <!-- <input  type="hedden" value="[image_1,image_3,image_5]" name="file-name-id"> -->
         </form>
     </div>
     @endsection
@@ -121,6 +121,7 @@
     <script src="{{asset('/js/character/fetchFormValue.js')}}"></script>
     <script src="{{asset('/js/character/validations.js')}}"></script>
     <script src="{{asset('/js/character/editSubmit.js')}}"></script>
+    <script src="{{asset('/js/sweetAlert.js')}}"></script>
 
 
     <script>
