@@ -4,6 +4,7 @@ use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ZukanController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\TribeController;
+use App\Models\Character;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +49,7 @@ Route::controller(CharacterController::class)->prefix("characters")->group(funct
     Route::get("/", "characterList");
 });
 
-
-
-
-
-Route::get("/dragonball_zukan", [App\Http\Controllers\ZukanController::class, "dragonball_zukan"]);
-Route::get("/character_detail/{id}", [App\Http\Controllers\ZukanController::class, "character_detail"]);
+Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
+    Route::get("/", "pbook");
+    Route::get("/{id}", "detail");
+});

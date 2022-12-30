@@ -15,6 +15,7 @@ define("TRIBE_TOP", "/tribe");
 define("SEASON_TOP", "/season");
 define("CHARACTER_CREATE_FORM", "/character");
 define("CHARACTER_TOP", "/characters");
+define("PBOOK_TOP", "/dragonball-pbook");
 
 define("DELETE_ICON_IMAGE_PATH", asset('/storage/img/trash-can-regular.svg'));
 

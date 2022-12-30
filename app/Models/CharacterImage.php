@@ -25,6 +25,20 @@ class CharacterImage extends Model
 
 
     /**
+     * 画像パスをフォーマット
+     *
+     * @return string
+     */
+    public function getFormatedImagePathAttribute():string 
+    {
+        if(empty($this->image_path)) {
+            return asset("/storage/img/noimage.png");
+        }
+        return asset($this->image_path);
+    }
+
+
+    /**
      * 対象のIDのキャラクター画像を取得
      *
      * @param object $query
@@ -54,4 +68,6 @@ class CharacterImage extends Model
             ->where("character_id", $characterId)
             ->delete();
     }
+
+    
 }

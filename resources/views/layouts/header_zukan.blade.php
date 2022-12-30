@@ -20,12 +20,18 @@
 
 <body>
     @yield("loading")
-    <div class="header">
-        <div class="header-logo"><span class="logo-1">DRAGON</span><span class="logo-2">BALL</span><span class="logo-3">pbook</span></div>
-        <div class="header-list">
-            <li id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
+    <header class="header">
+        <div class="header-logo">
+            <span class="font--yellow">DRAGON</span>
+            <span class="font--red">BALL</span>
+            <span class="font--blue">PBOOK</span>
         </div>
-    </div>
+        <nav class="header-nav">
+            <ul class="header-nav__list">
+                <li class="header-nav__item" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
+            </ul>
+        </nav>
+    </header>
 
     @yield("main")
 
@@ -33,7 +39,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="/dragonball_zukan" method="get" id="search-form">
+                <form action="/dragonball-pbook" method="get" id="search-form">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

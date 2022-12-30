@@ -5,6 +5,18 @@
     margin-top: 60px;
 }
 
+.previous-btn {
+    position: fixed;
+    z-index: 1;
+    width: 80px;
+    top: 48%;
+    left: 5px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
 .character {
     display: flex;
     justify-content: space-between;
@@ -14,13 +26,13 @@
     /* position: absolute;
     bottom: 0; */
     width: 240px;
-    height: 200px;
+    height: 210px;
     border-radius: 5px;
     border: 1px dotted #EEEEEE;
 }
 
 .myChart {
-    height: 200px !important;
+    height: 210px !important;
     width: 240px !important;
     object-fit: contain;
 }
@@ -35,7 +47,7 @@
 /* swiper */
 .swiper {
     width: 410px;
-    height: 450px;
+    height: 460px;
     position: static;
 }
 
@@ -56,7 +68,7 @@
 
 .swiper-slide img {
     width: 410px;
-    height: 450px;
+    height: 460px;
     border-radius: 5px;
     object-fit: cover;
     background-color: #EEEEEE;
@@ -128,7 +140,7 @@
     font-family: "Saiyan-Sans";
     /* color: rgba(0, 0, 0, 0.4); */
     color: white;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .dataArea {
@@ -138,7 +150,7 @@
 
 
 .detail {
-    height: 450px;
+    height: 460px;
     width: 400px;
     position: relative;
 }
@@ -152,15 +164,18 @@
 }
 
 .textArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 150px;
-    height: 200px;
+    height: 210px;
     border: 1px dotted #EEEEEE;
     border-radius: 5px;
     padding: 5px;
 }
 
 .textArea p {
-    font-size: 12px;
+    font-size: 13px;
     color: white;
     opacity: 0.7;
 }

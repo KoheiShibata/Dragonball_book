@@ -46,37 +46,39 @@ body {
     filter: drop-shadow(5px 5px 5px rgb(236, 123, 0));
 }
 
-.logo-1 {
+.font--yellow {
     color: rgb(250, 235, 8);
     -webkit-text-stroke: 1px #000;
 }
 
-.logo-2 {
+.font--red {
     color: rgb(231, 0, 18);
     -webkit-text-stroke: 1px #000;
 }
 
-.logo-3 {
+.font--blue {
     -webkit-text-stroke: 1px #000;
     color: #498DC5;
 }
 
-.header-list {
+.header-nav__list {
     display: flex;
     align-items: center;
 }
 
-.header-list li {
+.header-nav__item {
     list-style: none;
     margin-left: 30px;
+    margin-top: 10px;
 }
 
-.header-list img {
+.header-nav__list img {
+    width: 32px;
     transition-duration: 0.5s;
     cursor: pointer;
 }
 
-.header-list img:hover {
+.header-nav__list img:hover {
     opacity: 0.6;
     transform: translateY(-5px);
     transition-duration: 0.5s;

@@ -48,7 +48,7 @@ class Character extends Model
     }
 
     /**
-     * キャラクターの身長をフォーマット
+     * キャラクターの管理画面の身長をフォーマット
      *
      * @return 
      */
@@ -60,8 +60,21 @@ class Character extends Model
         return $this->height;
     }
 
+   /**
+     * キャラクター図鑑の身長をフォーマット
+     *
+     * @return 
+     */
+    public function getFormatedPbookHeightAttribute()
+    {
+        if(empty($this->height)) {
+            return "不明";
+        }
+        return $this->height;
+    }
+
     /**
-     * キャラクターの体重をフォーマット
+     * キャラクターの管理画面の体重をフォーマット
      *
      * @return 
      */
@@ -71,6 +84,19 @@ class Character extends Model
             return "未登録";
         }
         return $this->weight;
+    }
+
+       /**
+     * キャラクター図鑑の身長をフォーマット
+     *
+     * @return 
+     */
+    public function getFormatedPbookweightAttribute()
+    {
+        if(empty($this->height)) {
+            return "不明";
+        }
+        return $this->height;
     }
 
     /**
@@ -155,6 +181,35 @@ class Character extends Model
         return $query
             ->findOrFail($id)
             ->delete();
+    }
+
+
+    /**
+     * 検索対象のキャラクターを全取得
+     *
+     * @param object $query
+     * @param array $filter
+     * @return object
+     */
+    public function scopeSearchAll(object $query, array $filter):object
+    {
+        return $query
+            ->whereNull("characters.deleted_at")
+            ->whereNull("character_images.deleted_at")
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
+            ->when(!empty($filter["season"]), function ($query) use ($filter) {
+                return $query->whereIn("season_id", $filter["season"]);
+            })
+            ->when(!empty($filter["tribe"]), function ($query) use ($filter) {
+                return $query->whereIn("tribe_id", $filter["tribe"]);
+            })
+            ->when(!empty($filter["keyword"]), function ($query) use ($filter) {
+                return $query->where("name", "like", "%" . self::escapeLike($filter["keyword"]) . "%");
+            })
+            ->select("characters.*", "character_images.image_path")
+            ->orderBy("season_id", "asc")
+            ->orderBy("characters.id", "asc")
+            ->get();
     }
 
 }

@@ -29,7 +29,7 @@
             @endif
             @foreach($characters as $character)
             <div class="character" id="character" onclick="onClickCharacterDetail('{{$character->id}}')">
-                <img src="{{ $character->image_path }}" id="characterData" alt="">
+                <img src="{{ $character->formated_image_path }}" id="characterData" alt="">
                 <p class="characterName">{{$character->name}}</p>
             </div>
             @endforeach
@@ -44,7 +44,11 @@
 
 <script>
     function onClickCharacterDetail(id) {
-        window.location.href = (`/character_detail/${id}`)
+        window.location.href = (`/dragonball-pbook/${id}`)
+    }
+
+    function historyBtn() {
+        history.forward()
     }
 </script>
 @endsection
