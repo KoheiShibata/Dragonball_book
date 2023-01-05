@@ -1,11 +1,11 @@
-@extends("layouts.header_zukan")
+@extends("layouts.zukan")
 
 @section('loading.css')
 <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
 @endsection
 
 @section('header.css')
-<link href="{{ asset('css/headerZukan.css') }}" rel="stylesheet">
+<link href="{{ asset('css/zukan.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
@@ -21,21 +21,21 @@
 @endsection
 
 @section("main")
-<div class="main">
-    <div id="container">
-        <div class="characterList">
-            @if($characters->isEmpty())
-            <div class="noCharacter">表示できるキャラクタ―がいません。</div>
-            @endif
+<main class="main">
+    <section>
+        @if($characters->isEmpty())
+        <div class="character-none--message">表示できるキャラクタ―がいません。</div>
+        @endif
+        <ul class="character-list">
             @foreach($characters as $character)
-            <div class="character" id="character" onclick="onClickCharacterDetail('{{$character->id}}')">
-                <img src="{{ $character->image_path }}" id="characterData" alt="">
-                <p class="characterName">{{$character->name}}</p>
-            </div>
+            <li class="character-list__item"  onclick="onClickCharacterDetail('{{$character->id}}')">
+                <img src="{{ $character->formated_image_path }}" id="characterData" alt="">
+                <p>{{$character->name}}</p>
+            </li>
             @endforeach
-        </div>
-    </div>
-</div>
+        </ul>
+    </section>
+</main>
 @endsection
 
 @section("js")
@@ -44,7 +44,7 @@
 
 <script>
     function onClickCharacterDetail(id) {
-        window.location.href = (`/character_detail/${id}`)
+        window.location.href = (`/dragonball-pbook/${id}`)
     }
 </script>
 @endsection

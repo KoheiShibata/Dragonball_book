@@ -11,6 +11,7 @@ use App\Models\CharacterImage;
 use App\Models\Season;
 
 use App\Models\Tribe;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -22,13 +23,12 @@ class CharacterController extends Controller
      *
      * @return view
      */
-    public function character_create()
+    public function createForm()
     {
-        $seasons = Season::whereNull("deleted_at")->get();
+        $seasons = Season::fetchAll();
+        $tribes = Tribe::fetchAll();
 
-        $tribes = Tribe::whereNull("deleted_at")->get();
-
-        return view("/character_create", compact("seasons", "tribes"));
+        return view("/character.form", compact("seasons", "tribes"));
     }
 
 
@@ -38,49 +38,68 @@ class CharacterController extends Controller
      * @param Request $request
      * @return reidrect
      */
-    public function character_register(Request $request)
+    public function create(Request $request)
     {
 
-        $param = Character::create([
-            "name" => $request->name,
-            "content" => $request->content,
-            "height" => $request->height,
-            "weight" => $request->weight,
-            "tribe_id" => $request->tribe_id,
-            "season_id" => $request->season_id,
-            "attack" => $request->attack,
-            "defense" => $request->defense,
-            "ability" => $request->ability,
-            "popularity" => $request->popularity,
-        ]);
+        try {
+            $param = $request->validate(config(CHARACTER_REGISTRATION_VALIDATE));
 
-        $character_id = $param->id;
+            DB::beginTransaction();
+            $characterId = Character::create($param)->id;
+            $files = $request->image;
 
-        $files = [];
-        $files = $request->image;
-        $filePath = [];
-
-
-        if (!$files == []) {
-            foreach ($files as $file) {
-                preg_match('/data:image\/(\w+);base64,/', $file, $matches);
-                $extension = $matches[1];
-
-                $img = preg_replace('/^data:image.*base64,/', "", $file);
-                $img = str_replace(' ', '+', $img);
-
-                $fileName = md5($img);
-                $image_path = "/storage/character/" . $fileName . "." . $extension;
-                file_put_contents("." . $image_path, base64_decode($img));
-                $filePath[] = "/storage/character/" . $fileName . "." . $extension;
-
-                CharacterImage::create([
-                    "character_id" => $character_id,
-                    "image_path" => $image_path,
-                ]);
+            //　画像がpostされたときはアップロードした後、インサート用にフォーマット 
+            if (!empty($imagesPath = $this->imageUpload($files))) {
+                $characterImageInsertParam = [];
+                foreach ($imagesPath as $path) {
+                    $characterImageInsertParam[] = [
+                        "character_id" => $characterId,
+                        "image_path" => $path
+                    ];
+                }
+                CharacterImage::insert($characterImageInsertParam);
             }
+            DB::commit();
+            return [SUCCESS_MESSAGE => REGISTRATION_SUCCESS_MESSAGE];
+        } catch (\Exception $e) {
+            DB::rollback();
+            return [ERROR_MESSAGE => REGISTRATION_FAILED_MESSAGE];
         }
-        return redirect("character_list");
+    }
+
+
+    /**
+     * 画像アップロード処理
+     *
+     * @param array|null $files
+     * @return array
+     */
+    private function imageUpload($files): array
+    {
+        $res = [];
+        if (empty($files)) {
+            return [];
+        }
+
+        foreach ($files as $file) {
+            if (!preg_match('/data:image\/(\w+);base64,/', $file)) {
+
+                $file = strstr($file, "/storage");
+                $res[] = $file;
+                continue;
+            }
+
+            preg_match('/data:image\/(\w+);base64,/', $file, $matches);
+            $extension = $matches[1];
+
+            $img = preg_replace('/^data:image.*base64,/', "", $file);
+            $img = str_replace(' ', '+', $img);
+            $fileName = md5($img);
+            $imagePath = "/storage/character/" . $fileName . "." . $extension;
+            file_put_contents("." . $imagePath, base64_decode($img));
+            $res[] = $imagePath;
+        }
+        return $res;
     }
 
 
@@ -89,25 +108,23 @@ class CharacterController extends Controller
      *
      * @return view
      */
-    public function character_list()
+    public function characterList()
     {
-        $characters = DB::table("characters")
-            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-            ->whereNull("characters.deleted_at")
-            ->get();
+        $selectedCharacterId = [];
+        $characterImages = [];
+        $characters = Character::fetchAll();
 
-        foreach ($characters as $character) {
-            $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
-            if ($character->image->isEmpty()) {
-                $character->image_path = asset("/storage/img/noimage.png");
+        foreach ($characters as $key => $character) {
+            $character->height = $character->formatedHeight;
+            $character->weight = $character->formatedWeight;
+            $characterImages[$character->id][] = $character->formatedImagePath;
+            if (in_array($character->id, $selectedCharacterId)) {
+                unset($characters[$key]);
+                continue;
             }
-            if (!$character->image->isEmpty()) {
-                $character->image_path = asset($character->image[0]->image_path);
-            }
+            $selectedCharacterId[] = $character->id;
         }
-        return view("character_list", compact("characters"));
+        return view("character.list", compact("characters", "characterImages"));
     }
 
 
@@ -117,25 +134,26 @@ class CharacterController extends Controller
      * @param Request $request
      * @return view
      */
-    public function edit(Request $request)
+    public function characterDetail($id)
     {
-        $character = DB::table("characters")
-            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-            ->where("characters.id", "=", $request->id)
-            ->first();
-
-        $seasons = Season::whereNull("deleted_at")->get();
-        $tribes = Tribe::whereNull("deleted_at")->get();
-
-        $character->image = CharacterImage::select("image_path")->where("character_id", $request->id)->whereNull("deleted_at")->get();
-
-        foreach ($character->image as $images) {
-            $character->image_path[] = $images->image_path;
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            $seasons = Season::fetchAll();
+            $tribes = Tribe::fetchAll();
+            $character = Character::fetchUpdateRow($id);
+            $characterImages = CharacterImage::fetchImage($id);
+            foreach ($characterImages as $image) {
+                $characterImage[] = $image->image_path;
+            }
+            return view("character.edit", compact("character", "characterImage", "seasons", "tribes"));
+        } catch (\Exception $e) {
+            return abort(404);
         }
-
-        return view("character_edit", compact("character", "seasons", "tribes"));
     }
 
 
@@ -145,61 +163,33 @@ class CharacterController extends Controller
      * @param Request $request
      * @return void
      */
-    public function update(Request $request)
+    public function edit(Request $request)
     {
-        $character = Character::where("id", "=", $request->id)->first();
-        // 更新した値を代入
-        $character->name = $request->name;
-        $character->content = $request->content;
-        $character->height = $request->height;
-        $character->weight = $request->weight;
-        $character->tribe_id = $request->tribe_id;
-        $character->season_id = $request->season_id;
-        $character->attack = $request->attack;
-        $character->defense = $request->defense;
-        $character->ability = $request->ability;
-        $character->popularity = $request->popularity;
+        try {
+            $characterId = $request->id;
+            $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
 
-        // 画像以外の情報を更新
-        $character->save();
-        
-        // 画像の処理
-        $files = [];
-        $files = $request->image;
-        $filePath = [];
-        
-        // 選択されたidのキャラクタ―画像を削除する
-        $character->character_images()->delete();
+            DB::beginTransaction();
+            Character::updateExecution($param);
+            CharacterImage::deleteImageRow($characterId);
 
-        if (!$files == []) {
-            foreach ($files as $file) {
-                // base64形式以外の画像がrequestされた場合
-                if(!preg_match('/data:image\/(\w+);base64,/', $file)) {
-                    // /storageより前の文字列を削除する
-                    $file = strstr($file, "/storage");
-                    $image_path = $file;
+            $files = $request->image;
+            if (!empty($imagesPath = $this->imageUpload($files))) {
+                $characterImageInsertParam = [];
+                foreach ($imagesPath as $path) {
+                    $characterImageInsertParam[] = [
+                        "character_id" => $characterId,
+                        "image_path" => $path
+                    ];
                 }
-
-                //base64形式で画像がrequestされた時 
-                if(preg_match('/data:image\/(\w+);base64,/', $file)) {
-                    preg_match('/data:image\/(\w+);base64,/', $file, $matches);
-                    $extension = $matches[1];
-    
-                    $img = preg_replace('/^data:image.*base64,/', "", $file);
-                    $img = str_replace(' ', '+', $img);
-    
-                    $fileName = md5($img);
-                    $image_path = "/storage/character/" . $fileName . "." . $extension;
-                    file_put_contents("." . $image_path, base64_decode($img));
-                    $filePath[] = "/storage/character/" . $fileName . "." . $extension;
-                }
-                CharacterImage::create([
-                    "character_id" => $request->id,
-                    "image_path" => $image_path,
-                ]);
+                CharacterImage::insert($characterImageInsertParam);
             }
+            DB::commit();
+            return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return [ERROR_MESSAGE => UPDATE_FAILED_MESSAGE];
         }
-        
     }
 
 
@@ -209,11 +199,19 @@ class CharacterController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $character = Character::find($request->id);
-        $character->delete();
-
-        return redirect("character_list");
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            Character::deleteRow($id);
+            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
+        }
     }
 }

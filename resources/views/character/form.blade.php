@@ -1,49 +1,36 @@
-@extends("layouts.header_register")
+@extends("layouts.management")
 
 @section('header.css')
-<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/management.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
-<link href="{{ asset('css/characterEdit.css') }}" rel="stylesheet">
+<link href="{{ asset('css/character_create.css') }}" rel="stylesheet">
 @endsection
 
-@section("title", "$character->name の編集")
-
-@section("returnBtn")
-<a href="/character_list" class="returnBtn">＜ </a>
-@endsection
+@section("title", "キャラクターの登録")
 
 @section("main")
 <div class="main">
-    <h1 class="title">★Character edit</h1>
-    <span class="required"></span><span>は必須です</span>
+    <h1 class="title">★Character registration</h1>
+    <p class="info">入力情報は後から変更できます<span class="required">(</span>は必須です)</p>
     <div class="form-body">
-        <!-- <h1 class="subtitle">☆キャラクター情報</h1> -->
-        <form action="/character_register" enctype="multipart/form-data" method="post">
+        <h1 class="subtitle">☆キャラクター情報</h1>
+        <form action="/" enctype="multipart/form-data" method="post">
             @csrf
             <div class="form-group">
-                <input type="hidden" id="characterId" value="{{$character->id}}">
-                <label class="top-label required" for="name">☆キャラクター名</label><br>
-                <input type="text" class="form-control" name="name" id="name" value="{{$character->name}}">
+                <label class="register-label required" for="name">☆キャラクター名</label><br>
+                <input type="text" class="form-control" name="name" id="name" value="">
                 <div class="err-msg-name"></div>
             </div>
             <div class="form-group">
                 <label class="register-label">☆キャラクター画像</label><br>
                 <label for="chkNo"><input type="radio" id="chkNo" name="checkPass" checked="checked" onclick="formSwitch()">なし</label>
-                <label class="file_radio" for="chkYes"><input type="radio" id="chkYes" name="checkPass" checked="checked" onclick="formSwitch()">画像を選択する（最大5枚）</label>
+                <label class="file_radio" for="chkYes"><input type="radio" id="chkYes" name="checkPass" onclick="formSwitch()">画像を選択する（最大5枚）</label>
             </div>
             <div class="input_area" id="inputArea">
                 <div class="image_area">
                     <div id="preview-box">
-                        @if(!empty($character->image_path))
-                        @for($i=0;$i<count($character->image_path);$i++)
-                            <div class="preview-list" id="previewList_{{$i}}">
-                                <a href="javascript:void(0)" class="delete-button" onclick="onClickDeleteImage({{$i}})" id="deleteImage_{{$i}}">×</a>
-                                <img src="{{ asset($character->image_path[$i]) }}" class="preview-img" alt="">
-                            </div>
-                            @endfor
-                            @endif
                     </div>
                     <label for="preview_1" class="filelabel" id="label_1"><img src="{{asset('/storage/img/camera-solid.svg')}}" alt="">
                         <div class="push">画像を選択してください</div>
@@ -53,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label class="register-label required" for="content">☆キャラクター説明</label><br>
-                <textarea class="form-control" name="content" id="content" rows="10">{{$character->content}}</textarea>
+                <textarea class="form-control" name="content" id="content" rows="10"></textarea>
                 <div class="err-msg-content"></div>
             </div>
             <div class="form-group">
@@ -70,7 +57,7 @@
             <select name="tribe" class="chart" id="tribe" required>
                 <option value="">選択してください</option>
                 @foreach($tribes as $tribe)
-                <option value="{{$tribe->id}}" {{$tribe->id == $character->tribe_id ? 'selected' : ''}}>{{$tribe->name}}</option>
+                <option value="{{ $tribe->id }}">{{ $tribe->name }}</option>
                 @endforeach
             </select>
             <div class="err-msg-tribe"></div>
@@ -78,50 +65,50 @@
             <select name="season" class="chart" id="season" required>
                 <option value="">選択してください</option>
                 @foreach($seasons as $season)
-                <option value="{{$season->id}}" {{$season->id == $character->season_id ? 'selected' : ''}}>{{$season->name}}</option>
+                <option value="{{ $season->id }}">{{ $season->name }}</option>
                 @endforeach
             </select>
             <div class="err-msg-season"></div>
             <label for="attack" class="register-label required">攻撃</label>
             <select name="attack" class="chart" id="attack" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}" {{$character->attack == $i ? 'selected' : ''}}>{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-attack"></div>
             <label for="defence" class="register-label required">守備</label>
             <select name="defence" class="chart" id="defence" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}" {{$character->defense == $i ? 'selected' : ''}}>{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-defence"></div>
             <label for="ability" class="register-label required">潜在能力</label>
             <select name="ability" class="chart" id="ability" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}" {{$character->ability == $i ? 'selected' : ''}}>{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-ability"></div>
             <label for="popularity" class="register-label required">人気度</label>
             <select name="popularity" class="chart" id="popularity" required>
                 <option value="">選択してください</option>
-                @for ($i=1;$i<=10;$i++) <option value="{{$i}}" {{$character->popularity == $i ? 'selected' : ''}}>{{$i}}</option>
+                @for ($i=1;$i<=10;$i++) <option value="{{$i}}">{{ $i }}</option>
                     @endfor
             </select>
             <div class="err-msg-popularity"></div>
-            <button type="button" id="btnSubmit" class="btn_button">更新</button>
-            <!-- <input  type="hedden" value="[image_1,image_3,image_5]" name="file-name-id"> -->
+            <button type="button" id="btnSubmit" class="btn_button">登録</button>
+
         </form>
     </div>
     @endsection
 
     @section("js")
     <script src="{{asset('/js/doubleSubmit.js')}}"></script>
+    <script src="{{asset('/js/character/registerSubmit.js')}}"></script>
     <script src="{{asset('/js/character/fetchFormValue.js')}}"></script>
     <script src="{{asset('/js/character/validations.js')}}"></script>
-    <script src="{{asset('/js/character/editSubmit.js')}}"></script>
-
+    <script src="{{asset('/js/sweetAlert.js')}}"></script>
 
     <script>
         addEvent(1)
@@ -256,7 +243,6 @@
             inputLabel.style.display = "none";
         }
 
-        // プレビュー画像削除
         function onClickDeleteBtn(deleteId) {
             const previewList = document.getElementById(asPreviewListId(deleteId))
             previewList.remove()
@@ -270,12 +256,6 @@
                 const changeLabel = document.getElementById(`label_${maxLabelCount}`)
                 changeLabel.className = "filelabel"
             }
-        }
-
-        // 既存の登録画像削除
-        function onClickDeleteImage(deleteId) {
-            const previewList = document.getElementById(`previewList_${deleteId}`)
-            previewList.remove()
         }
 
 
@@ -299,4 +279,9 @@
             return `previewImage_${id}`
         }
     </script>
+
     @endsection
+
+
+
+</div>

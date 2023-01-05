@@ -13,6 +13,8 @@ use App\Models\Tribe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ZukanController extends Controller
 {
     public static function escapeLike($str)
@@ -26,70 +28,38 @@ class ZukanController extends Controller
      *
      * @return view
      */
-    public function dragonball_zukan(Request $request)
+    public function pbook(Request $request)
     {
-        $seasons = Season::whereNull("deleted_at")->get();
-        $tribes = Tribe::whereNull("deleted_at")->get();
+        try {
 
-        
-        $seasonId = $request->season;
-        $tribeId = $request->tribe;
-        $keyword = $request->input("keyword");
+            $selectedCharacterId = [];
+            $characterImages = [];
+            $seasons = Season::fetchAll();
+            $tribes = Tribe::fetchAll();
 
-        $characters = Character::whereNull("deleted_at")
-            ->when(!empty($seasonId), function ($query) use ($seasonId) {
-                return $query->whereIn("season_id", $seasonId);
-            })
-            ->when(!empty($tribeId), function ($query) use ($tribeId) {
-                return $query->whereIn("tribe_id", $tribeId);
-            })
-            ->when(!empty($keyword), function ($query) use ($keyword) {
-                return $query->where("name", "like", "%" . self::escapeLike($keyword) . "%");
-            })
-            ->orderBy("season_id", "asc")
-            ->get();
+            $filter = $request->only(config("filter.character"));
 
-            
+            $characters = Character::searchAll($filter);
 
-        if (!empty($characters)) {
-            session()->flash("seasonId", $seasonId);
-            session()->flash("tribeId", $tribeId);
-            session()->flash("keyword", $keyword);
+            if ($characters->isNotEmpty()) {
+                session()->flash("seasonId", $request->season);
+                session()->flash("tribeId", $request->tribe);
+                session()->flash("keyword", $request->keyword);
 
-            foreach ($characters as $character) {
-                $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
-
-                if ($character->image->isEmpty()) {
-                    $character->image_path = asset("/storage/img/noimage.png");
+                foreach ($characters as $key => $character) {
+                    $characterImages[$character->id][] = $character->formatedImagePath;
+                    if (in_array($character->id, $selectedCharacterId)) {
+                        unset($characters[$key]);
+                        continue;
+                    }
+                    $selectedCharacterId[] = $character->id;
                 }
-                if (!$character->image->isEmpty()) {
-                    $character->image_path = asset($character->image[0]->image_path);
-                }
+
             }
-            return view("/dragonball_zukan", compact("characters", "seasons", "tribes"));
+                return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
+        } catch (\Exception $e) {
+            return abort(404);
         }
-
-        
-        // 検索なし
-        // $characters = DB::table("characters")
-        //     ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-        //     ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-        //     ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-        //     ->whereNull("characters.deleted_at")
-        //     ->get();
-
-
-        // foreach ($characters as $character) {
-        //     $character->image = CharacterImage::where("character_id", $character->id)->whereNull("deleted_at")->get();
-
-        //     if ($character->image->isEmpty()) {
-        //         $character->image_path = asset("/storage/img/noimage.png");
-        //     }
-        //     if (!$character->image->isEmpty()) {
-        //         $character->image_path = asset($character->image[0]->image_path);
-        //     }
-        // }
-        // return view("/dragonball_zukan", compact("characters", "seasons", "tribes"));
     }
 
 
@@ -99,35 +69,26 @@ class ZukanController extends Controller
      * @param Request $request
      * @return view
      */
-    public function character_detail(Request $request)
+    public function detail($id)
     {
-        $seasons = Season::whereNull("deleted_at")->get();
-        $tribes = Tribe::whereNull("deleted_at")->get();
-        $character = DB::table("characters")
-            ->leftjoin("seasons", "characters.season_id", "=", "seasons.id")
-            ->leftjoin("tribes", "characters.tribe_id", "=", "tribes.id")
-            ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-            ->where("characters.id", "=", $request->id)
-            ->first();
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            $seasons = Season::fetchAll();
+            $tribes = Tribe::fetchAll();
+            $character = Character::fetchUpdateRow($id);
+            $characterImages = $characterImages = CharacterImage::fetchImage($id);
 
-        if (empty($character->height)) {
-            $character->height = "？";
+            foreach ($characterImages as $path) {
+                $characterImage[] = $path->formatedImagePath;
+            }
+            return view("/pbook.detail", compact("character", "characterImage", "seasons", "tribes"));
+        } catch (\Exception $e) {
+            return abort(404);
         }
-        if (empty($character->weight)) {
-            $character->weight = "？";
-        }
-
-
-        $character->image = CharacterImage::select("image_path")->where("character_id", $request->id)->whereNull("deleted_at")->get();
-
-        if ($character->image->isEmpty()) {
-            $character->image_path[] = asset("/storage/img/noimage.png");
-        }
-
-        foreach ($character->image as $images) {
-            $character->image_path[] = $images->image_path;
-        }
-
-        return view("character_detail", compact("character", "seasons", "tribes"));
     }
 }

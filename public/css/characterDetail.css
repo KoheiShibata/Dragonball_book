@@ -5,6 +5,18 @@
     margin-top: 60px;
 }
 
+.previous-btn {
+    position: fixed;
+    z-index: 1;
+    width: 80px;
+    top: 48%;
+    left: 5px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
 .character {
     display: flex;
     justify-content: space-between;
@@ -14,19 +26,18 @@
     /* position: absolute;
     bottom: 0; */
     width: 240px;
-    height: 200px;
+    height: 210px;
     border-radius: 5px;
     border: 1px dotted #EEEEEE;
 }
 
 .myChart {
-    height: 200px !important;
+    height: 210px !important;
     width: 240px !important;
     object-fit: contain;
 }
 
-.characterTitle {
-    /* color: 	#FFF803; */
+.character-name {
     text-shadow: 0 -1px 0px #F9A355, -1px 0 0px #F9A355, 1px 0px 0px #F9A355, 0 1px 0px #F9A355, 0 3px 0 #F9A355, 3px 0 #F9A355, 3px 3px 0 #F9A355;
     font-size: 18px;
     margin-bottom: 5px;
@@ -35,28 +46,25 @@
 /* swiper */
 .swiper {
     width: 410px;
-    height: 450px;
+    height: 460px;
     position: static;
 }
 
 .swiper-wrapper {
     position: static;
     z-index: 0;
-    /* width: 100%; */
 }
 
 .swiper-slide {
     color: #ffffff;
-    /* width: 100%; */
     text-align: center;
     line-height: 300px;
     text-align: center;
-    /* object-fit: cover; */
 }
 
 .swiper-slide img {
     width: 410px;
-    height: 450px;
+    height: 460px;
     border-radius: 5px;
     object-fit: cover;
     background-color: #EEEEEE;
@@ -124,12 +132,6 @@
 
 
 /* 詳細データ */
-.pointTitle {
-    font-family: "Saiyan-Sans";
-    /* color: rgba(0, 0, 0, 0.4); */
-    color: white;
-    font-size: 14px;
-}
 
 .dataArea {
     display: flex;
@@ -138,7 +140,7 @@
 
 
 .detail {
-    height: 450px;
+    height: 460px;
     width: 400px;
     position: relative;
 }
@@ -151,18 +153,32 @@
     margin-bottom: 5px;
 }
 
-.textArea {
+.text-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 150px;
-    height: 200px;
+    height: 210px;
     border: 1px dotted #EEEEEE;
     border-radius: 5px;
     padding: 5px;
+    margin-bottom: 0;
 }
 
-.textArea p {
-    font-size: 12px;
+.text-list__item {
+    list-style: none;
+}
+
+.text-list__item p {
+    font-size: 13px;
     color: white;
     opacity: 0.7;
+}
+
+.text-list__item span {
+    font-family: "Saiyan-Sans";
+    color: white;
+    font-size: 15px;
 }
 
 .contentArea {
@@ -218,24 +234,25 @@
         gap: 5px;
     }
 
-    .textArea {
+    .text-list {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         width: 50%;
         height: auto;
         border: 1px solid #eeee;
+        margin-bottom: 0;
     }
 
-    .pointTitle {
+    .text-list__item span {
         font-size: 18px;
     }
 
-    .textArea p {
+    .text-list__item p {
         font-size: 14px;
     }
 
-    .characterTitle {
+    .character-name {
         font-size: 20px;
         text-align: center;
         margin: 5px 0;

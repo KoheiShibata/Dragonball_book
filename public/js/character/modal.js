@@ -1,4 +1,4 @@
-function imageClick(jsonData, content) {
+function imageClick(jsonData, jsonImages, content) {
     document.getElementById("exampleModalLabel").innerHTML = `${jsonData.name}`
     document.getElementById("content").innerHTML = content
     getHeight().innerHTML = jsonData.height
@@ -10,37 +10,22 @@ function imageClick(jsonData, content) {
     document.getElementById("ability").innerHTML = jsonData.ability
     document.getElementById("popularity").innerHTML = jsonData.popularity
     // 編集ボタン
-    getEdit().setAttribute("href", `character_edit/${jsonData.id}`)
+    getEdit().setAttribute("href", `character/${jsonData.id}`)
     // 削除ボタン
     const deleteBtn = getdeleteBtn()
     deleteBtn.value = jsonData.id
-
-    if (jsonData.height == null) {
-        getHeight().innerHTML = "未登録"
-    }
-
-    if (jsonData.weight == null) {
-        getWeight().innerHTML = "未登録"
-    }
-
 
     for (let i = 0; i < 5; i++) {
         const imgSrc = document.getElementById(`imageList_${i}`)
         imgSrc.setAttribute("src", "")
         imgSrc.style.display = "none"
     }
-    // 登録画像がない場合
-    if (jsonData.image_path = "http://127.0.0.1:8000/storage/img/noimage.png") {
-        const noImage = document.getElementById("imageList_0")
-        noImage.setAttribute("src", "http://127.0.0.1:8000/storage/img/noimage.png")
-        noImage.style.display = "block"
-    }
 
     // 登録画像表示
-    const images = jsonData.image
+    const images = jsonImages
     for (let i = 0; i < images.length; i++) {
         const characterImage = document.getElementById(`imageList_${i}`)
-        characterImage.setAttribute("src", images[i].image_path)
+        characterImage.setAttribute("src", images[i])
         characterImage.style.display = "block"
     }
 
@@ -53,9 +38,11 @@ function imageClick(jsonData, content) {
 
 
 // deleteAlert
-function deleteAlert() {
+function deleteBtnClickAlert() {
     const deleteBtn = getdeleteBtn()
     const characterId = deleteBtn.value
+    const deleteForm = document.getElementById("character-delete-form")
+    deleteForm.action = `character/${characterId}`
     if (!characterId) return
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -75,7 +62,7 @@ function deleteAlert() {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            document.location.href = `/character_delete/${characterId}`
+            deleteForm.submit()
         } else {
             return false;
         }

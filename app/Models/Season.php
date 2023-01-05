@@ -16,4 +16,56 @@ class Season extends Model
     protected $guarded = [
         'id'
     ];
+
+
+    private $defaultFetchColumns = [
+        "id",
+        "name",
+    ];
+
+    /**
+     * アクティブなシーズンを全取得
+     *
+     * @param object $query
+     * @return object
+     */
+    public function scopeFetchAll(object $query):object {
+        return $query
+        ->whereNull("deleted_at")
+        ->select($this->defaultFetchColumns)
+        ->get();
+    }
+
+
+    /**
+     * レコードの更新処理
+     *
+     * @param object $query
+     * @param array $param
+     * @return boolean
+     */
+    public function scopeUpdateRow(object $query, array $param):bool 
+    {
+        return $query
+            ->findOrFail($param["id"])
+            ->fill($param)
+            ->save();
+    }
+
+
+    /**
+     * 対象IDのレコードに対して削除フラグを立てる
+     *
+     * @param object $query
+     * @param integer $id
+     * @return boolean
+     */
+    public function scopeDeleteRow(object $query, int $id):bool 
+    {
+        return $query
+            ->findOrFail($id)
+            ->delete();
+    }
+
+
 }
