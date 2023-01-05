@@ -1,7 +1,7 @@
-@extends("layouts.header_register")
+@extends("layouts.management")
 
 @section('header.css')
-<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/management.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
@@ -30,7 +30,7 @@
             @foreach($seasons as $season)
             <div class="edit" onclick="tableClick('{{$season->id}}', '{{$season->name}}')">
                 <p class="season_name">{{$season->name}}</p>
-                <img src="{{ DELETE_ICON_IMAGE_PATH }}" class="child" onclick="deleteClick('{{$season->id}}', '{{$season->name}}')" alt="">
+                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick('{{$season->id}}', '{{$season->name}}')" alt="">
             </div>
             @endforeach
         </div>

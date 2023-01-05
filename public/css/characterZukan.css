@@ -3,36 +3,28 @@
     src: url('../fonts/Saiyan-Sans.ttf');
 }
 
-/* body {
-    background-image: url(../storage/img/background-3.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    height: 100%;
-    overflow-y: scroll;
-} */
-
 .main {
     width: 1000px;
     margin: auto;
     margin-top: 60px;
 }
 
-.characterList {
+.character-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    padding-left: 0;
     width: 100%;
 }
 
-.character {
+.character-list__item {
+    list-style: none;
     width: 16%;
     cursor: pointer;
     transition-duration: 0.5s;
-    /* text-decoration: none; */
 }
 
-.character img {
+.character-list__item img {
     width: 100%;
     height: 165px;
     object-fit: cover;
@@ -40,13 +32,13 @@
     border-radius: 5px;
 }
 
-.character:hover {
+.character-list__item:hover {
     transform: translateY(-8px);
     transition-duration: 0.5s;
     opacity: 0.7;
 }
 
-.characterName {
+.character-list__item p {
     text-align: center;
     color: white;
     font-size: 9px;
@@ -55,7 +47,7 @@
     margin-bottom: 3px;
 }
 
-.noCharacter {
+.character-none--message {
     position: absolute;
     top: 50%;
     left: 42%;
@@ -71,23 +63,23 @@
         margin-bottom: 20px;
     }
 
-    .characterList {
+    .character-list {
         column-gap: 10px;
         row-gap: 22px;
     }
 
-    .character {
+    .character-list__item {
         width: calc(50vw - 10px);
         height: calc(50vw - 10px);
     }
 
-    .character img {
+    .character-list__item img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .characterName {
+    .character-list__item p {
         font-size: 10px;
         margin-top: 3px;
     }

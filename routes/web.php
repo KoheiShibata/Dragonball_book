@@ -23,33 +23,35 @@ Route::get('/', function () {
 });
 
 
-Route::controller(TribeController::class)->prefix("tribe")->group(function () {
-    Route::get("/", "tribeList");
-    Route::post("/", "create");
-    Route::put("/", "edit");
-    Route::delete("/{id}", "delete");
-});
+Route::group(['middleware' => 'basicauth'], function () {
+    Route::controller(TribeController::class)->prefix("tribe")->group(function () {
+        Route::get("/", "tribeList");
+        Route::post("/", "create");
+        Route::put("/", "edit");
+        Route::delete("/{id}", "delete");
+    });
 
-Route::controller(SeasonController::class)->prefix("season")->group(function () {
-    Route::get("/", "seasonList");
-    Route::post("/", "create");
-    Route::put("/", "edit");
-    Route::delete("/{id}", "delete");
-});
+    Route::controller(SeasonController::class)->prefix("season")->group(function () {
+        Route::get("/", "seasonList");
+        Route::post("/", "create");
+        Route::put("/", "edit");
+        Route::delete("/{id}", "delete");
+    });
 
-Route::controller(CharacterController::class)->prefix("character")->group(function () {
-    Route::get("/", "createForm");
-    Route::post("/", "create");
-    Route::get("/{id}", "characterDetail");
-    Route::put("/{id}", "edit");
-    Route::delete("/{id}", "delete");
-});
+    Route::controller(CharacterController::class)->prefix("character")->group(function () {
+        Route::get("/", "createForm");
+        Route::post("/", "create");
+        Route::get("/{id}", "characterDetail");
+        Route::put("/{id}", "edit");
+        Route::delete("/{id}", "delete");
+    });
 
-Route::controller(CharacterController::class)->prefix("characters")->group(function () {
-    Route::get("/", "characterList");
-});
+    Route::controller(CharacterController::class)->prefix("characters")->group(function () {
+        Route::get("/", "characterList");
+    });
 
-Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
-    Route::get("/", "pbook");
-    Route::get("/{id}", "detail");
+    Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
+        Route::get("/", "pbook");
+        Route::get("/{id}", "detail");
+    });
 });

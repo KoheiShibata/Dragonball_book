@@ -74,13 +74,19 @@
     transition: 0.5s;
 }
 
-
 .hamburger-btn {
     display: none;
 }
 
 .header .hamburger-nav {
     display: none;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #EF7D01;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 

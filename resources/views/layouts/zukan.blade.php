@@ -36,6 +36,10 @@
 
     @yield("main")
 
+    <footer class="footer">
+        <p>© 2023 s-kohei</p>
+    </footer>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -17,7 +17,7 @@ define("CHARACTER_CREATE_FORM", "/character");
 define("CHARACTER_TOP", "/characters");
 define("PBOOK_TOP", "/dragonball-pbook");
 
-define("DELETE_ICON_IMAGE_PATH", asset('/storage/img/trash-can-regular.svg'));
+define("DELETE_ICON_IMAGE_PATH", '/storage/img/trash-can-regular.svg');
 
 define("TRIBE_REGISTRATION_VALIDATE", "validations.tribe.registration");
 define("TRIBE_UPDATE_VALIDATE", "validations.tribe.update");

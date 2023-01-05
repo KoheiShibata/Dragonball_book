@@ -1,7 +1,7 @@
-@extends("layouts.header_register")
+@extends("layouts.management")
 
 @section('header.css')
-<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/management.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
@@ -30,7 +30,7 @@
             @foreach($tribes as $tribe)
             <div class="tribe_table" onclick="tableClick('{{$tribe->id}}', '{{$tribe->name}}')">
                 <p class="tribe_name">{{$tribe->name}}</p>
-                <img src="{{ DELETE_ICON_IMAGE_PATH }}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
+                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
             </div>
             @endforeach
         </div>

@@ -1,7 +1,7 @@
-@extends("layouts.header_register")
+@extends("layouts.management")
 
 @section('header.css')
-<link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/management.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
