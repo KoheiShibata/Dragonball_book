@@ -21,7 +21,7 @@
 @endsection
 
 @section("main")
-<div class="main">
+<main class="main">
     <div id="container">
         <div class="characterList">
             @if($characters->isEmpty())
@@ -35,7 +35,7 @@
             @endforeach
         </div>
     </div>
-</div>
+</main>
 @endsection
 
 @section("js")
@@ -45,10 +45,6 @@
 <script>
     function onClickCharacterDetail(id) {
         window.location.href = (`/dragonball-pbook/${id}`)
-    }
-
-    function historyBtn() {
-        history.forward()
     }
 </script>
 @endsection

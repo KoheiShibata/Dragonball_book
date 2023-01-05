@@ -12,6 +12,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <link rel="shortcut icon" sizes="480x480" href="{{ asset('/storage/img/dragonball-4.png') }}">
     <link rel="stylesheet" type="text/css" href="/css/loading.css">
     @yield("header.css")
     @yield("css")
@@ -39,44 +40,51 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <header class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </header>
                 <form action="/dragonball-pbook" method="get" id="search-form">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body">
-                        <div class="freewordBox">
-                            <div class="seachTitle">
-                                <p class="titleName"><img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt=""><span class="titleString">freeword</span></p>
+                        <section class="search-section">
+                            <div class="search-section__title">
+                                <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                                <p>freeword</p>
                             </div>
-                            <input type="text" name="keyword" id="keyword" placeholder="名前やシーズンでさがす" value="{{session('keyword') ? session('keyword'): '' }}">
-                        </div>
-                        <div class="seasonCheckBox">
-                            <div class="seachTitle">
-                                <p class="titleName"><img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt=""><span class="titleString">season</span></p>
+                            <div class="search-box">
+                                <input type="text" name="keyword" id="keyword" placeholder="名前やシーズンでさがす" value="{{session('keyword') ? session('keyword'): '' }}">
                             </div>
-                            <div class="searchArea">
+                        </section>
+                        <section class="search-section">
+                            <div class="search-section__title">
+                                <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                                <p>season</p>
+                            </div>
+                            <div class="search-checkbox">
                                 @foreach($seasons as $season)
-                                <label for="{{$season->name}}" id="label{{$season->name}}" class="checkboxLabel{{ session('seasonId') && in_array($season->id, session('seasonId'))  ? '_checkedBtn' : ''}}">
+                                <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('seasonId') && in_array($season->id, session('seasonId'))  ? '--checked' : ''}}">
                                     <input type="checkbox" class="checkbox" id="{{$season->name}}" name="season[]" value="{{$season->id}}" onclick="checkboxId('{{$season->name}}')" {{ session("seasonId") && in_array($season->id, session('seasonId'))  ? "checked" : "" }}>{{$season->name}}</label>
                                 @endforeach
                             </div>
-                        </div>
-                        <div class="tribeCheckBox">
-                            <div class="serchTitle">
-                                <p class="titleName"><img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt=""><span class="titleString">tribe</span></p>
+                        </section>
+                        <section class="search-section">
+                            <div class="search-section__title">
+                                <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                                <p>tribe</p>
                             </div>
-                            @foreach($tribes as $tribe)
-                            <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="checkboxLabel{{ session('tribeId') && in_array($tribe->id, session('tribeId'))  ? '_checkedBtn' : '' }}">
-                                <input type="checkbox" class="checkbox" id="{{$tribe->name}}" name="tribe[]" value="{{$tribe->id}}" onclick="checkboxId('{{$tribe->name}}')" {{ session("tribeId") && in_array($tribe->id, session('tribeId'))  ? "checked" : "" }}>{{$tribe->name}}</label>
-                            @endforeach
-                        </div>
+                            <div class="search-checkbox">
+                                @foreach($tribes as $tribe)
+                                <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribeId') && in_array($tribe->id, session('tribeId'))  ? '--checked' : '' }}">
+                                    <input type="checkbox" class="checkbox" id="{{$tribe->name}}" name="tribe[]" value="{{$tribe->id}}" onclick="checkboxId('{{$tribe->name}}')" {{ session("tribeId") && in_array($tribe->id, session('tribeId'))  ? "checked" : "" }}>{{$tribe->name}}</label>
+                                @endforeach
+                            </div>
+                        </section>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="cancelBtn" data-bs-dismiss="modal">キャンセル</button>
-                        <button type="submit" class="serchBtn" id="btnSubmit" onclick="doubleSolutionSubmit()">検索</button>
-                        <button type="button" class="resetBtn" onclick="unCheckAll()">リセット</button>
-                    </div>
+                    <footer class="modal-footer">
+                        <button type="button" class="cancel-btn" data-bs-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="serch-btn" id="btnSubmit" onclick="doubleSolutionSubmit()">検索</button>
+                        <button type="button" class="reset-btn" onclick="unCheckAll()">リセット</button>
+                    </footer>
                 </form>
             </div>
         </div>

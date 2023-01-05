@@ -55,8 +55,8 @@ class ZukanController extends Controller
                     $selectedCharacterId[] = $character->id;
                 }
 
-                return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
             }
+                return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
         } catch (\Exception $e) {
             return abort(404);
         }

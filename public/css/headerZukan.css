@@ -9,9 +9,9 @@ body {
     background-image: url(../storage/img/background-3.png);
     background-repeat: no-repeat;
     background-size: cover;
-    /* min-height: 100vh;
+    min-height: 100vh;
     height: 100%;
-    overflow-y: scroll; */
+    overflow-y: scroll;
 }
 
 .header {
@@ -29,20 +29,10 @@ body {
     background-color: #EEEEEE;
 }
 
-.header-list {
-    display: flex;
-    align-items: center;
-}
-
-.header-list img {
-    width: 32px;
-}
-
 .header-logo {
-    width: 35px;
     display: flex;
     font-family: 'Saiyan-Sans';
-    font-size: 40px;
+    font-size: 32px;
     filter: drop-shadow(5px 5px 5px rgb(236, 123, 0));
 }
 
@@ -73,7 +63,7 @@ body {
 }
 
 .header-nav__list img {
-    width: 32px;
+    width: 30px;
     transition-duration: 0.5s;
     cursor: pointer;
 }
@@ -118,16 +108,46 @@ body {
     text-align: center;
 }
 
-.modal-content {
-    border-radius: 5px;
-}
-
 .modal-title img {
     width: 20px;
     margin-bottom: 2px;
 }
 
-.checkboxLabel {
+.modal-content {
+    border-radius: 5px;
+}
+
+.search-section__title {
+    display: flex;
+    align-items: center;
+    font-family: 'Saiyan-Sans';
+    margin: 5px 0;
+}
+
+.search-section__title img {
+    width: 40px;
+}
+
+.search-section__title p {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.search-box input {
+    margin: 0 5px;
+    margin-bottom: 10px;
+    width: 98%;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0, 0.8);
+    font-size: 12px;
+    padding: 4px 2px;
+}
+
+.search-checkbox input {
+    display: none;
+}
+
+.search-checkbox__label {
     cursor: pointer;
     padding: 5px;
     border: 1px solid #434343;
@@ -142,104 +162,12 @@ body {
     margin-bottom: 10px;
 }
 
-.checkboxLabel:hover {
+.search-checkbox__label:hover {
     box-shadow: 1px 1px 0 0 #DDDDDD;
-    /* transition: 0.5s; */
     transform: translateY(-1px);
 }
 
-.freewordBox input {
-    margin: 0 5px;
-    margin-bottom: 10px;
-    width: 98%;
-    border-radius: 5px;
-    border: 1px solid rgb(0, 0, 0, 0.8);
-    font-size: 12px;
-    padding: 4px 2px;
-}
-
-.seasonCheckBox input {
-    display: none;
-}
-
-.tribeCheckBox input {
-    display: none;
-}
-
-.tribeCheckBox {
-    margin-bottom: 5px;
-}
-
-.titleName {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    font-family: 'Saiyan-Sans';
-    margin: 5px 0;
-}
-
-.titleName img {
-    width: 40px;
-}
-
-.titleString {
-    margin-bottom: 2px;
-}
-
-.serchBtn {
-    border-radius: 5px;
-    font-size: 12px;
-    background-color: #EA8F00;
-    border: 8px;
-    height: 28px;
-    width: 104px;
-    margin: 0;
-    text-align: center;
-}
-
-.serchBtn:hover {
-    background-color: #EF7D01;
-    opacity: 0.6;
-    transition: 0.5s;
-}
-
-.cancelBtn {
-    border-radius: 5px;
-    font-size: 12px;
-    border: 1px;
-    background-color: #0090D6;
-    height: 28px;
-    width: 104px;
-    text-align: center;
-    margin: 3px 0;
-}
-
-.cancelBtn:hover {
-    background-color: #4A90CA;
-    opacity: 0.7;
-    transition: 0.5s;
-}
-
-.resetBtn {
-    border-radius: 5px;
-    font-size: 12px;
-    border: 8px;
-    height: 28px;
-    width: 104px;
-    margin: 3px 0;
-    text-align: center;
-    background-color: #DA284C;
-    border: 1px solid #434343;
-    margin: 0;
-}
-
-.resetBtn:hover {
-    background-color: #FF0000;
-    transition: 0.5s;
-}
-
-
-.checkboxLabel_checkedBtn {
+.search-checkbox__label--checked {
     cursor: pointer;
     padding: 5px;
     border: 1px solid #434343;
@@ -258,6 +186,59 @@ body {
     box-shadow: rgb(221, 221, 221) 1px 1px 0px 0px;
     background-color: rgb(255, 219, 201);
 }
+
+.serch-btn {
+    border-radius: 5px;
+    font-size: 12px;
+    background-color: #EA8F00;
+    border: 8px;
+    height: 28px;
+    width: 104px;
+    margin: 0;
+    text-align: center;
+}
+
+.serch-btn:hover {
+    background-color: #EF7D01;
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.cancel-btn {
+    border-radius: 5px;
+    font-size: 12px;
+    border: 1px;
+    background-color: #0090D6;
+    height: 28px;
+    width: 104px;
+    text-align: center;
+    margin: 3px 0;
+}
+
+.cancel-btn:hover {
+    background-color: #4A90CA;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.reset-btn {
+    border-radius: 5px;
+    font-size: 12px;
+    border: 8px;
+    height: 28px;
+    width: 104px;
+    margin: 3px 0;
+    text-align: center;
+    background-color: #DA284C;
+    border: 1px solid #434343;
+    margin: 0;
+}
+
+.reset-btn:hover {
+    background-color: #FF0000;
+    transition: 0.5s;
+}
+
 
 .btn-close {
     display: none;
@@ -291,26 +272,26 @@ body {
         width: 100%;
     }
 
-    .titleName {
+    .searech-section__title p {
         margin-bottom: 2px;
         margin-top: 0px;
     }
 
-    .titleName img {
+    .search-section__title img {
         width: 35px;
     }
 
-    .searchArea {
+    .search-checkbox {
         display: flex;
         flex-wrap: wrap;
         column-gap: 5px;
     }
 
-    .checkboxLabel {
+    .search-checkbox__label {
         width: 45vw;
     }
 
-    .checkboxLabel_checkedBtn {
+    .search-checkbox__label--checked {
         width: 45vw;
     }
 
@@ -323,15 +304,15 @@ body {
         width: 45vw;
     }
 
-    .resetBtn {
+    .reset-btn {
         background-color: #0090D6;
     }
 
-    .resetBtn:hover {
+    .reset-btn:hover {
         background-color: #4A90CA;
     }
 
-    .cancelBtn {
+    .cancel-btn {
         display: none;
     }
 
