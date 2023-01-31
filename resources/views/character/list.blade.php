@@ -1,11 +1,11 @@
-@extends("layouts.management")
+@extends("layouts.admin")
 
 @section('loading.css')
 <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
 @endsection
 
 @section('header.css')
-<link href="{{ asset('css/management.css') }}" rel="stylesheet">
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
