@@ -98,6 +98,9 @@
             </select>
             <div class="err-msg-popularity"></div>
             <button type="button" id="btnSubmit" class="btn_button">登録</button>
+            <div class="loading-area__submit--hide" id="loading-area__submit">
+                <img src="{{asset('/storage/img/loading-6.gif')}}" alt="">
+            </div>
 
         </form>
     </div>

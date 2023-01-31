@@ -96,7 +96,6 @@ class CharacterController extends Controller
 
             $img = preg_replace('/^data:image.*?base64,/', "", $file);
             $img = str_replace(' ', '+', $img);
-            echo $img;
             $fileName = md5($img);
             $imagePath = "/storage/character/" . $fileName . "." . $extension;
             file_put_contents("." . $imagePath, base64_decode($img));
