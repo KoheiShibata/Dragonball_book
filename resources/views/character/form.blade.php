@@ -159,10 +159,10 @@
 
                 creatInputAreaById(nextId)
 
-                if (fileSize >= 5242880) {
+                if (fileSize >= 2097152) {
                     Swal.fire({
                         icon: 'error',
-                        text: 'アップロードするファイルのサイズ上限は5MBです',
+                        text: 'アップロードするファイルのサイズ上限は2MBです',
                     })
                     onClickDeleteBtn(id)
                 }

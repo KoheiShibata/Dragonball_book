@@ -1,46 +1,46 @@
 // キャラクター名
-function asName() {
+function getName() {
     const name = document.getElementById("name").value
     return name
 }
 
-function asErrorMsgName() {
+function getErrorMsgName() {
     const errorMsgName = document.querySelector(".err-msg-name")
     return errorMsgName
 }
 
 
 // キャラクター説明
-function asContent() {
+function getContent() {
     const content = document.getElementById("content").value
     return content
 }
 
-function asErrorMsgContent() {
+function getErrorMsgContent() {
     const errorMsgContent = document.querySelector(".err-msg-content")
     return errorMsgContent
 }
 
 
 // 身長
-function asHeight() {
+function getHeight() {
     const height = document.getElementById("height").value
     return height
 }
 
-function asErrorMsgHeight() {
+function getErrorMsgHeight() {
     const errorMsgHeight = document.querySelector(".err-msg-height")
     return errorMsgHeight
 }
 
 
 // 体重
-function asWeight() {
+function getWeight() {
     const weight = document.getElementById("weight").value
     return weight
 }
 
-function asErrorMsgWeight() {
+function getErrorMsgWeight() {
     const errorMsgWeight = document.querySelector(".err-msg-weight")
     return errorMsgWeight
 }

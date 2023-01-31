@@ -1,6 +1,6 @@
 
 function nameValidate() {
-    const name = asName()
+    const name = getName()
     const errorMsgName = asErrorMsgName()
     errorMsgName.classList.add("form-invalid")
     const nameLength = name.length
@@ -17,7 +17,7 @@ function nameValidate() {
 }
 
 function contentValidate() {
-    const content = asContent()
+    const content = getContent()
     const errorMsgContent = asErrorMsgContent()
     const contentLength = content.length
     errorMsgContent.classList.add("form-invalid")
@@ -34,7 +34,7 @@ function contentValidate() {
 }
 
 function heightValidate() {
-    const height = asHeight()
+    const height = getHeight()
     const errorMsgHeight = asErrorMsgHeight()
     const heightDigits = height.toString().length
     errorMsgHeight.classList.add("form-invalid")
@@ -51,7 +51,7 @@ function heightValidate() {
 }
 
 function weightValidate() {
-    const weight = asWeight()
+    const weight = getWeight()
     const errorMsgWeight = asErrorMsgWeight()
     const weightDigits = weight.toString().length
     errorMsgWeight.classList.add("form-invalid")
