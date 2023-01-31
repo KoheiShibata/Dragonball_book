@@ -59,7 +59,7 @@ input:focus::placeholder {
     content: " *";
     color: red;
     vertical-align: middle;
-  }
+}
 
 .chart {
     height: 40px;
@@ -163,6 +163,8 @@ select option:first-child {
 .file_radio {
     margin-left: 40px;
 }
+
+
 
 /* ボタン */
 .btn_button {

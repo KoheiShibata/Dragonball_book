@@ -1,10 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     const btnSubmit = document.getElementById("btnSubmit")
+    const loadingGifSubmit = document.getElementById("loading-area__submit")
 
     btnSubmit.addEventListener("click", (e) => {
         let base64Images = new Array();
-        btnSubmit.disabled = true
+        btnChangeLoading(btnSubmit, loadingGifSubmit)
         let validations = "ture"
 
 
@@ -60,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         if (validations == false) {
-            btnSubmit.disabled = false
+            loadingChangeBtn(btnSubmit, loadingGifSubmit)
             return
         }
 
@@ -76,10 +77,10 @@ window.addEventListener('DOMContentLoaded', () => {
         // 画像なしが選択されていたら
         if (radioCheckNo.checked) {
             let param = {
-                name: asName(),
-                content: asContent(),
-                height: asHeight(),
-                weight: asWeight(),
+                name: getName(),
+                content: getContent(),
+                height: getHeight(),
+                weight: getWeight(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -104,14 +105,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                     if (data.errorMessage) {
                         showSweetAlert("error", data.errorMessage)
-                        btnSubmit.disabled = false
+                        loadingChangeBtn(btnSubmit, loadingGifSubmit)
                         return
                     }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
                     showSweetAlert("error", data.errorMessage)
-                    btnSubmit.disabled = false
+                    loadingChangeBtn(btnSubmit, loadingGifSubmit)
                     return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
@@ -120,10 +121,10 @@ window.addEventListener('DOMContentLoaded', () => {
         // 画像ありが選択されていたら
         if (radioCheckYes.checked) {
             let param = {
-                name: asName(),
-                content: asContent(),
-                height: asHeight(),
-                weight: asWeight(),
+                name: getName(),
+                content: getContent(),
+                height: getHeight(),
+                weight: getWeight(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -148,14 +149,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                     if (data.errorMessage) {
                         showSweetAlert("error", data.errorMessage)
-                        btnSubmit.disabled = false
+                        loadingChangeBtn(btnSubmit, loadingGifSubmit)
                         return
                     }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
                     showSweetAlert("error", data.errorMessage)
-                    btnSubmit.disabled = false
+                    loadingChangeBtn(btnSubmit, loadingGifSubmit)
                     return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動

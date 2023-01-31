@@ -1,11 +1,12 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     const btnSubmit = document.getElementById("btnSubmit")
+    const loadingGifSubmit = document.getElementById("loading-area__submit")
 
     btnSubmit.addEventListener("click", (e) => {
         let base64Images = new Array();
+        btnChangeLoading(btnSubmit, loadingGifSubmit)
         let validations = "true"
-        btnSubmit.disabled = true
 
 
         // キャラクター名バリデーション
@@ -60,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         if (validations == false) {
-            btnSubmit.disabled = false
+            loadingChangeBtn(btnSubmit, loadingGifSubmit)
             return
         }
 
@@ -80,10 +81,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (radioCheckNo.checked) {
             let param = {
                 id: characterId,
-                name: asName(),
-                content: asContent(),
-                height: asHeight(),
-                weight: asWeight(),
+                name: getName(),
+                content: getContent(),
+                height: getHeight(),
+                weight: getWeight(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -108,14 +109,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                     if (data.errorMessage) {
                         showSweetAlert("error", data.errorMessage)
-                        btnSubmit.disabled = false
+                        loadingChangeBtn(btnSubmit, loadingGifSubmit)
                         return
                     }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
                     showSweetAlert("error", data.errorMessage)
-                    btnSubmit.disabled = false
+                    loadingChangeBtn(btnSubmit, loadingGifSubmit)
                     return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
@@ -125,10 +126,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (radioCheckYes.checked) {
             let param = {
                 id: characterId,
-                name: asName(),
-                content: asContent(),
-                height: asHeight(),
-                weight: asWeight(),
+                name: getName(),
+                content: getContent(),
+                height: getHeight(),
+                weight: getWeight(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -153,14 +154,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                     if (data.errorMessage) {
                         showSweetAlert("error", data.errorMessage)
-                        btnSubmit.disabled = false
+                        loadingChangeBtn(btnSubmit, loadingGifSubmit)
                         return
                     }
                 })
                 // Ajaxリクエストが失敗した時発動
                 .fail((data) => {
                     showSweetAlert("error", data.errorMessage)
-                    btnSubmit.disabled = false
+                    loadingChangeBtn(btnSubmit, loadingGifSubmit)
                     return
                 })
             // Ajaxリクエストが成功・失敗どちらでも発動
