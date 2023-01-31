@@ -82,18 +82,21 @@ class CharacterController extends Controller
         }
 
         foreach ($files as $file) {
+            // 編集で変更しなかった画像パスを取得
             if (!preg_match('/data:image\/(\w+);base64,/', $file)) {
 
                 $file = strstr($file, "/storage");
                 $res[] = $file;
                 continue;
             }
-
+            
+            // base64をデコード
             preg_match('/data:image\/(\w+);base64,/', $file, $matches);
             $extension = $matches[1];
 
-            $img = preg_replace('/^data:image.*base64,/', "", $file);
+            $img = preg_replace('/^data:image.*?base64,/', "", $file);
             $img = str_replace(' ', '+', $img);
+            echo $img;
             $fileName = md5($img);
             $imagePath = "/storage/character/" . $fileName . "." . $extension;
             file_put_contents("." . $imagePath, base64_decode($img));
