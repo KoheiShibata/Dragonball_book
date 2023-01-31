@@ -1,0 +1,13 @@
+.common-loading-area__submit--hide {
+    display: none;
+}
+
+.common-loading-area__submit--active {
+    display: block;
+    margin: 16px 0;
+    text-align: center;
+}
+
+.common-loading-area__submit--active img {
+    width: 40px;
+}
