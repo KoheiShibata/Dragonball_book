@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <link rel="shortcut icon" sizes="480x480" href="{{ asset('/storage/img/dragonball-4.png') }}">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/loading.css">
     @yield("header.css")
     @yield("css")
@@ -22,22 +24,24 @@
 <body>
     @yield("loading")
     <header class="header">
-        <div class="header-logo">
-            <span class="font--yellow">DRAGON</span>
-            <span class="font--red">BALL</span>
-            <span class="font--blue">PBOOK</span>
+        <div class="header-wrapper">
+            <a href="/dragonball-pbook" class="header-logo">
+                <span class="font--yellow">DRAGON</span>
+                <span class="font--red">BALL</span>
+                <span class="font--blue">PBOOK</span>
+            </a>
+            <nav class="header-nav">
+                <ul class="header-nav__list">
+                    <li class="header-nav__item" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
+                </ul>
+            </nav>
         </div>
-        <nav class="header-nav">
-            <ul class="header-nav__list">
-                <li class="header-nav__item" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
-            </ul>
-        </nav>
     </header>
 
     @yield("main")
 
     <footer class="footer">
-        <p>© 2023 s-kohei</p>
+        <p>© 2023 s-kohei Dragonball-pbook</p>
     </footer>
 
     <!-- Modal -->

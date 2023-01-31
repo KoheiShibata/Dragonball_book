@@ -3,18 +3,14 @@
     src: url('../fonts/Saiyan-Sans.ttf');
 }
 
-textarea:focus,
-input:focus,
-input[type]:focus,
-.uneditable-input:focus {
-    outline: none;
-    box-shadow: none;
-    border: 2px solid #000;
-    background-color: #ffffff;
+.form-control:focus {
+    color: #495057;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
 }
 
-input:focus::placeholder {
-    color: #000;
+.header-wrapper {
+    width: 700px;
 }
 
 .main {
@@ -35,7 +31,7 @@ input:focus::placeholder {
 .info {
     color: rgba(0, 0, 0, 0.6);
     font-size: 15px;
-    margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 .subtitle {
@@ -80,10 +76,6 @@ select option:first-child {
     color: rgba(0, 0, 0, 0.3);
 }
 
-.input_area {
-    display: none;
-}
-
 .image_area {
     margin-top: 10px;
 }
@@ -91,15 +83,13 @@ select option:first-child {
 #preview-box {
     display: flex;
     gap: 5px;
-    float: left;
-    width: 700px;
+    margin-top: 20px;
 }
 
 .preview-list {
     position: relative;
     display: flex;
-    width: 140px;
-    height: 140px;
+    width: 25%;
 }
 
 .preview-img {
@@ -116,7 +106,7 @@ select option:first-child {
     width: 700px;
     border-radius: 8px;
     transition: all 0.5s;
-    margin-top: 35px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -187,11 +177,10 @@ select option:first-child {
     top: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.9);
-    text-decoration: none;
     color: white;
     padding: 5px;
     margin: 0;
-    padding: 0 8px;
+    padding: 2px 8px;
     border: rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
@@ -210,4 +199,54 @@ select option:first-child {
 
 .input-invalid {
     border: 1px solid #f50000;
+}
+
+
+@media screen and (max-width: 480px) {
+    .header-wrapper {
+        width: 100%;
+    }
+
+    .main {
+        width: 97%;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    .title {
+        font-size: 27px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .info {
+        font-size: 13px;
+    }
+
+    .register-label {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .filelabel {
+        width: 100%;
+    }
+
+    .filelabel__disabled {
+        width: 100%;
+    }
+
+    .chart {
+        width: 100%;
+    }
+
+    #preview-box {
+        flex-wrap: wrap;
+    }
+
+    .preview-list {
+        width: calc(50% - 5px);
+    }
 }

@@ -1,3 +1,63 @@
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+/* layouts */
+.header {
+    position: fixed;
+    border-bottom: solid 1px #cfcfcf;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #EEEEEE;
+}
+
+.header-wrapper {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.header-logo {
+    display: flex;
+    font-family: 'Saiyan-Sans';
+    font-size: 33px;
+    filter: drop-shadow(5px 5px 5px rgb(236, 123, 0));
+}
+
+.font--yellow {
+    color: rgb(250, 235, 8);
+    -webkit-text-stroke: 1px #000;
+}
+
+.font--red {
+    color: rgb(231, 0, 18);
+    -webkit-text-stroke: 1px #000;
+}
+
+.font--blue {
+    -webkit-text-stroke: 1px #000;
+    color: #498DC5;
+}
+
+.footer {
+    margin: 32px 0 5px 0;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+
+
+/* loading */
 .common-loading-area__submit--hide {
     display: none;
 }

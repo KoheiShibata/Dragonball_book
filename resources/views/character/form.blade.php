@@ -1,7 +1,7 @@
-@extends("layouts.management")
+@extends("layouts.admin")
 
 @section('header.css')
-<link href="{{ asset('css/management.css') }}" rel="stylesheet">
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 @endsection
 
 @section('css')
@@ -25,8 +25,8 @@
             </div>
             <div class="form-group">
                 <label class="register-label">☆キャラクター画像</label><br>
-                <label for="chkNo"><input type="radio" id="chkNo" name="checkPass" checked="checked" onclick="formSwitch()">なし</label>
-                <label class="file_radio" for="chkYes"><input type="radio" id="chkYes" name="checkPass" onclick="formSwitch()">画像を選択する（最大5枚）</label>
+                <label for="chkNo"><input type="radio" id="chkNo" name="checkPass" onclick="formSwitch()">なし</label>
+                <label class="file_radio" for="chkYes"><input type="radio" id="chkYes" checked="checked" name="checkPass" onclick="formSwitch()">画像を選択する（最大5枚）</label>
             </div>
             <div class="input_area" id="inputArea">
                 <div class="image_area">
