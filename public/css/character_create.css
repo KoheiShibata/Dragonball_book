@@ -83,13 +83,15 @@ select option:first-child {
 #preview-box {
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
 
 .preview-list {
     position: relative;
     display: flex;
-    width: 25%;
+    width: calc(33.3% - 4px);
+    height: 230px;
 }
 
 .preview-img {
@@ -180,7 +182,7 @@ select option:first-child {
     color: white;
     padding: 5px;
     margin: 0;
-    padding: 2px 8px;
+    padding: 2px 6px 3px 6px;
     border: rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
@@ -242,11 +244,8 @@ select option:first-child {
         width: 100%;
     }
 
-    #preview-box {
-        flex-wrap: wrap;
-    }
-
     .preview-list {
         width: calc(50% - 5px);
+        height: 185px;
     }
 }
