@@ -25,11 +25,11 @@
     @yield("loading")
     <header class="header">
         <div class="header-wrapper">
-            <div class="header-logo">
+            <a href="/dragonball-pbook" class="header-logo">
                 <span class="font--yellow">DRAGON</span>
                 <span class="font--red">BALL</span>
                 <span class="font--blue">PBOOK</span>
-            </div>
+            </a>
             <nav class="header-nav">
                 <ul class="header-nav__list">
                     <li class="header-nav__item" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>

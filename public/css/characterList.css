@@ -12,18 +12,8 @@ body {
 .main {
     width: 800px;
     margin: auto;
-    margin-top: 60px;
+    margin-top: 70px;
     margin-bottom: 25px;
-}
-
-.title {
-    font-family: "Saiyan-Sans";
-    font-size: 32px;
-    color: #EF7D01;
-    -webkit-text-stroke: 1px #000;
-    padding: 10px 0;
-    border-bottom: 2px dashed rgba(0, 0, 0, 0.5);
-    margin-bottom: 10px;
 }
 
 .character-list {
@@ -36,7 +26,6 @@ body {
 
 .character-list__item {
     width: calc(20% - 6.5px);
-    list-style: none;
 }
 
 .character-list__item p {
@@ -98,17 +87,12 @@ body {
     font-family: "Saiyan-Sans";
     color: rgba(0, 0, 0, 0.4);
     font-size: 15px;
-    /* margin-top: 5px; */
-    /* margin-bottom: 5px; */
-    /* padding-bottom: 5px; */
-    /* border-bottom: 2px dotted rgba(0, 0, 0, 0.2); */
 }
 
 .contentTitle {
     font-family: "Saiyan-Sans";
     color: rgba(0, 0, 0, 0.5);
     margin-top: 3px;
-    /* border-bottom: 2px dotted rgba(0, 0, 0, 0.2); */
 }
 
 .modalContent {
@@ -201,7 +185,7 @@ body {
 @media screen and (max-width: 480px) {
     .main {
         width: 100%;
-        margin-top: 48px;
+        margin-top: 55px;
     }
 
     .title {

@@ -23,7 +23,6 @@
 
 @section("main")
 <main class="main">
-    <h1 class="title">★Character list</h1>
     <section>
         <ul class="character-list">
             @foreach($characters as $character)

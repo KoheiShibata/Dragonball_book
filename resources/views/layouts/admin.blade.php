@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <link rel="shortcut icon" sizes="480x480" href="{{ asset('/storage/img/dragonball-4.png') }}">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/common.css">
     @yield("loading.css")
     @yield("header.css")
@@ -22,31 +24,33 @@
     @yield("loading")
     @yield("returnBtn")
     <header class="header">
-        <div class="header-logo">
-            <span class="font--yellow">DRAGON</span>
-            <span class="font--red">BALL</span>
-            <span class="font--blue">PBOOK</span>
-        </div>
-        <nav class="header-nav">
-            <ul class="header-nav__list">
-                <li class="header-nav__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
-                <li class="header-nav__item"><a href="{{ SEASON_TOP }}">season</a></li>
-                <li class="header-nav__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                <li class="header-nav__item"><a href="{{ CHARACTER_TOP }}">list</a></li>
-            </ul>
-        </nav>
+        <div class="header-wrapper">
+            <a href="/dragonball-pbook" class="header-logo">
+                <span class="font--yellow">DRAGON</span>
+                <span class="font--red">BALL</span>
+                <span class="font--blue">PBOOK</span>
+            </a>
+            <nav class="header-nav">
+                <ul class="header-nav__list">
+                    <li class="header-nav__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
+                    <li class="header-nav__item"><a href="{{ SEASON_TOP }}">season</a></li>
+                    <li class="header-nav__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
+                    <li class="header-nav__item"><a href="{{ CHARACTER_TOP }}">list</a></li>
+                </ul>
+            </nav>
 
-        <div class="hamburger-btn" id="hamburgerBtn">
-            <span class="hamburger-btn--passive"></span><span></span><span></span>
+            <div class="hamburger-btn" id="hamburgerBtn">
+                <span class="hamburger-btn--passive"></span><span></span><span></span>
+            </div>
+            <nav class="hamburger-nav" id="hamburgerNav">
+                <ul class="hamburger-menu">
+                    <li class="hamburger-menu__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
+                    <li class="hamburger-menu__item"><a href="{{ SEASON_TOP }}">season</a></li>
+                    <li class="hamburger-menu__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
+                    <li class="hamburger-menu__item"><a href="{{ CHARACTER_TOP }}">characterlist</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav class="hamburger-nav" id="hamburgerNav">
-            <ul class="hamburger-menu">
-                <li class="hamburger-menu__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
-                <li class="hamburger-menu__item"><a href="{{ SEASON_TOP }}">season</a></li>
-                <li class="hamburger-menu__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                <li class="hamburger-menu__item"><a href="{{ CHARACTER_TOP }}">characterlist</a></li>
-            </ul>
-        </nav>
     </header>
 
     @yield("main")
