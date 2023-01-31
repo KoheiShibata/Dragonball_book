@@ -12,7 +12,6 @@
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <link rel="shortcut icon" sizes="480x480" href="{{ asset('/storage/img/dragonball-4.png') }}">
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/common.css">
     @yield("loading.css")
     @yield("header.css")
