@@ -186,7 +186,6 @@
 
 .contentArea {
     min-height: 240px;
-    /* height: 220px; */
     margin-bottom: 10px;
     border: 1px dotted #EEEEEE;
     border-radius: 5px;
@@ -207,7 +206,7 @@
 
     .main {
         width: 100%;
-        margin-top: 48px;
+        margin-top: 50px;
         margin-bottom: 20px;
     }
 
@@ -229,7 +228,7 @@
     }
 
     .contentArea {
-        margin-top: 30px;
+        margin-top: 35px;
         padding:0 5px 5px;
         min-height: 160px;
         height: auto;
@@ -239,6 +238,7 @@
     .dataArea {
         width: 100%;
         gap: 5px;
+        margin-top: 10px;
     }
 
     .text-list {
