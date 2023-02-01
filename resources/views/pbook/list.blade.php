@@ -21,6 +21,11 @@
 @endsection
 
 @section("main")
+@if($characters->isEmpty())
+<div class="character-none--message">
+    <p>表示できるキャラクタ―がいません。</p>
+</div>
+@endif
 <main class="main">
     <section>
         <ul class="character-list">

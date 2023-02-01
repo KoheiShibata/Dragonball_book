@@ -38,11 +38,6 @@
         </div>
     </header>
 
-    @if($characters->isEmpty())
-    <div class="character-none--message">
-        <p>表示できるキャラクタ―がいません。</p>
-    </div>
-    @endif
 
     @yield("main")
 
