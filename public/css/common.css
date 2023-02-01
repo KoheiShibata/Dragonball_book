@@ -47,12 +47,15 @@ a {
 }
 
 .footer {
-    margin: 32px 0 5px 0;
-    text-align: center;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
 }
 
 .footer p {
     font-size: 14px;
+    color: white;
 }
 
 

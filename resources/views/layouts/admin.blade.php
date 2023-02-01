@@ -55,7 +55,7 @@
     @yield("main")
 
     <footer class="footer">
-        <p>© 2023 s-kohei</p>
+        <p>© 2023 s-kohei Dragonball-pbook</p>
     </footer>
 
     <!--==============JQuery読み込み===============-->
