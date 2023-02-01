@@ -23,12 +23,9 @@
 @section("main")
 <main class="main">
     <section>
-        @if($characters->isEmpty())
-        <div class="character-none--message">表示できるキャラクタ―がいません。</div>
-        @endif
         <ul class="character-list">
             @foreach($characters as $character)
-            <li class="character-list__item"  onclick="onClickCharacterDetail('{{$character->id}}')">
+            <li class="character-list__item" onclick="onClickCharacterDetail('{{$character->id}}')">
                 <img src="{{ $character->formated_image_path }}" id="characterData" alt="">
                 <p>{{$character->name}}</p>
             </li>

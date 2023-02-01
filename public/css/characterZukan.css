@@ -47,10 +47,12 @@
 }
 
 .character-none--message {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 50%;
-    left: 42%;
     color: #EEEEEE;
+    text-align: center;
+    line-height: 50;
 }
 
 
