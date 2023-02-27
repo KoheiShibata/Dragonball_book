@@ -1,11 +1,17 @@
 .header-wrapper {
-    width: 850px;
+    max-width: 1200px;
 }
 
 .main {
-    width: 850px;
+    max-width: 1200px;
     margin: auto;
     margin-top: 60px;
+}
+
+.character {
+    display: flex;
+    justify-content: space-between;
+    height: 88vh;
 }
 
 .previous-btn {
@@ -20,23 +26,16 @@
     border-radius: 5px;
 }
 
-.character {
-    display: flex;
-    justify-content: space-between;
-}
-
 .chartRadar {
-    /* position: absolute;
-    bottom: 0; */
-    width: 240px;
-    height: 210px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     border: 1px dotted #EEEEEE;
 }
 
 .myChart {
-    height: 210px !important;
-    width: 240px !important;
+    height: 100% !important;
+    width: 100% !important;
     object-fit: contain;
 }
 
@@ -47,9 +46,14 @@
 }
 
 /* swiper */
+.character-image {
+    position: relative;
+    width: 53%;
+}
+
 .swiper {
-    width: 410px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     position: static;
 }
 
@@ -66,8 +70,8 @@
 }
 
 .swiper-slide img {
-    width: 410px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     object-fit: cover;
     background-color: #EEEEEE;
@@ -135,33 +139,51 @@
 
 
 /* 詳細データ */
-
-.dataArea {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 .detail {
-    height: 460px;
-    width: 400px;
+    height: 100%;
+    width: 42%;
     position: relative;
 }
 
 .desctiptionArea {
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
 }
 
 .desctiptionArea p {
     margin-bottom: 5px;
 }
 
+.contentArea {
+    min-height: calc(50% - 5px);
+    border: 1px dotted #EEEEEE;
+    border-radius: 5px;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+.contentArea p {
+    font-size: 15px;
+    color: #EEEEEE;
+    opacity: 0.7;
+}
+
+.dataArea {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    height: calc(50% - 10px);
+}
+
+
 .text-list {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 150px;
-    height: 210px;
+    width: 50%;
     border: 1px dotted #EEEEEE;
     border-radius: 5px;
     padding: 5px;
@@ -184,22 +206,12 @@
     font-size: 15px;
 }
 
-.contentArea {
-    min-height: 240px;
-    margin-bottom: 10px;
-    border: 1px dotted #EEEEEE;
-    border-radius: 5px;
-    padding: 5px;
-    overflow-y: auto;
-}
-
-.contentArea p {
-    font-size: 14px;
-    color: #EEEEEE;
-    opacity: 0.7;
-}
 
 @media screen and (max-width: 480px) {
+    body {
+        padding-bottom: 40px;
+    }
+
     .header-wrapper {
         width: 100%;
     }
@@ -211,9 +223,9 @@
     }
 
     .character {
-        flex-wrap: wrap;
         justify-content: space-around;
         flex-direction: column-reverse;
+        height: auto;
     }
 
     .detail {
@@ -222,9 +234,11 @@
         display: flex;
         justify-content: space-around;
     }
-
+    
     .desctiptionArea {
-        width: 95%;
+        width: 100%;
+        margin: 0 10px;
+        gap: 10px;
     }
 
     .contentArea {
@@ -238,14 +252,9 @@
     .dataArea {
         width: 100%;
         gap: 5px;
-        margin-top: 10px;
     }
 
     .text-list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 50%;
         height: auto;
         border: 1px solid #eeee;
         margin-bottom: 0;
@@ -278,23 +287,18 @@
     }
 
     /* swiper */
-    .swiper {
-        width: 90vw;
-        height: 90vw;
+    .character-image {
+        width: 90%;
+        margin: 0 auto;
+        height: 360px;
     }
-
-    .swiper-slide img {
-        width: 100%;
-        height: 100%;
-    }
-
 
     .swiper-button-prev {
-        left: 0px !important;
+        left: -19px !important;
     }
 
     .swiper-button-next {
-        right: 0px !important;
+        right: -19px !important;
     }
 
 
