@@ -2,7 +2,7 @@ function checkboxId(checkId) {
     const checkboxId = document.getElementById(checkId)
     const labelId = document.getElementById(`label${checkId}`)
     if (checkboxId.checked == true) {
-        labelId.className = "search-checkbox__label--checked"
+        labelId.className = "search-checkbox__label search-checkbox__label--checked"
     }
     if (checkboxId.checked == false) {
         labelId.className = "search-checkbox__label"
