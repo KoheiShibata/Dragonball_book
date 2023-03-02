@@ -7,8 +7,6 @@ body {
     background-image: url(../storage/img/background-3.png);
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: calc(100vh - 60px);
-    position: relative;
     padding-bottom: 60px;
 }
 
@@ -183,6 +181,9 @@ body {
     text-align: center;
 }
 
+.footer p {
+    color: white;
+}
 
 
 @media screen and (max-width: 480px) {

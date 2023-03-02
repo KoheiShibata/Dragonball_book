@@ -109,6 +109,7 @@ select option:first-child {
     border-radius: 8px;
     transition: all 0.5s;
     margin-top: 30px;
+    padding: 6px 0;
     text-align: center;
 }
 
@@ -163,10 +164,11 @@ select option:first-child {
     color: #fff;
     background-color: #EF7D01;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 10px;
-    padding: 3px;
+    padding: 10px 0;
     width: 100%;
+    border-radius: 5px;
 }
 
 .btn_button:hover {

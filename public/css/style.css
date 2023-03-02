@@ -43,7 +43,8 @@
     background-color: #EF7D01;
     border: 1px solid rgba(0, 0, 0, 0.2);
     margin-top: 25px;
-    padding: 3px;
+    padding: 8px;
+    border-radius: 5px;
     width: 100%;
 }
 

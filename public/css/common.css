@@ -21,7 +21,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5px;
 }
 
 .header-logo {
@@ -49,12 +48,13 @@ a {
 .footer {
    position: absolute;
    bottom: 0;
-   width: 100%;
-   text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .footer p {
     font-size: 14px;
+    white-space:nowrap;
     color: white;
 }
 

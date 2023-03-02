@@ -1,10 +1,15 @@
-/* header */
-
 @font-face {
     font-family: 'Saiyan-Sans';
     src: url('../fonts/Saiyan-Sans Left Oblique.ttf');
 }
 
+body {
+    position: relative;
+    min-height: calc(100vh - 60px);
+    padding-bottom: 40px;
+}
+
+/* header */
 .header {
     height: 55px;
 }
@@ -48,6 +53,11 @@
 
 .header .hamburger-nav {
     display: none;
+}
+
+/* footer */
+.footer p {
+    color: #000;
 }
 
 

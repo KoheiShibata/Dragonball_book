@@ -1,11 +1,13 @@
-.header-wrapper {
-    width: 850px;
-}
-
 .main {
-    width: 850px;
+    max-width: 1280px;
     margin: auto;
     margin-top: 60px;
+}
+
+.character {
+    display: flex;
+    justify-content: space-between;
+    height: 88vh;
 }
 
 .previous-btn {
@@ -20,36 +22,34 @@
     border-radius: 5px;
 }
 
-.character {
-    display: flex;
-    justify-content: space-between;
-}
-
 .chartRadar {
-    /* position: absolute;
-    bottom: 0; */
-    width: 240px;
-    height: 210px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     border: 1px dotted #EEEEEE;
 }
 
 .myChart {
-    height: 210px !important;
-    width: 240px !important;
+    height: 100% !important;
+    width: 100% !important;
     object-fit: contain;
 }
 
 .character-name {
     text-shadow: 0 -1px 0px #F9A355, -1px 0 0px #F9A355, 1px 0px 0px #F9A355, 0 1px 0px #F9A355, 0 3px 0 #F9A355, 3px 0 #F9A355, 3px 3px 0 #F9A355;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin: 5px 0 10px;
 }
 
 /* swiper */
+.character-image {
+    position: relative;
+    width: 53%;
+}
+
 .swiper {
-    width: 410px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     position: static;
 }
 
@@ -66,8 +66,8 @@
 }
 
 .swiper-slide img {
-    width: 410px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     object-fit: cover;
     background-color: #EEEEEE;
@@ -135,33 +135,48 @@
 
 
 /* 詳細データ */
-
-.dataArea {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 .detail {
-    height: 460px;
-    width: 400px;
+    height: 100%;
+    width: 42%;
     position: relative;
 }
 
 .desctiptionArea {
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
 }
 
-.desctiptionArea p {
-    margin-bottom: 5px;
+.contentArea {
+    min-height: calc(50% - 5px);
+    border: 1px dotted #EEEEEE;
+    border-radius: 5px;
+    padding: 8px;
+    overflow-y: auto;
 }
+
+.contentArea p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #EEEEEE;
+    opacity: 0.7;
+}
+
+.dataArea {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    height: calc(50% - 10px);
+}
+
 
 .text-list {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 150px;
-    height: 210px;
+    width: 50%;
     border: 1px dotted #EEEEEE;
     border-radius: 5px;
     padding: 5px;
@@ -172,48 +187,42 @@
     list-style: none;
 }
 
-.text-list__item p {
-    font-size: 13px;
-    color: white;
-    opacity: 0.7;
-}
-
 .text-list__item span {
     font-family: "Saiyan-Sans";
     color: white;
-    font-size: 15px;
+    font-size: 18px;
 }
 
-.contentArea {
-    min-height: 240px;
-    margin-bottom: 10px;
-    border: 1px dotted #EEEEEE;
-    border-radius: 5px;
-    padding: 5px;
-    overflow-y: auto;
-}
-
-.contentArea p {
+.text-list__item p {
+    margin-top: 8px;
     font-size: 14px;
-    color: #EEEEEE;
+    color: white;
     opacity: 0.7;
 }
 
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 1280px) {
+    .main {
+        margin: 60px 16px 0;
+    }
+    
+}
+
+
+@media screen and (max-width: 640px) {
     .header-wrapper {
-        width: 100%;
+        padding: 0 10px;
     }
 
     .main {
         width: 100%;
-        margin-top: 50px;
-        margin-bottom: 20px;
+        margin: 60px 0 0;
     }
 
     .character {
-        flex-wrap: wrap;
         justify-content: space-around;
         flex-direction: column-reverse;
+        height: auto;
     }
 
     .detail {
@@ -224,46 +233,33 @@
     }
 
     .desctiptionArea {
-        width: 95%;
+        width: 100%;
+        margin: 0 10px;
+        gap: 10px;
     }
 
     .contentArea {
         margin-top: 35px;
-        padding:0 5px 5px;
         min-height: 160px;
-        height: auto;
         border: 1px solid #eeee;
+    }
+
+    .character-name {
+        font-size: 18px;
+        text-align: center;
     }
 
     .dataArea {
         width: 100%;
         gap: 5px;
-        margin-top: 10px;
     }
 
     .text-list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 50%;
         height: auto;
         border: 1px solid #eeee;
         margin-bottom: 0;
     }
 
-    .text-list__item span {
-        font-size: 18px;
-    }
-
-    .text-list__item p {
-        font-size: 14px;
-    }
-
-    .character-name {
-        font-size: 20px;
-        text-align: center;
-        margin: 5px 0;
-    }
 
     /* chart */
     .chartRadar {
@@ -278,23 +274,18 @@
     }
 
     /* swiper */
-    .swiper {
-        width: 90vw;
-        height: 90vw;
+    .character-image {
+        width: 90%;
+        margin: 0 auto;
+        height: 400px;
     }
-
-    .swiper-slide img {
-        width: 100%;
-        height: 100%;
-    }
-
 
     .swiper-button-prev {
-        left: 0px !important;
+        left: -19px !important;
     }
 
     .swiper-button-next {
-        right: 0px !important;
+        right: -19px !important;
     }
 
 

@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div style="position:relative">
+        <div class="character-image">
             <div class="swiper">
                 <div class="swiper-wrapper">
                     @foreach($characterImage as $imagePath)
