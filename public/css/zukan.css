@@ -123,7 +123,7 @@ body {
 
 .search-checkbox__label {
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #434343;
     border-radius: 5px;
     box-shadow: 3px 3px 0 0 #DDDDDD;
@@ -150,7 +150,7 @@ body {
     border-radius: 5px;
     font-size: 12px;
     width: calc(25% - 8px);
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     border: none;
 }
@@ -229,7 +229,6 @@ body {
 
     .search-checkbox__label {
         width: calc(50% - 6px);
-        padding: 10px;
     }
 
     .modal-footer {
@@ -240,7 +239,6 @@ body {
 
     .modal-footer button {
         width: calc(50% - 16px);
-        padding: 10px;
     }
 
     .reset-btn {

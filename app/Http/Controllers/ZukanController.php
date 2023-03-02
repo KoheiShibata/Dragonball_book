@@ -17,11 +17,14 @@ use function PHPUnit\Framework\isEmpty;
 
 class ZukanController extends Controller
 {
+    public function home() {
+        return view("/pbook.home");
+    }
+
     public static function escapeLike($str)
     {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
-
 
     /**
      * キャラクター図鑑をHTMLで出力（検索あり）
