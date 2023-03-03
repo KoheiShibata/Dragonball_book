@@ -18,7 +18,8 @@ use function PHPUnit\Framework\isEmpty;
 class ZukanController extends Controller
 {
     public function home() {
-        return view("/pbook.home");
+        $seasons = Season::fetchAll();
+        return view("/pbook.home", compact("seasons"));
     }
 
     public static function escapeLike($str)
