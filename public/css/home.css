@@ -10,6 +10,16 @@ body {
     height: 100vh;
 }
 
+/* ローディング */
+#splash {
+    background-color: #000;
+}
+
+#splash_logo img {
+    width: 320px;
+}
+
+
 a {
     display: block;
     text-align: center;
@@ -109,13 +119,16 @@ a:hover {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
+    .season__item a {
+        padding: 20px 0;
+    }
 }
 
 @media screen and (max-width: 850px) {
     .main {
         margin: 0 20px;
     }
-    
 }
 
 @media screen and (max-width: 660px) {

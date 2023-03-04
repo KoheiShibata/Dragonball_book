@@ -99,17 +99,11 @@
         </div>
     </div>
 
-    <!--==============JQuery読み込み===============-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('/js/character/checkBox.js')}}"></script>
     <script src="{{asset('/js/doubleSubmit.js')}}"></script>
-
-
     @yield("js")
 </body>
 
