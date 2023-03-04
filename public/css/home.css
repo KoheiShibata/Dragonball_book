@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'Saiyan-Sans';
+    src: url('../fonts/Saiyan-Sans Left Oblique.ttf');
+}
+
+html,
+body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* ローディング */
+#splash {
+    background-color: #000;
+}
+
+#splash_logo img {
+    width: 320px;
+}
+
+
+a {
+    display: block;
+    text-align: center;
+    border-radius: 40px;
+    color: #000;
+    transition: 0.6s;
+    text-decoration: none;
+}
+
+a:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.6s;
+}
+
+.main {
+    max-width: 800px;
+    height: calc(100vh - 80px);
+    margin: 0 auto;
+    padding: 40px 0;
+    position: relative;
+}
+
+.main__wrapper {
+    height: 100%;
+}
+
+.title {
+    height: 16%;
+    font-family: "Saiyan-Sans";
+    font-size: 55px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.title span:first-child {
+    display: inline-block;
+    transform: scale(-1, 1);
+}
+
+.home__img img {
+    position: absolute;
+    left: -50%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100vh;
+    max-width: 560px;
+    object-fit: cover;
+}
+
+
+.season__list {
+    height: 84%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 80px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+
+.season__item {
+    width: calc(50% - 40px);
+    z-index: 1;
+}
+
+.season__item a {
+    width: 100%;
+    padding: 24px 0;
+    font-size: 20px;
+    background-color: #FFA214;
+}
+
+.pbook__redirect  a {
+    font-family: "Saiyan-Sans";
+    font-size: 32px;
+    background-color: #084C84;
+}
+
+.footer {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer p {
+    font-size: 14px;
+    white-space: nowrap;
+    color: #000;
+}
+
+
+@media screen  and (max-width: 1280px) {
+    .home__img img {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .season__item a {
+        padding: 20px 0;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .main {
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .season__list {
+        column-gap: 40px;
+    }
+
+    .season__item {
+        width: calc(50% - 20px);
+    }
+
+    .season__item a {
+        font-size: 14px;
+        padding: 16px 0;
+    }
+}

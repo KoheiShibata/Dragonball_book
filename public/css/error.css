@@ -4,6 +4,7 @@
 }
 
 body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
     background: #333333;
 }
 
@@ -42,10 +43,14 @@ body {
 
 .error__desc {
     color: white;
-    font-size: 16px;
     display: flex;
     text-align: center;
     flex-direction: column;
+}
+
+.error__desc p {
+    font-size: 16px;
+    line-height: 1.8;
 }
 
 .error__desc a {
@@ -53,13 +58,13 @@ body {
     position: relative;
     display: block;
     width: fit-content;
-    margin: auto;
+    margin: 16px auto 0;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     background: black;
     border: solid #333333 0.5px;
     border-radius: 50px;
-    padding: 10px 40px; 
+    padding: 15px 40px; 
     transition: 0.5s;
 }
 

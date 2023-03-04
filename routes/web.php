@@ -18,12 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::group(['middleware' => 'basicauth'], function () {
+    Route::get("/", [ZukanController::class, "home"])->name("home");
+
     Route::controller(TribeController::class)->prefix("tribe")->group(function () {
         Route::get("/", "tribeList");
         Route::post("/", "create");

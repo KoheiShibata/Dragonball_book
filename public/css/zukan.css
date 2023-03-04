@@ -4,10 +4,11 @@
 }
 
 body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
     background-image: url(../storage/img/background-3.png);
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 63px);
     overflow-y: scroll;
     position: relative;
     padding-bottom: 60px;
@@ -40,14 +41,16 @@ body {
 }
 
 /* モーダル検索 */
+.modal-dialog {
+    max-width: 600px;
+}
+
 .modal-content form {
     margin-bottom: 0;
 }
 
 .modal-body {
-    padding: 2px;
-    width: 455px;
-    margin: auto;
+    padding: 10px 20px;
 }
 
 .modal-header {
@@ -107,21 +110,26 @@ body {
     padding: 4px 2px;
 }
 
+.search-checkbox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .search-checkbox input {
     display: none;
 }
 
 .search-checkbox__label {
     cursor: pointer;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #434343;
     border-radius: 5px;
     box-shadow: 3px 3px 0 0 #DDDDDD;
     transform: translateY(-3px);
-    margin-left: 5px;
     font-size: 12px;
-    height: 30px;
-    width: 104px;
+    width: calc(25% - 8px);
     text-align: center;
     margin-bottom: 10px;
 }
@@ -132,34 +140,23 @@ body {
 }
 
 .search-checkbox__label--checked {
-    cursor: pointer;
-    padding: 5px;
-    border: 1px solid #434343;
-    border-radius: 5px;
-    box-shadow: 3px 3px 0 0 #dddddd;
-    transform: translateY(-3px);
-    margin-left: 5px;
-    font-size: 12px;
-    height: 30px;
-    width: 104px;
-    text-align: center;
-    margin-bottom: 10px;
-    /* checkbox選択状態css */
     border: 1.5px solid rgb(234, 143, 0);
     transform: translateY(-1px);
     box-shadow: rgb(221, 221, 221) 1px 1px 0px 0px;
     background-color: rgb(255, 219, 201);
 }
 
-.serch-btn {
+.modal-footer button {
     border-radius: 5px;
     font-size: 12px;
-    background-color: #EA8F00;
-    border: 8px;
-    height: 28px;
-    width: 104px;
-    margin: 0;
+    width: calc(25% - 8px);
+    padding: 10px;
     text-align: center;
+    border: none;
+}
+
+.serch-btn {
+    background-color: #EA8F00;
 }
 
 .serch-btn:hover {
@@ -169,14 +166,7 @@ body {
 }
 
 .cancel-btn {
-    border-radius: 5px;
-    font-size: 12px;
-    border: 1px;
     background-color: #0090D6;
-    height: 28px;
-    width: 104px;
-    text-align: center;
-    margin: 3px 0;
 }
 
 .cancel-btn:hover {
@@ -186,16 +176,8 @@ body {
 }
 
 .reset-btn {
-    border-radius: 5px;
-    font-size: 12px;
-    border: 8px;
-    height: 28px;
-    width: 104px;
-    margin: 3px 0;
-    text-align: center;
     background-color: #DA284C;
     border: 1px solid #434343;
-    margin: 0;
 }
 
 .reset-btn:hover {
@@ -232,8 +214,8 @@ body {
 
 
     /* 検索モーダル */
-    .modal-body {
-        width: 100%;
+    .modal-dialog {
+        margin: 10px;
     }
 
     .searech-section__title p {
@@ -245,27 +227,18 @@ body {
         width: 35px;
     }
 
-    .search-checkbox {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 5px;
-    }
-
     .search-checkbox__label {
-        width: 45vw;
-    }
-
-    .search-checkbox__label--checked {
-        width: 45vw;
+        width: calc(50% - 6px);
     }
 
     .modal-footer {
-        padding: 6px 0;
+        padding: 6px 20px;
+        gap: 16px;
         flex-direction: row-reverse;
     }
 
     .modal-footer button {
-        width: 45vw;
+        width: calc(50% - 16px);
     }
 
     .reset-btn {

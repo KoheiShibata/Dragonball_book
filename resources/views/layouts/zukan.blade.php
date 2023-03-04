@@ -71,7 +71,7 @@
                             </div>
                             <div class="search-checkbox">
                                 @foreach($seasons as $season)
-                                <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('seasonId') && in_array($season->id, session('seasonId'))  ? '--checked' : ''}}">
+                                <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('seasonId') && in_array($season->id, session('seasonId'))  ? ' search-checkbox__label--checked' : ''}}">
                                     <input type="checkbox" class="checkbox" id="{{$season->name}}" name="season[]" value="{{$season->id}}" onclick="checkboxId('{{$season->name}}')" {{ session("seasonId") && in_array($season->id, session('seasonId'))  ? "checked" : "" }}>{{$season->name}}</label>
                                 @endforeach
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="search-checkbox">
                                 @foreach($tribes as $tribe)
-                                <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribeId') && in_array($tribe->id, session('tribeId'))  ? '--checked' : '' }}">
+                                <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribeId') && in_array($tribe->id, session('tribeId'))  ? ' search-checkbox__label--checked' : '' }}">
                                     <input type="checkbox" class="checkbox" id="{{$tribe->name}}" name="tribe[]" value="{{$tribe->id}}" onclick="checkboxId('{{$tribe->name}}')" {{ session("tribeId") && in_array($tribe->id, session('tribeId'))  ? "checked" : "" }}>{{$tribe->name}}</label>
                                 @endforeach
                             </div>
@@ -99,17 +99,11 @@
         </div>
     </div>
 
-    <!--==============JQuery読み込み===============-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('/js/character/checkBox.js')}}"></script>
     <script src="{{asset('/js/doubleSubmit.js')}}"></script>
-
-
     @yield("js")
 </body>
 
