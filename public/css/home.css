@@ -133,7 +133,7 @@ a:hover {
 
 @media screen and (max-width: 660px) {
     .title {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .season__list {
