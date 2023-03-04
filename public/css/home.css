@@ -39,9 +39,10 @@ a:hover {
 .title {
     height: 16%;
     font-family: "Saiyan-Sans";
-    font-size: 56px;
+    font-size: 55px;
     text-align: center;
     position: relative;
+    z-index: 1;
 }
 
 .title span:first-child {
@@ -55,7 +56,7 @@ a:hover {
     top: 50%;
     transform: translateY(-50%);
     height: 100vh;
-    width: 500px;
+    max-width: 560px;
     object-fit: cover;
 }
 
@@ -73,11 +74,12 @@ a:hover {
 
 .season__item {
     width: calc(50% - 40px);
+    z-index: 1;
 }
 
 .season__item a {
     width: 100%;
-    padding: 30px 0;
+    padding: 24px 0;
     font-size: 20px;
     background-color: #FFA214;
 }
@@ -99,4 +101,38 @@ a:hover {
     font-size: 14px;
     white-space: nowrap;
     color: #000;
+}
+
+
+@media screen  and (max-width: 1280px) {
+    .home__img img {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .main {
+        margin: 0 20px;
+    }
+    
+}
+
+@media screen and (max-width: 660px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .season__list {
+        column-gap: 40px;
+    }
+
+    .season__item {
+        width: calc(50% - 20px);
+    }
+
+    .season__item a {
+        font-size: 14px;
+        padding: 16px 0;
+    }
 }
