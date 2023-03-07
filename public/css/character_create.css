@@ -3,12 +3,6 @@
     src: url('../fonts/Saiyan-Sans.ttf');
 }
 
-.form-control:focus {
-    color: #495057;
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
-}
-
 .header-wrapper {
     width: 700px;
 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ZukanController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\TribeController;
@@ -18,8 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(['middleware' => 'basicauth'], function () {
     Route::get("/", [ZukanController::class, "home"])->name("home");
+    
+    Route::controller(LoginController::class)->prefix("login")->group(function () {
+        Route::get("/", "loginForm");
+    });
 
     Route::controller(TribeController::class)->prefix("tribe")->group(function () {
         Route::get("/", "tribeList");
