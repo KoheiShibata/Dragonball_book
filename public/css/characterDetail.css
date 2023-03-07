@@ -7,7 +7,7 @@
 .character {
     display: flex;
     justify-content: space-between;
-    height: 88vh;
+    height: 86vh;
 }
 
 .previous-btn {

@@ -17,14 +17,10 @@ use function PHPUnit\Framework\isEmpty;
 
 class ZukanController extends Controller
 {
-    public function home() {
+    public function home()
+    {
         $seasons = Season::fetchAll();
         return view("/pbook.home", compact("seasons"));
-    }
-
-    public static function escapeLike($str)
-    {
-        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
 
     /**
@@ -44,12 +40,11 @@ class ZukanController extends Controller
             $filter = $request->only(config("filter.character"));
 
             $characters = Character::searchAll($filter);
+            session()->flash("seasonId", $request->season);
+            session()->flash("tribeId", $request->tribe);
+            session()->flash("keyword", $request->keyword);
 
             if ($characters->isNotEmpty()) {
-                session()->flash("seasonId", $request->season);
-                session()->flash("tribeId", $request->tribe);
-                session()->flash("keyword", $request->keyword);
-
                 foreach ($characters as $key => $character) {
                     $characterImages[$character->id][] = $character->formatedImagePath;
                     if (in_array($character->id, $selectedCharacterId)) {
@@ -58,9 +53,8 @@ class ZukanController extends Controller
                     }
                     $selectedCharacterId[] = $character->id;
                 }
-
             }
-                return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
+            return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
         } catch (\Exception $e) {
             return abort(404);
         }

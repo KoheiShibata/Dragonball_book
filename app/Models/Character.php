@@ -204,7 +204,7 @@ class Character extends Model
                 return $query->whereIn("tribe_id", $filter["tribe"]);
             })
             ->when(!empty($filter["keyword"]), function ($query) use ($filter) {
-                return $query->where("name", "like", "%" . self::escapeLike($filter["keyword"]) . "%");
+                return $query->where("name", "LIKE", "%". $filter["keyword"]. "%");
             })
             ->select("characters.*", "character_images.image_path")
             ->orderBy("season_id", "asc")
