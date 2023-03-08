@@ -19,7 +19,7 @@ class Character extends Model
         'id'
     ];
 
-    
+
     /**
      * デフォルト取得カラム
      *
@@ -31,14 +31,14 @@ class Character extends Model
         "tribes.name as tribe_name",
         "character_images.image_path",
     ];
-    
-    
+
+
     public function character_images()
     {
         return $this->hasMany(CharacterImage::class);
     }
-    
-    
+
+
     public static function boot()
     {
         parent::boot();
@@ -54,20 +54,20 @@ class Character extends Model
      */
     public function getFormatedHeightAttribute()
     {
-        if(empty($this->height)) {
+        if (empty($this->height)) {
             return "未登録";
         }
         return $this->height;
     }
 
-   /**
+    /**
      * キャラクター図鑑の身長をフォーマット
      *
      * @return 
      */
     public function getFormatedPbookHeightAttribute()
     {
-        if(empty($this->height)) {
+        if (empty($this->height)) {
             return "不明";
         }
         return $this->height;
@@ -80,20 +80,20 @@ class Character extends Model
      */
     public function getFormatedWeightAttribute()
     {
-        if(empty($this->weight)) {
+        if (empty($this->weight)) {
             return "未登録";
         }
         return $this->weight;
     }
 
-       /**
+    /**
      * キャラクター図鑑の身長をフォーマット
      *
      * @return 
      */
     public function getFormatedPbookweightAttribute()
     {
-        if(empty($this->height)) {
+        if (empty($this->height)) {
             return "不明";
         }
         return $this->height;
@@ -104,22 +104,22 @@ class Character extends Model
      *
      * @return string
      */
-    public function getFormatedImagePathAttribute():string 
+    public function getFormatedImagePathAttribute(): string
     {
-        if(empty($this->image_path)) {
+        if (empty($this->image_path)) {
             return asset("/storage/img/noimage.png");
         }
         return asset($this->image_path);
     }
 
-    
+
     /**
      * アクティブなキャラクターを全取得する
      *
      * @param object $query
      * @return object
      */
-    public function scopeFetchAll(object $query):object 
+    public function scopeFetchAll(object $query): object
     {
         return $query
             ->whereNull("characters.deleted_at")
@@ -132,7 +132,24 @@ class Character extends Model
             ->orderBy("id", "asc")
             ->get();
     }
-    
+
+    /**
+     * 対象のIDのキャラクターが存在するか
+     *
+     * @param object $query
+     * @param string $characterId
+     * @return boolean
+     */
+    public function scopeIsCharacterExists(object $query, string $characterId): bool
+    {
+        return $query
+            ->where([
+                "deleted_at" => null,
+                "id" => $characterId,
+            ])
+            ->exists();
+    }
+
 
     /**
      * 編集対象のIDのキャラクターを取得
@@ -141,14 +158,19 @@ class Character extends Model
      * @param integer $characterId
      * @return object
      */
-    public function scopeFetchUpdateRow(object $query, int $characterId):object
+    public function scopeFetchCharacterDataByCharacterId(object $query, int $characterId): object
     {
         return $query
+            ->where([
+                "characters.deleted_at" => null,
+                "characters.id" => $characterId,
+                "seasons.deleted_at" => null,
+                "tribes.deleted_at" => null,
+            ])
             ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
             ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
             ->leftJoin("character_images", "character_images.character_id", "characters.id")
             ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
-            ->where("characters.id", "=", $characterId)
             ->first();
     }
 
@@ -160,7 +182,7 @@ class Character extends Model
      * @param array $param
      * @return boolean
      */
-    public function scopeUpdateExecution(object $query, array $param):bool
+    public function scopeUpdateExecution(object $query, array $param): bool
     {
         return $query
             ->findOrFail($param["id"])
@@ -176,7 +198,7 @@ class Character extends Model
      * @param integer $id
      * @return boolean
      */
-    public function scopeDeleteRow(object $query, int $id):bool
+    public function scopeDeleteRow(object $query, int $id): bool
     {
         return $query
             ->findOrFail($id)
@@ -191,7 +213,7 @@ class Character extends Model
      * @param array $filter
      * @return object
      */
-    public function scopeSearchAll(object $query, array $filter):object
+    public function scopeSearchAll(object $query, array $filter): object
     {
         return $query
             ->whereNull("characters.deleted_at")
@@ -204,12 +226,11 @@ class Character extends Model
                 return $query->whereIn("tribe_id", $filter["tribe"]);
             })
             ->when(!empty($filter["keyword"]), function ($query) use ($filter) {
-                return $query->where("name", "LIKE", "%". $filter["keyword"]. "%");
+                return $query->where("name", "LIKE", "%" . $filter["keyword"] . "%");
             })
             ->select("characters.*", "character_images.image_path")
             ->orderBy("season_id", "asc")
             ->orderBy("characters.id", "asc")
             ->get();
     }
-
 }

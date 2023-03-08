@@ -141,13 +141,14 @@ class CharacterController extends Controller
         try {
             if (
                 empty($id) ||
-                !is_numeric($id)
+                !is_numeric($id) ||
+                !Character::isCharacterExists($id)
             ) {
                 throw new \Exception();
             }
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
-            $character = Character::fetchUpdateRow($id);
+            $character = Character::fetchCharacterDataByCharacterId($id);
             $characterImages = CharacterImage::fetchImage($id);
             foreach ($characterImages as $image) {
                 $characterImage[] = $image->image_path;
