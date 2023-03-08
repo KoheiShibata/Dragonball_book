@@ -1,0 +1,292 @@
+.main {
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.character {
+    display: flex;
+    justify-content: space-between;
+    height: 86vh;
+}
+
+.previous-btn {
+    position: fixed;
+    z-index: 1;
+    width: 80px;
+    top: 48%;
+    left: 5px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.chartRadar {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px dotted #EEEEEE;
+}
+
+.myChart {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: contain;
+}
+
+.character-name {
+    text-shadow: 0 -1px 0px #F9A355, -1px 0 0px #F9A355, 1px 0px 0px #F9A355, 0 1px 0px #F9A355, 0 3px 0 #F9A355, 3px 0 #F9A355, 3px 3px 0 #F9A355;
+    font-size: 18px;
+    margin: 5px 0 10px;
+}
+
+/* swiper */
+.character-image {
+    position: relative;
+    width: 53%;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    position: static;
+}
+
+.swiper-wrapper {
+    position: static;
+    z-index: 0;
+}
+
+.swiper-slide {
+    color: #ffffff;
+    text-align: center;
+    line-height: 300px;
+    text-align: center;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    background-color: #EEEEEE;
+}
+
+.swiper-pagination {
+    bottom: -40px !important;
+    width: 100px;
+    color: #ffffff;
+}
+
+/* ページネーションの基本スタイル */
+.swiper-pagination-bullet {
+    background-color: transparent;
+    background-image: url(../storage/img/kintoun-remove.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: unset;
+    height: 25px;
+    opacity: 0.7;
+    width: 25px;
+}
+
+/* 選択されているページネーション */
+.swiper-pagination-bullet-active {
+    background-image: url(../storage/img/orangekintoun-remove.png);
+    height: 25px;
+    width: 25px;
+}
+
+.swiper-button-prev {
+    left: -30px !important;
+}
+
+.swiper-button-next {
+    right: -30px !important;
+}
+
+/* 前へ次への矢印カスタマイズ */
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    bottom: 0;
+    content: "";
+    height: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    width: 0;
+    opacity: 0.7;
+}
+
+/* 前への矢印カスタマイズ */
+.swiper-button-prev:after {
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #F9A355;
+    border-top: 10px solid transparent;
+}
+
+/* 次への矢印カスタマイズ */
+.swiper-button-next:after {
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #F9A355;
+    border-top: 10px solid transparent;
+}
+
+
+/* 詳細データ */
+.detail {
+    height: 100%;
+    width: 42%;
+    position: relative;
+}
+
+.desctiptionArea {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.contentArea {
+    min-height: calc(50% - 5px);
+    border: 1px dotted #EEEEEE;
+    border-radius: 5px;
+    padding: 8px;
+    overflow-y: auto;
+}
+
+.contentArea p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #EEEEEE;
+    opacity: 0.7;
+}
+
+.dataArea {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    height: calc(50% - 10px);
+}
+
+
+.text-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    border: 1px dotted #EEEEEE;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 0;
+}
+
+.text-list__item {
+    list-style: none;
+}
+
+.text-list__item span {
+    font-family: "Saiyan-Sans";
+    color: white;
+    font-size: 18px;
+}
+
+.text-list__item p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: white;
+    opacity: 0.7;
+}
+
+
+@media screen and (max-width: 1280px) {
+    .main {
+        margin: 60px 16px 0;
+    }
+    
+}
+
+
+@media screen and (max-width: 640px) {
+    .header-wrapper {
+        padding: 0 10px;
+    }
+
+    .main {
+        width: 100%;
+        margin: 60px 0 0;
+    }
+
+    .character {
+        justify-content: space-around;
+        flex-direction: column-reverse;
+        height: auto;
+    }
+
+    .detail {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .desctiptionArea {
+        width: 100%;
+        margin: 0 10px;
+        gap: 10px;
+    }
+
+    .contentArea {
+        margin-top: 35px;
+        min-height: 160px;
+        border: 1px solid #eeee;
+    }
+
+    .character-name {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .dataArea {
+        width: 100%;
+        gap: 5px;
+    }
+
+    .text-list {
+        height: auto;
+        border: 1px solid #eeee;
+        margin-bottom: 0;
+    }
+
+
+    /* chart */
+    .chartRadar {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #eeee;
+    }
+
+    .myChart {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* swiper */
+    .character-image {
+        width: 90%;
+        margin: 0 auto;
+        height: 400px;
+    }
+
+    .swiper-button-prev {
+        left: -19px !important;
+    }
+
+    .swiper-button-next {
+        right: -19px !important;
+    }
+
+
+}
