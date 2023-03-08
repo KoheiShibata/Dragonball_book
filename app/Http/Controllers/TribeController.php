@@ -77,6 +77,14 @@ class TribeController extends Controller
         }
     }
 
-
+    /**
+     * getパラメーター制御
+     *
+     * @return abort
+     */
+    public function getControl() 
+    {
+        return abort(404);
+    }
 
 }

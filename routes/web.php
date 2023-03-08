@@ -44,6 +44,7 @@ Route::group(['middleware' => 'basicauth'], function () {
             Route::post("/", "create");
             Route::put("/", "edit");
             Route::delete("/{id}", "delete");
+            Route::get("/{id}", "getControl");
         });
     
         Route::controller(SeasonController::class)->prefix("season")->group(function () {
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'basicauth'], function () {
             Route::post("/", "create");
             Route::put("/", "edit");
             Route::delete("/{id}", "delete");
+            Route::get("/{id}", "getControl");
         });
     
         Route::controller(CharacterController::class)->prefix("character")->group(function () {
@@ -65,6 +67,9 @@ Route::group(['middleware' => 'basicauth'], function () {
             Route::get("/", "characterList");
         });
 
-        Route::post("/logout", [LogoutController::class, "logout"])->name("logout"); // ログアウト処理
+        Route::controller(LogoutController::class)->prefix("logout")->group(function () {
+            Route::get("/", "getControl");
+            Route::post("/", "logout")->name("logout"); // ログアウト処理
+        });
     });
 });

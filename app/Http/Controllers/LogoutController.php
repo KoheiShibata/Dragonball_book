@@ -18,4 +18,14 @@ class LogoutController extends Controller
 
         return redirect("/login");
     }
+
+    /**
+     * getパラメータ制御
+     *
+     * @return abort
+     */
+    public function getLogout()
+    {
+        return abort(404);
+    }
 }

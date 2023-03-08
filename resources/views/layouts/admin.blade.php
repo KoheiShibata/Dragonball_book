@@ -37,7 +37,7 @@
                     <li class="header-nav__item">
                         <form action="{{ route('logout') }}" method="POST" name="admin_logout">
                             @csrf
-                            <a href="#" onclick="onClickLogout()" id="logoutBtn">logout</a>
+                            <a href="javascript:void(0)" onclick="onClickLogout()" id="logoutBtn">logout</a>
                         </form>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@
                     <li class="hamburger-menu__item">
                         <form action="{{ route('logout') }}" method="POST" name="admin_logout">
                             @csrf
-                            <a href="#" onclick="onClickLogout()" id="logoutBtn">logout</a>
+                            <a href="javascript:void(0)" onclick="onClickLogout()" id="logoutBtn">logout</a>
                         </form>
                     </li>
                 </ul>

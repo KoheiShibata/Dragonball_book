@@ -30,7 +30,7 @@
 .info {
     color: rgba(0, 0, 0, 0.6);
     font-size: 15px;
-    margin-bottom: 0px;
+    margin-top: 8px;
 }
 
 .form-control {
@@ -71,7 +71,7 @@ input:focus::placeholder {
     display: none;
     color: red;
     font-size: 14px;
-    padding-left: 3px;
+    margin: 5px 0 3px 0;
 }
 
 /* 一覧テーブル */

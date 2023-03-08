@@ -16,6 +16,7 @@
 <body>
     <div class="login-form">
         <div class="title__wrap">
+        <p class="error-message">{{ session()->has("errorMessage") ? session("errorMessage") : null }}</p>
             <img src="/img/shenlong.jpg" alt="">
             <h1><span>／</span>LOGIN<span>／</span></h1>
         </div>
@@ -32,7 +33,7 @@
                     <input type="password" name="password" id="password" value="" class="form-control">
                     <p class="error-message">{{ $errors->has("password") ? $errors->first("password") : null }}</p>
                 </div>
-                <button type="button" id="btnSubmit" class="btn-button">ログイン</button>
+                <button type="submit" id="btnSubmit" class="btn-button">ログイン</button>
                 <div class="common-loading-area__submit--hide" id="loading-area__submit">
                     <img src="{{asset('/storage/img/loading-6.gif')}}" alt="">
                 </div>
@@ -47,7 +48,6 @@
         const loadingGifSubmit = document.getElementById("loading-area__submit")
         btnSubmit.addEventListener("click", function() {
             btnChangeLoading(btnSubmit, loadingGifSubmit)
-            document.loginForm.submit()
         })
     </script>
 </body>
