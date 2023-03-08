@@ -187,8 +187,8 @@ select option:first-child {
 /* バリデーション */
 .form-invalid {
     color: #f50000;
-    font-size: 12px;
-    padding-left: 12px;
+    font-size: 14px;
+    margin: 8px;
 }
 
 .input-invalid {

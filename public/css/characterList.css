@@ -7,7 +7,7 @@ body {
     background-image: url(../storage/img/background-3.png);
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: 60px;
+    min-height: calc(100vh - 72px);
 }
 
 .header-wrapper {

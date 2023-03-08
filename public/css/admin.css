@@ -7,7 +7,7 @@ body {
     font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
     position: relative;
     min-height: calc(100vh - 60px);
-    padding-bottom: 40px;
+    padding-bottom: 4%;
 }
 
 /* header */
