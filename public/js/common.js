@@ -10,10 +10,16 @@ $(".hamburger-btn").click(function() {
 
 // ログアウト処理
 function onClickLogout() {
-    const logoutBtn = document.getElementById("logoutBtn")
-    
-    let res = confirm("本当にログアウトしますか？")
-    if(res == true) {
-        document.admin_logout[0].submit();
-    }
+    Swal.fire({
+        text: "本当にログアウトしますか？",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#498DC5',
+        cancelButtonColor: '#FFA214',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.admin_logout[0].submit()
+        }
+      })
 }
