@@ -21,7 +21,6 @@
 
 <body>
     @yield("loading")
-    @yield("returnBtn")
     <header class="header">
         <div class="header-wrapper">
             <a href="/dragonball-pbook" class="header-logo">
@@ -31,10 +30,16 @@
             </a>
             <nav class="header-nav">
                 <ul class="header-nav__list">
+                    <li class="header-nav__item"><a href="{{ CHARACTER_TOP }}">list</a></li>
                     <li class="header-nav__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
                     <li class="header-nav__item"><a href="{{ SEASON_TOP }}">season</a></li>
                     <li class="header-nav__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                    <li class="header-nav__item"><a href="{{ CHARACTER_TOP }}">list</a></li>
+                    <li class="header-nav__item">
+                        <form action="{{ route('logout') }}" method="POST" name="admin_logout">
+                            @csrf
+                            <a href="#" onclick="onClickLogout()" id="logoutBtn">logout</a>
+                        </form>
+                    </li>
                 </ul>
             </nav>
 
@@ -43,10 +48,16 @@
             </div>
             <nav class="hamburger-nav" id="hamburgerNav">
                 <ul class="hamburger-menu">
+                    <li class="hamburger-menu__item"><a href="{{ CHARACTER_TOP }}">characterlist</a></li>
                     <li class="hamburger-menu__item"><a href="{{ CHARACTER_CREATE_FORM }}">character</a></li>
                     <li class="hamburger-menu__item"><a href="{{ SEASON_TOP }}">season</a></li>
                     <li class="hamburger-menu__item"><a href="{{ TRIBE_TOP }}">tribe</a></li>
-                    <li class="hamburger-menu__item"><a href="{{ CHARACTER_TOP }}">characterlist</a></li>
+                    <li class="hamburger-menu__item">
+                        <form action="{{ route('logout') }}" method="POST" name="admin_logout">
+                            @csrf
+                            <a href="#" onclick="onClickLogout()" id="logoutBtn">logout</a>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -63,38 +74,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield("js")
-    <script>
-        $(".hamburger-btn").click(function() {
-            $(this).toggleClass('hamburger-btn--active');
-
-            const hamburgerBtn = document.getElementById("hamburgerBtn").className
-            const hamburgerNav = document.getElementById("hamburgerNav")
-
-            if (hamburgerBtn == "hamburger-btn hamburger-btn--active") {
-                hamburgerNav.style.display = "block"
-            }
-            if (hamburgerBtn == "hamburger-btn") {
-                hamburgerNav.style.display = "none"
-            }
-
-
-        });
-
-        $(".hamburger-nav").click(function() {
-            document.getElementById("hamburgerBtn").classList.toggle("hamburger-btn--active")
-
-            const hamburgerBtn = document.getElementById("hamburgerBtn").className
-            const hamburgerNav = document.getElementById("hamburgerNav")
-
-            if (hamburgerBtn == "hamburger-btn hamburger-btn--active") {
-                hamburgerNav.style.display = "block"
-            }
-            if (hamburgerBtn == "hamburger-btn") {
-                hamburgerNav.style.display = "none"
-            }
-
-        })
-    </script>
+    <script src="{{asset('/js/common.js')}}"></script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ZukanController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\TribeController;
@@ -22,19 +23,19 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'basicauth'], function () {
-    // サイト利用者画面
-    Route::get("/", [ZukanController::class, "home"])->name("home");
+    // 一般利用者画面
+    Route::get("/", [ZukanController::class, "home"])->name("home"); // ホーム画面
     
     Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
         Route::get("/", "pbook");
-        Route::get("/{id}", "detail");
+        Route::get("/{id}", "detail"); 
     });
 
-
+    
     Route::controller(LoginController::class)->prefix("login")->group(function () {
-        Route::get("/", "loginForm")->name("login.index");
-        Route::post("/", "loginJudge")->name("login.judge");
-    });
+        Route::get("/", "loginForm")->name("login.index"); // ログイン画面
+        Route::post("/", "loginJudge")->name("login.judge"); // ログイン判定
+    }); 
 
     // 以下管理者のみ
     Route::middleware(['AdminAuth'])->group(function () {
@@ -63,5 +64,7 @@ Route::group(['middleware' => 'basicauth'], function () {
         Route::controller(CharacterController::class)->prefix("characters")->group(function () {
             Route::get("/", "characterList");
         });
+
+        Route::post("/logout", [LogoutController::class, "logout"])->name("logout"); // ログアウト処理
     });
 });

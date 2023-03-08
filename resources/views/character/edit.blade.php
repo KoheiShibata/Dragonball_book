@@ -5,19 +5,15 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('css/characterEdit.css') }}" rel="stylesheet">
+<link href="{{ asset('css/characterForm.css') }}" rel="stylesheet">
 @endsection
 
 @section("title", "$character->name の編集")
 
-@section("returnBtn")
-<a href="{{ CHARACTER_TOP }}" class="returnBtn">＜ </a>
-@endsection
-
 @section("main")
 <div class="main">
     <h1 class="title">★Character edit</h1>
-    <span class="required"></span><span>は必須です</span>
+    <p class="info">キャラクター情報を変更できます<span class="required">(</span>は必須です)</p>
     <div class="form-body">
         <!-- <h1 class="subtitle">☆キャラクター情報</h1> -->
         <form action="/" enctype="multipart/form-data" method="post">
@@ -25,7 +21,7 @@
             @method("put")
             <div class="form-group">
                 <input type="hidden" id="characterId" value="{{$character->id}}">
-                <label class="top-label required" for="name">☆キャラクター名</label><br>
+                <label class="register-label required" for="name">☆キャラクター名</label><br>
                 <input type="text" class="form-control" name="name" id="name" value="{{$character->name}}">
                 <div class="err-msg-name"></div>
             </div>

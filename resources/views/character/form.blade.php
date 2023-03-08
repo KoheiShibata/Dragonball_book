@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('css/character_create.css') }}" rel="stylesheet">
+<link href="{{ asset('css/characterForm.css') }}" rel="stylesheet">
 @endsection
 
 @section("title", "キャラクターの登録")
