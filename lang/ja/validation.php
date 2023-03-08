@@ -155,6 +155,8 @@ return [
 
     'attributes' => [
         "season_name" => "シーズン名",
+        "email" => "メールアドレス",
+        "password" => "パスワード",
     ],
 
 ];

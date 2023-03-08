@@ -4,6 +4,7 @@
 }
 
 body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
     position: relative;
     min-height: calc(100vh - 60px);
     padding-bottom: 40px;
@@ -15,13 +16,14 @@ body {
 }
 
 .header-wrapper {
-    width: 800px;
+    max-width: 700px;
     height: 55px;
 }
 
 .header-nav__list {
     display: flex;
     align-items: center;
+    gap: 10px;
     margin-bottom: 0;
 }
 
@@ -32,10 +34,6 @@ body {
     padding: 10px 15px;
     border-radius: 6px;
     transition: 0.5s;
-}
-
-.header-nav__item {
-    margin-left: 30px;
 }
 
 .header-nav__item:first-child {
@@ -51,7 +49,7 @@ body {
     display: none;
 }
 
-.header .hamburger-nav {
+.hamburger-nav {
     display: none;
 }
 
@@ -62,7 +60,7 @@ body {
 
 
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 700px) {
     .header {
         width: 100%;
         height: 45px;
@@ -88,9 +86,18 @@ body {
 
 
     /* ハンバーガーメニュー */
+    .hamburger-btn .hamburger-btn--active {
+        display: block;
+    }
+
+    .hamburger-nav--active {
+        display: block;
+    }
+
     .hamburger-btn {
         /*ボタン内側の基点となるためrelativeを指定。
     追従するナビゲーションの場合はfixed＋top、rightといった位置をセットで指定*/
+        display: block;
         position: relative;
         cursor: pointer;
         width: 50px;
@@ -110,7 +117,6 @@ body {
         background: #EF7D01;
         width: 45%;
     }
-
 
     .hamburger-btn span:nth-of-type(1) {
         top: 13px;
@@ -196,7 +202,14 @@ body {
         font-family: 'Saiyan-Sans';
         font-size: 30px;
         color: #EEEEEE;
-        padding: 16% 100px;
+        padding: 24px 96px;
+        border-radius: 8px;
+        transition: 0.6s;
+    }
+
+    .hamburger-menu__item a:hover {
+        background-color: #EF7400;
+        transition: 0.6s;
     }
 
 }

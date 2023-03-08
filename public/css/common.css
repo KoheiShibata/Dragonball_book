@@ -5,6 +5,13 @@ li {
 a {
     text-decoration: none;
 }
+
+.form-control:focus {
+    color: #495057;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
+}
+
 /* layouts */
 .header {
     position: fixed;

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class BasicAuthMiddleware
+class AdminAuth
 {
     /**
      * Handle an incoming request.
@@ -16,16 +16,11 @@ class BasicAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $username = $request->getUser();
-        $password = $request->getPassword();
-
-        if ($username == "dragonball" && $password ==  "pbook") {
-            return $next($request);
+        if(!session()->has("admin")) 
+        {
+            return redirect("/login");
         }
 
-        abort(401, "Enter username and password.", [
-            header('WWW-Authenticate: Basic realm="Sample Private Page"'),
-            header('Content-Type: text/plain; charset=utf-8')
-        ]);
+        return $next($request);
     }
 }

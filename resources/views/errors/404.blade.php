@@ -23,6 +23,9 @@
                     指定されたページは削除されたか、名前が変更されたか、<br>
                     一時的にご利用ができない可能性がございます。</p>
                 <a href="{{ route('home') }}">トップページに戻る</a>
+                @if(session()->has("admin"))
+                <a href="{{ CHARACTER_TOP }}">管理画面トップページに戻る</a>
+                @endif
             </div>
         </section>
     </main>

@@ -10,16 +10,6 @@ body {
     height: 100vh;
 }
 
-/* ローディング */
-#splash {
-    background-color: #000;
-}
-
-#splash_logo img {
-    width: 320px;
-}
-
-
 a {
     display: block;
     text-align: center;
