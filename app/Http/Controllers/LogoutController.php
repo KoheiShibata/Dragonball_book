@@ -24,7 +24,7 @@ class LogoutController extends Controller
      *
      * @return abort
      */
-    public function getLogout()
+    public function getControl()
     {
         return abort(404);
     }
