@@ -22,40 +22,46 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'basicauth'], function () {
+    // サイト利用者画面
     Route::get("/", [ZukanController::class, "home"])->name("home");
     
-    Route::controller(LoginController::class)->prefix("login")->group(function () {
-        Route::get("/", "loginForm");
-    });
-
-    Route::controller(TribeController::class)->prefix("tribe")->group(function () {
-        Route::get("/", "tribeList");
-        Route::post("/", "create");
-        Route::put("/", "edit");
-        Route::delete("/{id}", "delete");
-    });
-
-    Route::controller(SeasonController::class)->prefix("season")->group(function () {
-        Route::get("/", "seasonList");
-        Route::post("/", "create");
-        Route::put("/", "edit");
-        Route::delete("/{id}", "delete");
-    });
-
-    Route::controller(CharacterController::class)->prefix("character")->group(function () {
-        Route::get("/", "createForm");
-        Route::post("/", "create");
-        Route::get("/{id}", "characterDetail");
-        Route::put("/{id}", "edit");
-        Route::delete("/{id}", "delete");
-    });
-
-    Route::controller(CharacterController::class)->prefix("characters")->group(function () {
-        Route::get("/", "characterList");
-    });
-
     Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
         Route::get("/", "pbook");
         Route::get("/{id}", "detail");
+    });
+
+
+    Route::controller(LoginController::class)->prefix("login")->group(function () {
+        Route::get("/", "loginForm")->name("login.index");
+        Route::post("/", "loginJudge")->name("login.judge");
+    });
+
+    // 以下管理者のみ
+    Route::middleware(['AdminAuth'])->group(function () {
+        Route::controller(TribeController::class)->prefix("tribe")->group(function () {
+            Route::get("/", "tribeList");
+            Route::post("/", "create");
+            Route::put("/", "edit");
+            Route::delete("/{id}", "delete");
+        });
+    
+        Route::controller(SeasonController::class)->prefix("season")->group(function () {
+            Route::get("/", "seasonList");
+            Route::post("/", "create");
+            Route::put("/", "edit");
+            Route::delete("/{id}", "delete");
+        });
+    
+        Route::controller(CharacterController::class)->prefix("character")->group(function () {
+            Route::get("/", "createForm");
+            Route::post("/", "create");
+            Route::get("/{id}", "characterDetail");
+            Route::put("/{id}", "edit");
+            Route::delete("/{id}", "delete");
+        });
+    
+        Route::controller(CharacterController::class)->prefix("characters")->group(function () {
+            Route::get("/", "characterList");
+        });
     });
 });
