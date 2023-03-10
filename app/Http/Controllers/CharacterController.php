@@ -89,7 +89,7 @@ class CharacterController extends Controller
                 $res[] = $file;
                 continue;
             }
-            
+
             // base64をデコード
             preg_match('/data:image\/(\w+);base64,/', $file, $matches);
             $extension = $matches[1];
@@ -114,9 +114,20 @@ class CharacterController extends Controller
     {
         $selectedCharacterId = [];
         $characterImages = [];
+        if (empty(session("seasonId")) && empty(session("tribeId"))) {
+            session()->push("seasonId", "");
+            session()->push("tribeId", "");
+        }
         $characters = Character::fetchAll();
 
         foreach ($characters as $key => $character) {
+            if (!in_array($character->season_id, session("seasonId"))) {
+                session()->push("seasonId", $character->season_id);
+            }
+            if (!in_array($character->tribe_id, session("tribeId"))) {
+                session()->push("tribeId", $character->tribe_id);
+            }
+
             $character->height = $character->formatedHeight;
             $character->weight = $character->formatedWeight;
             $characterImages[$character->id][] = $character->formatedImagePath;
@@ -126,6 +137,7 @@ class CharacterController extends Controller
             }
             $selectedCharacterId[] = $character->id;
         }
+
         return view("character.list", compact("characters", "characterImages"));
     }
 

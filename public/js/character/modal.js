@@ -53,7 +53,6 @@ function deleteBtnClickAlert() {
         buttonsStyling: false
     })
     swalWithBootstrapButtons.fire({
-        // title: '本当に削除しますか?',
         text: "本当に削除しますか？",
         icon: 'warning',
         showCancelButton: true,

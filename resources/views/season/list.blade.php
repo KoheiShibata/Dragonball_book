@@ -39,9 +39,7 @@
     <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
-                </div>
+                <b class="modal-title" id="exampleModalLabel">編集画面</b>
                 <form action="/season" method="post" id="season-edit-form" onsubmit="return checkSeasonEdit()">
                     @csrf
                     @method("put")
@@ -50,9 +48,9 @@
                         <div class="errorMessage" id="modalSeasonErrorMessage">シーズン名を30以内で、正しく入力してください。</div>
                         <input type="hidden" name="id" id="modal_editId">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <div class="btn-area">
                         <button type="submit" id="editSubmit" class="btn btn-primary">更新</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                     </div>
                 </form>
             </div>
@@ -62,19 +60,18 @@
     <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</h5>
-                </div>
+                <b class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</b>
                 <form action="/season" method="post" id="season-delete-form">
                     @csrf
                     @method("delete")
                     <div class="modal-body">
+                        <p>シーズン名</p>
                         <p class="name" id="season_name"></p>
                         <input type="hidden" name="id" id="modal_deleteId">
                     </div>
-                    <div class="modal-footer">
+                    <div class="btn-area">
+                        <button type="button" class="btn btn-danger" id="deleteBtn" data-session="{{ json_encode(session('seasonId')) }}" onclick="seasonDeleteBtnClick()">はい</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                        <button type="button" class="btn btn-danger" id="deleteBtn" onclick="seasonDeleteBtnClick()">はい</button>
                     </div>
                 </form>
             </div>
@@ -104,7 +101,7 @@
             }
         })
 
-        
+
         $(".edit").on("click", () => {
             const modal = new bootstrap.Modal(document.getElementById("modal-edit"), {
                 keyboard: false
@@ -126,7 +123,7 @@
         }
         // 削除
         function deleteClick(id, name) {
-            document.getElementById("season_name").innerHTML = `シーズン名:${name}`
+            document.getElementById("season_name").innerHTML = `${name}`
             document.getElementById("modal_deleteId").value = `${id}`
             document.getElementById("season-delete-form").action = `/season/${id}`
         }

@@ -28,9 +28,9 @@
         <label class="register_label">☆カテゴリー一覧</label>
         <div>
             @foreach($tribes as $tribe)
-            <div class="tribe_table"  onclick="tableClick('{{ $tribe->id }}', '{{ $tribe->name }}')">
+            <div class="tribe_table" onclick="tableClick({{ json_encode($tribe) }})">
                 <p class="tribe_name">{{$tribe->name}}</p>
-                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick('{{ $tribe->id }}', '{{ $tribe->name }}')" alt="">
+                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick({{ json_encode($tribe) }})" alt="">
             </div>
             @endforeach
         </div>
@@ -39,20 +39,18 @@
     <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">編集画面</h5>
-                </div>
+                    <b class="modal-title" id="exampleModalLabel">編集画面</b>
                 <form action="/tribe" method="post" id="editForm" onsubmit="return checkTribeEdit()">
                     @csrf
                     @method("put")
                     <div class="modal-body">
+                        <input type="hidden" name="id" id="modal_editId">
                         <input type="text" class="form-control" name="name" id="modal_name" value="">
                         <div class="errorMessage" id="modalTribeErrorMessage">カテゴリー名を30文字以内で、正しく入力してください。</div>
-                        <input type="hidden" name="id" id="modal_editId">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <div class="btn-area">
                         <button type="submit" class="btn btn-primary" id="editSubmit">更新</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                     </div>
                 </form>
             </div>
@@ -62,19 +60,18 @@
     <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</h5>
-                </div>
+                <b class="modal-title" id="exampleModalLabel">※本当に削除してよろしいですか？</b>
                 <form action="" method="post" id="tribe-delete-form">
                     @csrf
                     @method("delete")
                     <div class="modal-body">
+                        <p>カテゴリー名</p>
                         <p class="name" id="tribe_name"></p>
                         <input type="hidden" name="id" id="modal_deleteId">
                     </div>
-                    <div class="modal-footer">
+                    <div class="btn-area">
+                        <button type="button" class="btn btn-danger" id="deleteBtn" data-session="{{ json_encode(session('tribeId')) }}" onclick="tribeDeleteBtnClick()">はい</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                        <button type="button" class="btn btn-danger" id="deleteBtn" onclick="tribeDeleteBtnClick()">はい</button>
                     </div>
                 </form>
             </div>
@@ -92,7 +89,7 @@
     <script>
         window.addEventListener("load", function() {
             const successMessage = @json(session("successMessage"));
-            if(successMessage) {
+            if (successMessage) {
                 showSweetAlert("success", successMessage)
                 return
             }
@@ -119,16 +116,16 @@
         })
 
         // 編集
-        function tableClick(id, name) {
-            document.getElementById("modal_name").value = `${name}`
-            document.getElementById("modal_editId").value = `${id}`
-
+        function tableClick(json) {
+            document.getElementById("modal_name").value = json.name
+            document.getElementById("modal_editId").value = json.id
         }
         // 削除
-        function deleteClick(id, name) {
-            document.getElementById("tribe_name").innerHTML = `カテゴリー名:${name}`
-            document.getElementById("modal_deleteId").value = `${id}`
-            document.getElementById("tribe-delete-form").action = `/tribe/${id}`
+        function deleteClick(json) {
+            console.log(json)
+            document.getElementById("tribe_name").innerHTML = json.name
+            document.getElementById("modal_deleteId").value = json.id
+            document.getElementById("tribe-delete-form").action = `/tribe/${json.id}`
         }
     </script>
     @endsection

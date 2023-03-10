@@ -141,27 +141,29 @@ input:focus::placeholder {
 
 
 /* modal */
-.modal-header {
-    padding: 10px 2px;
+.modal-content {
+    min-height: 200px;
+    padding: 10px 16px;
 }
 
 .modal-title {
-    font-family: "MS ゴシック";
     font-size: 15px;
+    text-align: center;
+    margin: 12px 0;
 }
 
 .modal-body {
-    margin: 20px 0;
+    min-height: 100px;
 }
 
-.modal-footer {
-    padding: 2px;
+.modal-body p {
+    margin-bottom: 8px;
+    font-size: 17px;
+    text-align: center;
 }
 
-.modal-footer button {
-    margin: 1px 5px;
-}
-
-form {
-    margin-bottom: 0px;
+.btn-area {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
