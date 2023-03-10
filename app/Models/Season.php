@@ -66,6 +66,23 @@ class Season extends Model
             ->findOrFail($id)
             ->delete();
     }
+    
 
+    /**
+     * 対象のシーズン名が存在するか
+     *
+     * @param object $query
+     * @param string $seasonName
+     * @return boolean
+     */
+    public function scopeIsSeasonExists(object $query, string $seasonName): bool
+    {
+        return $query
+            ->where([
+                "deleted_at" => null,
+                "name" => $seasonName,
+            ])
+            ->exists();
+    }
 
 }

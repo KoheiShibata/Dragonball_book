@@ -24,6 +24,7 @@ define("TRIBE_REGISTRATION_VALIDATE", "validations.tribe.registration");
 define("TRIBE_UPDATE_VALIDATE", "validations.tribe.update");
 define("SEASON_REGISTRATION_VALIDATE", "validations.season.registration");
 define("SEASON_UPDATE_VALIDATE", "validations.season.update");
+define("SEASON_LIMITED_VALUE", "validations.season.limitedValue");
 define("CHARACTER_REGISTRATION_VALIDATE", "validations.character.registration");
 define("CHARACTER_UPDATE_VALIDATE", "validations.character.update");
 

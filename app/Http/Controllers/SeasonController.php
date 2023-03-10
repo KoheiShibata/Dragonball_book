@@ -15,11 +15,11 @@ class SeasonController extends Controller
      *
      * @return view
      */
-    public function seasonList() {
+    public function seasonList()
+    {
         $seasons = Season::fetchAll();
         return view("season.list", compact("seasons"));
     }
-
 
     /**
      * シーズンを新規登録
@@ -27,14 +27,20 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function create(Request $request) 
+    public function create(Request $request)
     {
         try {
             $param = $request->validate(config(SEASON_REGISTRATION_VALIDATE));
+
+            if (
+                !in_array($param["name"], config(SEASON_LIMITED_VALUE)) ||
+                Season::IsSeasonExists($param["name"])
+            ) {
+                throw new \Exception();
+            }
             Season::create($param);
             return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, REGISTRATION_SUCCESS_MESSAGE);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return redirect(SEASON_TOP)->with(ERROR_MESSAGE, REGISTRATION_FAILED_MESSAGE);
         }
     }
@@ -45,16 +51,22 @@ class SeasonController extends Controller
      * @param Request $request
      * @return red
      */
-    public function edit(Request $request) 
+    public function edit(Request $request)
     {
         try {
             $param = $this->validate($request, config(SEASON_UPDATE_VALIDATE));
+            
+            if (
+                !in_array($param["name"], config(SEASON_LIMITED_VALUE)) ||
+                Season::IsSeasonExists($param["name"])
+            ) {
+                throw new \Exception();
+            }
             Season::updateRow($param);
             return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, UPDATE_SUCCESS_MESSAGE);
         } catch (\Exception $e) {
             return redirect(SEASON_TOP)->with(ERROR_MESSAGE, UPDATE_FAILED_MESSAGE);
         }
-        
     }
 
     /**
@@ -63,21 +75,20 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function delete($id) 
+    public function delete($id)
     {
         try {
-           if(empty($id) ||
-           !is_numeric($id)
-           ) {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
                 throw new \Exception();
-           }
-           Season::deleteRow($id);
-           return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE); 
+            }
+            Season::deleteRow($id);
+            return redirect(SEASON_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
         } catch (\Exception $e) {
             return redirect(SEASON_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
-
         }
-
     }
 
     /**

@@ -61,7 +61,7 @@
                                 <p>freeword</p>
                             </div>
                             <div class="search-box">
-                                <input type="text" name="keyword" id="keyword" placeholder="名前やシーズンでさがす" value="{{session('keyword') ? session('keyword'): '' }}">
+                                <input type="text" name="keyword" id="keyword" placeholder="名前やシーズンでさがす" value="{{session('keyword') ? session('keyword'): '' }}" maxlength="40">
                             </div>
                         </section>
                         <section class="search-section">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="search-checkbox">
                                 @foreach($seasons as $season)
-                                <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('seasonId') && in_array($season->id, session('seasonId'))  ? ' search-checkbox__label--checked' : ''}}">
+                                <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('season') && in_array($season->id, session('season'))  ? ' search-checkbox__label--checked' : ''}}">
                                     <input type="checkbox" class="checkbox" id="{{$season->name}}" name="season[]" value="{{$season->id}}" onclick="checkboxId('{{$season->name}}')" {{ session("seasonId") && in_array($season->id, session('seasonId'))  ? "checked" : "" }}>{{$season->name}}</label>
                                 @endforeach
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="search-checkbox">
                                 @foreach($tribes as $tribe)
-                                <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribeId') && in_array($tribe->id, session('tribeId'))  ? ' search-checkbox__label--checked' : '' }}">
+                                <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribe') && in_array($tribe->id, session('tribe'))  ? ' search-checkbox__label--checked' : '' }}">
                                     <input type="checkbox" class="checkbox" id="{{$tribe->name}}" name="tribe[]" value="{{$tribe->id}}" onclick="checkboxId('{{$tribe->name}}')" {{ session("tribeId") && in_array($tribe->id, session('tribeId'))  ? "checked" : "" }}>{{$tribe->name}}</label>
                                 @endforeach
                             </div>

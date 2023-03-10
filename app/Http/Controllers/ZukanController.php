@@ -17,11 +17,17 @@ use function PHPUnit\Framework\isEmpty;
 
 class ZukanController extends Controller
 {
+    /**
+     * ホーム画面をHTMLで出力する
+     *
+     * @return view
+     */
     public function home()
     {
         $seasons = Season::fetchAll();
         return view("/pbook.home", compact("seasons"));
     }
+
 
     /**
      * キャラクター図鑑をHTMLで出力（検索あり）
@@ -40,9 +46,12 @@ class ZukanController extends Controller
             $filter = $request->only(config("filter.character"));
 
             $characters = Character::searchAll($filter);
-            session()->flash("seasonId", $request->season);
-            session()->flash("tribeId", $request->tribe);
-            session()->flash("keyword", $request->keyword);
+            foreach ($filter as $key => $sessionData) {
+                if ($key !== "keyword" && !(is_array($sessionData))) {
+                    continue;
+                }
+                session()->flash($key, $sessionData);
+            }
 
             if ($characters->isNotEmpty()) {
                 foreach ($characters as $key => $character) {
@@ -90,4 +99,5 @@ class ZukanController extends Controller
             return abort(404);
         }
     }
+
 }
