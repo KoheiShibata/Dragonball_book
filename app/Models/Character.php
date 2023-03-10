@@ -218,16 +218,16 @@ class Character extends Model
         return $query
             ->whereNull("characters.deleted_at")
             ->whereNull("character_images.deleted_at")
-            ->leftJoin("character_images", "character_images.character_id", "characters.id")
-            ->when(!empty($filter["season"]), function ($query) use ($filter) {
+            ->when(!empty($filter["season"]) && is_array($filter["season"]), function ($query) use ($filter) {
                 return $query->whereIn("season_id", $filter["season"]);
             })
-            ->when(!empty($filter["tribe"]), function ($query) use ($filter) {
+            ->when(!empty($filter["tribe"]) && is_array($filter["tribe"]), function ($query) use ($filter) {
                 return $query->whereIn("tribe_id", $filter["tribe"]);
             })
             ->when(!empty($filter["keyword"]), function ($query) use ($filter) {
                 return $query->where("name", "LIKE", "%" . $filter["keyword"] . "%");
             })
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
             ->select("characters.*", "character_images.image_path")
             ->orderBy("season_id", "asc")
             ->orderBy("characters.id", "asc")

@@ -104,7 +104,7 @@
             }
         })
 
-
+        
         $(".edit").on("click", () => {
             const modal = new bootstrap.Modal(document.getElementById("modal-edit"), {
                 keyboard: false

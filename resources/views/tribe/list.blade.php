@@ -28,9 +28,9 @@
         <label class="register_label">☆カテゴリー一覧</label>
         <div>
             @foreach($tribes as $tribe)
-            <div class="tribe_table" onclick="tableClick('{{$tribe->id}}', '{{$tribe->name}}')">
+            <div class="tribe_table"  onclick="tableClick('{{ $tribe->id }}', '{{ $tribe->name }}')">
                 <p class="tribe_name">{{$tribe->name}}</p>
-                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick('{{$tribe->id}}', '{{$tribe->name}}')" alt="">
+                <img src="{{ asset(DELETE_ICON_IMAGE_PATH) }}" class="child" onclick="deleteClick('{{ $tribe->id }}', '{{ $tribe->name }}')" alt="">
             </div>
             @endforeach
         </div>
