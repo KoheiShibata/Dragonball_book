@@ -167,14 +167,12 @@
 
             const nextId = getNextId()
 
-            // if (nextId > 5) return
-
             creatInputAreaById(nextId)
 
-            if (fileSize >= 2097152) {
+            if (fileSize >= 3145728) {
                 Swal.fire({
                     icon: 'error',
-                    text: 'アップロードするファイルのサイズ上限は2MBです',
+                    text: 'アップロードするファイルのサイズ上限は3MBです',
                 })
                 onClickDeleteBtn(id)
             }

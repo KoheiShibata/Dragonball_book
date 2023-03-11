@@ -15,6 +15,8 @@ class LogoutController extends Controller
     public function logout()
     {
         session()->forget("admin");
+        session()->forget("seasonId");
+        session()->forget("tribeId");
 
         return redirect("/login");
     }
