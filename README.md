@@ -1,5 +1,5 @@
 <p align="center">
-<img width="440" height="100" alt="スクリーンショット 2023-01-28 9 39 02" src="https://user-images.githubusercontent.com/115211493/224544122-626ba81d-34e1-4b46-886c-47250c471ca2.png">
+<img width="440" height="100" alt="スクリーンショット 2023-01-28 9 39 02" src="https://user-images.githubusercontent.com/115211493/224544776-3689be13-34dd-46c5-935f-33dea0fb34dd.png">
 </p>
 
 # Dragonball Pbook 〜ドラゴンボール図鑑〜
