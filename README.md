@@ -1,5 +1,5 @@
 <p align="center">
-<img width="440" height="100" alt="スクリーンショット 2023-01-28 9 39 02" src="https://user-images.githubusercontent.com/115211493/224534773-8a350333-d85b-4538-b644-e9f28eba6dc6.png">
+<img width="440" height="100" alt="スクリーンショット 2023-01-28 9 39 02" src="https://user-images.githubusercontent.com/115211493/224544122-626ba81d-34e1-4b46-886c-47250c471ca2.png">
 </p>
 
 # Dragonball Pbook 〜ドラゴンボール図鑑〜
@@ -16,7 +16,7 @@
 
 ### 管理ユーザー機能
 ### https://kohei-techis.com/characters
-- <ログイン>　
+<ログイン>　
 - email : dragonball@pbook.com
 - password : <!-- ZZ4genen -->
 <div align="center">
