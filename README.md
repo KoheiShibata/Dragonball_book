@@ -1,66 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img width="440" height="100" alt="スクリーンショット 2023-01-28 9 39 02" src="https://user-images.githubusercontent.com/115211493/224534773-8a350333-d85b-4538-b644-e9f28eba6dc6.png">
 </p>
 
-## About Laravel
+# Dragonball Pbook 〜ドラゴンボール図鑑〜
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Demo
+### 一般ユーザー機能
+### https://kohei-techis.com/
+<Basic認証>
+- ユーザー名 : dragonball
+- パスワード : pbook
+<div align="center">
+<!-- <video controls src="https://user-images.githubusercontent.com/52269577/215363313-51ea18d2-9b9b-49af-9266-08924c237ebb.mov"></video> -->
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 管理ユーザー機能
+### https://kohei-techis.com/characters
+- <ログイン>　
+- email : dragonball@pbook.com
+- password : <!-- ZZ4genen -->
+<div align="center">
+<!-- <video controls src="https://user-images.githubusercontent.com/52269577/215363313-51ea18d2-9b9b-49af-9266-08924c237ebb.mov"></video> -->
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Description
+WEB上で全シーズンのドラゴンボール登場キャラクターを閲覧、検索できるWEBアプリケーションです。<br>
+headerメニューの検索モーダルから条件に合ったキャラクターを検索できます。<br>
+キャラクター画像をクリックするとキャラクターの詳細情報を確認できます。<br>
 
-## Learning Laravel
+管理者としてログインすればキャラクター、シーズン、カテゴリーを登録 / 編集 / 削除ができます。<br>
+※著作権の関係上Basic認証を採用しています。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
+- 選択したシーズン、カテゴリー,名前でキャラクターの検索
+- 選択したキャラクターの詳細情報
+- キャラクターのステータス(10段階評価)を確認できる
+- ログインするとキャラクター・シーズン・カテゴリーの登録 / 編集 / 削除ができる
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirement
+- Laravel v9.41.0
+- php v8.0.23
+- apache
+- MYSQL 10.3.37-MariaDB
 
-## Laravel Sponsors
+## Usage
+- 一般ユーザの場合
+1. Basic認証
+2. 全シーズンの登場キャラクターを閲覧できる
+3. トップページから閲覧したいシーズンを選択する
+4. headerメニューから検索modalを表示(名前、シーズン、カテゴリーによる絞り込み)
+5. キャラクター詳細情報はキャラクター画像をクリック
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- 管理ユーザの場合
+1. Basic認証 & ログイン
+2. headerメニューから移動
+3. 項目に沿って情報を入力すると登録できる
+4. キャラクター画像 or テーブルをクリックでmodal表示 (詳細情報表示 / 編集 / 削除ができる)
 
-### Premium Partners
+## How to install & Start-up
+```
+$ git clone https://github.com/KoheiShibata/Dragonball_book.git
+$ cp .env.example .env
+$ composer install
+$ php artisan key:generate
+$ php artisan migrate
+$ php artisan storage:link
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Author
+koheiShibata
