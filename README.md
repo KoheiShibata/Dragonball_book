@@ -18,7 +18,7 @@
 ### https://kohei-techis.com/characters
 <ログイン>　
 - email : dragonball@pbook.com
-- password : <!-- ZZ4genen -->
+- password : ZZ4genen
 <div align="center">
 <!-- <video controls src="https://user-images.githubusercontent.com/52269577/215363313-51ea18d2-9b9b-49af-9266-08924c237ebb.mov"></video> -->
 </div>
