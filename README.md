@@ -11,7 +11,7 @@
 - ユーザー名 : dragonball
 - パスワード : pbook
 <div align="center">
-<!-- <video controls src="https://user-images.githubusercontent.com/52269577/215363313-51ea18d2-9b9b-49af-9266-08924c237ebb.mov"></video> -->
+　<video controls src="https://user-images.githubusercontent.com/115211493/226309265-7a409b9f-8d42-40cf-a544-1f804aeeb6bc.mp4"></video>
 </div>
 
 ### 管理ユーザー機能
@@ -20,7 +20,7 @@
 - email : dragonball@pbook.com
 - password : ZZ4genen
 <div align="center">
-<!-- <video controls src="https://user-images.githubusercontent.com/52269577/215363313-51ea18d2-9b9b-49af-9266-08924c237ebb.mov"></video> -->
+　<video controls src="https://user-images.githubusercontent.com/115211493/226309596-1f3b1bb3-a124-4ee2-aeef-4fbf1505adef.mp4"></video>
 </div>
 
 ## Description
