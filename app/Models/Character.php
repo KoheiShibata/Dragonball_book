@@ -233,4 +233,25 @@ class Character extends Model
             ->orderBy("characters.id", "asc")
             ->get();
     }
+
+    /**
+     * アクティブなキャラクターを全取得する(api)
+     *
+     * @param object $query
+     * @return object
+     */
+    public function scopeFetchAllByApi(object $query): object
+    {
+        return $query
+            ->whereNull("characters.deleted_at")
+            ->whereNull("character_images.deleted_at")
+            ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
+            ->select($this->defaultFetchColumns)
+            ->orderBy("season_id", "asc")
+            ->orderBy("id", "asc")
+            ->groupBy('characters.id')
+            ->get();
+    }
 }
