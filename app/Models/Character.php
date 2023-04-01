@@ -251,7 +251,6 @@ class Character extends Model
             ->select($this->defaultFetchColumns)
             ->orderBy("season_id", "asc")
             ->orderBy("id", "asc")
-            ->with("character_images:image_path,character_id")
             ->groupBy('characters.id')
             ->get();
     }
