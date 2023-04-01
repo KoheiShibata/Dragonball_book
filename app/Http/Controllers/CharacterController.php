@@ -27,7 +27,7 @@ class CharacterController extends Controller
     {
         $seasons = Season::fetchAll();
         $tribes = Tribe::fetchAll();
-
+        
         return view("/character.form", compact("seasons", "tribes"));
     }
 
@@ -228,5 +228,13 @@ class CharacterController extends Controller
         } catch (\Exception $e) {
             return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
         }
+    }
+
+
+    public function characterData(Request $request)
+    {
+        $characterData = Character::fetchAllbyApi();
+
+        return response()->json($characterData);
     }
 }
