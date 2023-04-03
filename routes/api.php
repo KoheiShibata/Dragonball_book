@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(CharacterController::class)->prefix("characters")->group(function () {
-    Route::get("/", "characterData");
+    Route::get("/{token}", "characterData");
 });

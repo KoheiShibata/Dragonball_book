@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Character;
-
 use App\Models\CharacterImage;
-
 use App\Models\Season;
-
 use App\Models\Tribe;
+use Illuminate\Support\Str;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
@@ -27,7 +25,7 @@ class CharacterController extends Controller
     {
         $seasons = Season::fetchAll();
         $tribes = Tribe::fetchAll();
-        
+
         return view("/character.form", compact("seasons", "tribes"));
     }
 
@@ -231,8 +229,13 @@ class CharacterController extends Controller
     }
 
 
-    public function characterData(Request $request)
+    public function characterData($token)
     {
+        if ($token !== env("ACCESS_TOKEN")) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
         $characterData = Character::fetchAllbyApi();
 
         return response()->json($characterData);
