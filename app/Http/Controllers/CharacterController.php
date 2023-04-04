@@ -228,7 +228,12 @@ class CharacterController extends Controller
         }
     }
 
-
+    /**
+     * キャラクターデータをjson形式で返す
+     *
+     * @param [type] $token
+     * @return JSON
+     */
     public function characterData($token)
     {
         if ($token !== env("ACCESS_TOKEN")) {
@@ -239,5 +244,11 @@ class CharacterController extends Controller
         $characterData = Character::fetchAllbyApi();
 
         return response()->json($characterData);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->json()->all();
+        print_r($data);
     }
 }
