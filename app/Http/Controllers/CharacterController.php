@@ -246,8 +246,13 @@ class CharacterController extends Controller
         return response()->json($characterData);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $token)
     {
+        if ($token !== env("ACCESS_TOKEN")) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
         $data = $request->json()->all();
         print_r($data);
     }
