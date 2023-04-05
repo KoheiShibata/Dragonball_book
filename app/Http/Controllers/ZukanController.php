@@ -42,15 +42,16 @@ class ZukanController extends Controller
             $characterImages = [];
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
+            session()->forget(config("filter.character"));
 
             $filter = $request->only(config("filter.character"));
-
             $characters = Character::searchAll($filter);
+            
             foreach ($filter as $key => $sessionData) {
                 if ($key !== "keyword" && !(is_array($sessionData))) {
                     continue;
                 }
-                session()->flash($key, $sessionData);
+                session()->put($key, $sessionData);
             }
 
             if ($characters->isNotEmpty()) {
