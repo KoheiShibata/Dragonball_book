@@ -254,6 +254,6 @@ class CharacterController extends Controller
             ], 401);
         }
         $data = $request->json()->all();
-        print_r($data);
+        
     }
 }
