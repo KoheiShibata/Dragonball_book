@@ -266,6 +266,7 @@ class CharacterController extends Controller
             "◎一番かわいいと思うキャラクターは誰ですか？" => "ブルマ(少年期)",
             "◎一番かっこいいと思うキャラクターは誰ですか？" => "ゴジータ(超サイヤ人4)",
         ];
+        return response()->json($data);
         
     }
 }
