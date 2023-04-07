@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('question_answers', function (Blueprint $table) {
+        Schema::create('enquete_answers', function (Blueprint $table) {
             $table->increments("id");
-            $table->integer("question_id")->length(4);
+            $table->integer("enquete_id")->length(4);
             $table->string("answer", 100);
             $table->softDeletes();
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_answers');
+        Schema::dropIfExists('enquete_answers');
     }
 };
