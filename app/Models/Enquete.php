@@ -42,7 +42,7 @@ class Enquete extends Model
                 $enqueteId = Enquete::create(["title" => $key])->id;
             }
 
-            // $enqueteId = $enqueteId->id;
+            $enqueteId = $enqueteId->id;
             $param[] = [
                 "enquete_id" => $enqueteId,
                 "answer" => $answer,
