@@ -55,12 +55,12 @@ class Enquete extends Model
 
 
     /**
-     * アンケート結果を全取得する
+     * アンケート結果を各項目top3を取得する
      *
      * @param object $query
-     * @return object
+     * @return array
      */
-    public function scopeFetchRanking(object $query): object
+    public function scopeFetchRanking(object $query): array
     {
         return $query
             ->where([
@@ -84,6 +84,34 @@ class Enquete extends Model
             ->groupBy('enquetes.id', 'characters.id')
             ->orderBy('enquetes.id', 'asc')
             ->orderBy("vote_count", "desc")
-            ->get();
+            ->get()
+            ->groupBy('enquete_id')
+            ->map(function ($items) {
+                return $items->take(3)->map(function ($item) {
+                    return (object) [
+                        'id' => $item->id,
+                        'title' => $item->title,
+                        'name' => $item->name,
+                        'height' => $item->height,
+                        'weight' => $item->weight,
+                        'image_path' => $item->image_path,
+                        'tribe_id' => $item->tribe_id,
+                        'season_id' => $item->season_id,
+                        'content' => $item->content,
+                        'attack' => $item->attack,
+                        'defense' => $item->defense,
+                        'ability' => $item->ability,
+                        'popularity' => $item->popularity,
+                        'enquete_id' => $item->enquete_id,
+                        'answer' => $item->answer,
+                        'image_paths' => $item->image_paths,
+                        'vote_count' => $item->vote_count,
+                        'season_name' => $item->season_name,
+                        'tribe_name' => $item->tribe_name,
+                        'character_images' => explode(',', $item->image_paths)
+                    ];
+                })->toArray();
+            })
+            ->toArray();
     }
 }

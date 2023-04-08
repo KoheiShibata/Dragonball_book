@@ -13,6 +13,6 @@ class RankingController extends Controller
     public function index()
     {
         $data = Enquete::fetchRanking();
-        print_r($data->toArray());
+        print_r($data);
     }
 }
