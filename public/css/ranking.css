@@ -1,0 +1,88 @@
+.main {
+    max-width: 720px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.enquete__title {
+    padding: 24px 0 16px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+}
+
+.enquete__title span:first-child {
+    display: inline-block;
+    transform: scale(-1, 1);
+}
+
+.character__item {
+    background-color: #eee;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.name__wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.name__wrap h4 {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.name__wrap p {
+    padding: 6px;
+    width: 40px;
+    font-size: 14px;
+    background-color: rgb(231, 0, 18);
+    color: #fff;
+}
+
+.name__wrap p::after {
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    content: '';
+    border-left: 20px solid rgb(231, 0, 18);
+    border-right: 20px solid rgb(231, 0, 18);
+    border-bottom: 12px solid transparent;
+}
+
+.name__wrap span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.character__item img {
+    width: 280px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.character__wrap {
+    display: flex;
+    gap: 48px;
+    margin-top: 16px;
+}
+
+.character__desc {
+    width: 100%;
+}
+
+.vote {
+    letter-spacing: 4px;
+}
+
+.vote span {
+    font-size: 24px;
+    color: rgb(231, 0, 18);
+    font-weight: bold;
+}
