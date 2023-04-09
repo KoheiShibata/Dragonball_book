@@ -28,28 +28,31 @@
         <ul class="character__list">
             @foreach($characters as $key => $character)
             <li class="character__item">
-                <div class="name__wrap">
-                    <p><span>{{ $key + 1 }}</span>位</p>
-                    <h4>{{ $character->answer }}</h4>
-                </div>
-                <div class="character__wrap">
-                    <img src="{{ $character->character_images[0] }}" alt="">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>獲得票数</th>
-                                <td class="vote"><span>{{ $character->vote_count }}</span>票</td>
-                            </tr>
-                            <tr>
-                                <th>シーズン</th>
-                                <td>{{ $character->season_name }}</td>
-                            </tr>
-                            <tr>
-                                <th>種族</th>
-                                <td>{{ $character->tribe_name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <a href="/dragonball-pbook/{{ $character->id }}">
+                    <div class="name__wrap">
+                        <p><span>{{ $key + 1 }}</span>位</p>
+                        <h4>{{ $character->answer }}</h4>
+                    </div>
+                    <div class="character__wrap">
+                        <img src="{{ $character->character_images[0] }}" alt="">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>獲得票数</th>
+                                    <td class="vote"><span>{{ $character->vote_count }}</span>票</td>
+                                </tr>
+                                <tr>
+                                    <th>シーズン</th>
+                                    <td>{{ $character->season_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>種族</th>
+                                    <td>{{ $character->tribe_name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </a>
             </li>
             @endforeach
         </ul>
