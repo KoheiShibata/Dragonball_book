@@ -27,7 +27,7 @@
                 </li>
                 @endforeach
                 <li class="season__item pbook__redirect">
-                    <a href="{{ PBOOK_TOP }}" class="pbook__redirect">Dragonball pbook top</a>
+                    <a href="{{ route('ranking') }}" class="pbook__redirect">Dragonball pbook ranking</a>
                 </li>
             </ul>
         </div>
