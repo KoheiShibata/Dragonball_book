@@ -40,7 +40,7 @@ class Enquete extends Model
 
             // 新しいアンケートの質問を登録する
             if (!$enqueteId) {
-                $enqueteId = Enquete::create(["title" => $key])->id;
+                $enqueteId = Enquete::create(["title" => $key]);
             }
 
             $enqueteId = $enqueteId->id;
