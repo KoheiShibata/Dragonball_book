@@ -32,7 +32,7 @@ Route::group(['middleware' => 'basicauth'], function () {
         Route::get("/{id}", "detail"); 
     });
 
-    Route::get("/ranking", [RankingController::class, "index"])->name("index"); // ランキング画面
+    Route::get("/ranking", [RankingController::class, "index"])->name("ranking"); // ランキング画面
     
     Route::controller(LoginController::class)->prefix("login")->group(function () {
         Route::get("/", "loginForm")->name("login.index"); // ログイン画面

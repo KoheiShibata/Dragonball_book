@@ -37,10 +37,10 @@ class RankingController extends Controller
      */
     private function formatRankingData(array $rankingData): array
     {
-        $prevVoteCount = 0;
-        $prevRank = 0;
 
         foreach ($rankingData as &$characters) {
+            $prevVoteCount = 0;
+            $prevRank = 0;
             $this->assignRanking($characters, $prevVoteCount, $prevRank);
         }
 
