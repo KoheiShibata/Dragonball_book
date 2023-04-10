@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ZukanController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\TribeController;
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'basicauth'], function () {
         Route::get("/{id}", "detail"); 
     });
 
+    Route::get("/ranking", [RankingController::class, "index"])->name("index"); // ランキング画面
     
     Route::controller(LoginController::class)->prefix("login")->group(function () {
         Route::get("/", "loginForm")->name("login.index"); // ログイン画面

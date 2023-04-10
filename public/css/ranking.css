@@ -1,0 +1,124 @@
+.main {
+    max-width: 700px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.enquete__title {
+    padding: 24px 0 16px;
+    text-align: center;
+    font-size: 22px;
+    color: #fff;
+}
+
+.enquete__title span:first-child {
+    display: inline-block;
+    transform: scale(-1, 1);
+}
+
+.character__item {
+    background-color: #eee;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    transition: 0.8s;
+}
+
+.character__item:hover {
+    opacity: 0.6;
+    transition: 0.8s;
+}
+
+.name__wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.name__wrap h4 {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    color: #000;
+}
+
+.name__wrap p {
+    padding: 6px;
+    width: 40px;
+    flex-shrink: 0;
+    font-size: 14px;
+    background-color: rgb(231, 0, 18);
+    color: #fff;
+}
+
+.name__wrap p::after {
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    content: '';
+    border-left: 20px solid rgb(231, 0, 18);
+    border-right: 20px solid rgb(231, 0, 18);
+    border-bottom: 12px solid transparent;
+}
+
+.name__wrap span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.character__wrap {
+    display: flex;
+    gap: 48px;
+    margin-top: 16px;
+}
+
+.character__wrap img {
+    width: 280px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.character__desc {
+    width: 100%;
+}
+
+.vote {
+    letter-spacing: 4px;
+}
+
+.vote span {
+    font-size: 24px;
+    color: rgb(231, 0, 18);
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 700px) {
+    .main {
+        margin: 60px 16px 0;
+    }
+
+    .enquete__title {
+        font-size: 16px;
+    }
+
+    .character__wrap {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .character__wrap img {
+        width: 320px;
+    }
+
+    .vote span {
+        font-size: 20px;
+    }
+}
