@@ -30,7 +30,7 @@
             <li class="character__item">
                 <a href="/dragonball-pbook/{{ $character->id }}">
                     <div class="name__wrap">
-                        <p><span>{{ $key + 1 }}</span>位</p>
+                        <p><span>{{ $character->rank }}</span>位</p>
                         <h4>{{ $character->answer }}</h4>
                     </div>
                     <div class="character__wrap">

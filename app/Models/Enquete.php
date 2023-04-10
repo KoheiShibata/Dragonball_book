@@ -77,7 +77,7 @@ class Enquete extends Model
             ->leftJoin("seasons", "seasons.id", "characters.season_id")
             ->leftJoin("tribes", "tribes.id", "characters.tribe_id")
             ->selectRaw('enquetes.id, enquetes.title, characters.*, enquete_answers.enquete_id, enquete_answers.answer')
-            ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path) AS image_paths')
+            ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
             ->selectRaw('COUNT(DISTINCT enquete_answers.id) AS vote_count')
             ->selectRaw('seasons.name AS season_name')
             ->selectRaw('tribes.name AS tribe_name')
