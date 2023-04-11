@@ -4,6 +4,10 @@
     margin-top: 60px;
 }
 
+.header-wrapper {
+    justify-content: center;
+}
+
 .enquete__title {
     padding: 24px 0;
     text-align: center;

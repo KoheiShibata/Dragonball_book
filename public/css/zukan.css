@@ -40,6 +40,10 @@ body {
     transition-duration: 0.5s;
 }
 
+.header-nav__item {
+    display: none;
+}
+
 /* モーダル検索 */
 .modal-dialog {
     max-width: 600px;
@@ -187,6 +191,10 @@ body {
 
 .btn-close {
     display: none;
+}
+
+.common-loading-area__submit--active img {
+    width: 24px;
 }
 
 
