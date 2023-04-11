@@ -21,7 +21,6 @@ function unCheckAll() {
         const checkboxId = checkbox.getAttribute("id")
         document.getElementById(`label${checkboxId}`).className = "search-checkbox__label"
     }
-
 }
 
 // フィルター検索
@@ -29,6 +28,25 @@ const btnSubmit = document.getElementById("btnSubmit")
 const loadingGifSubmit = document.getElementById("loading-area__submit")
 const characterNoneMessage = document.getElementById("characterNoneMessage")
 btnSubmit.addEventListener("click", () => {
+    getFilterCharacters();
+})
+
+// ページの読み込み時、フィルターの値が存在する場合
+window.addEventListener("load", () => {
+    const keyword = document.getElementById("keyword").value;
+    const season = Array.from(document.querySelectorAll('input[name="season[]"]:checked')).map(e => e.value);
+    const tribe = Array.from(document.querySelectorAll('input[name="tribe[]"]:checked')).map(e => e.value);
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    if (keyword || season.length > 0 || tribe.length > 0) {
+        for (const checkbox of checkedCheckboxes) {
+            checkbox.parentElement.classList.add('search-checkbox__label--checked');
+        }
+        getFilterCharacters();
+    }
+})
+
+// フィルター処理
+function getFilterCharacters() {
     btnChangeLoading(btnSubmit, loadingGifSubmit)
     characterNoneMessage.className = "character-none__message"
     $("#exampleModal").modal("hide")
@@ -97,5 +115,4 @@ btnSubmit.addEventListener("click", () => {
             $("#splash").fadeOut('slow');
             $("#splash_logo").fadeOut('slow');
         })
-    // Ajaxリクエストが成功・失敗どちらでも発動
-})
+}
