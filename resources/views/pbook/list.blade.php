@@ -21,7 +21,7 @@
 @endsection
 
 @section("main")
-<!-- キャラクターがいないとき -->
+<!-- キャラクターがいないとき、表示 -->
 <div class="character-none__message" id="characterNoneMessage">
     <p>表示できるキャラクタ―がいません。</p>
 </div>

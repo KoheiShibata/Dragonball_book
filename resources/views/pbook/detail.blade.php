@@ -51,7 +51,7 @@
         <div class="character-image">
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    @foreach($characterImage as $imagePath)
+                    @foreach($character->image_paths as $imagePath)
                     <div class="swiper-slide"><img src="{{ asset($imagePath) }}" alt=""></div>
                     @endforeach
                 </div>

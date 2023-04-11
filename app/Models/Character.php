@@ -122,12 +122,18 @@ class Character extends Model
     public function scopeFetchAll(object $query): object
     {
         return $query
-            ->whereNull("characters.deleted_at")
-            ->whereNull("character_images.deleted_at")
+            ->where([
+                "characters.deleted_at" => null,
+                "character_images.deleted_at" => null,
+                "seasons.deleted_at" => null,
+                "tribes.deleted_at" => null,
+            ])
             ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
             ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
             ->leftJoin("character_images", "character_images.character_id", "characters.id")
             ->select($this->defaultFetchColumns)
+            ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
+            ->groupBy('characters.id')
             ->orderBy("season_id", "asc")
             ->orderBy("id", "asc")
             ->get();
@@ -166,11 +172,14 @@ class Character extends Model
                 "characters.id" => $characterId,
                 "seasons.deleted_at" => null,
                 "tribes.deleted_at" => null,
+                "character_images.deleted_at" => null,
             ])
             ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
             ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
             ->leftJoin("character_images", "character_images.character_id", "characters.id")
             ->select("characters.*", "seasons.name as season_name", "tribes.name as tribe_name")
+            ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
+            ->groupBy('characters.id')
             ->first();
     }
 

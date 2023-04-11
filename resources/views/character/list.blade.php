@@ -27,13 +27,14 @@
         <ul class="character-list">
             @foreach($characters as $character)
             <li class="character-list__item">
-                <img src="{{ $character->formated_image_path }}" id="characterData" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" onclick="imageClick( {{ json_encode($character) }}, {{ json_encode($characterImages[$character->id]) }}, `{!! nl2br(e($character->content)) !!}`)">
+                <img src="{{ $character->image_path }}" class="character-list__img" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" data-character="{{ $character }}">
                 <p>{{ $character->name }}</p>
             </li>
             @endforeach
         </ul>
     </section>
 </main>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -44,14 +45,8 @@
             <div class="modal-body">
                 <label class="subtitle-label">☆character image</label>
                 <div id="imageBox">
-                    <img class="modalImage" src="" id="imageList_0" alt="">
-                    <img class="modalImage" src="" id="imageList_1" alt="">
-                    <img class="modalImage" src="" id="imageList_2" alt="">
-                    <img class="modalImage" src="" id="imageList_3" alt="">
-                    <img class="modalImage" src="" id="imageList_4" alt="">
-                </div>
 
-                <!-- <p class="imageComent" id="unregistered"></p> -->
+                </div>
                 <label class="contentTitle">☆content</label>
                 <p class="modalContent" id="content"></p>
                 <div class="characterInfo">

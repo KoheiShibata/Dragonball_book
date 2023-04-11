@@ -110,8 +110,6 @@ class CharacterController extends Controller
      */
     public function characterList()
     {
-        $selectedCharacterId = [];
-        $characterImages = [];
         if (empty(session("seasonId")) && empty(session("tribeId"))) {
             session()->push("seasonId", "");
             session()->push("tribeId", "");
@@ -128,15 +126,14 @@ class CharacterController extends Controller
 
             $character->height = $character->formatedHeight;
             $character->weight = $character->formatedWeight;
-            $characterImages[$character->id][] = $character->formatedImagePath;
-            if (in_array($character->id, $selectedCharacterId)) {
-                unset($characters[$key]);
+            $character->image_path = $character->formated_image_path;
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formated_image_path];
                 continue;
             }
-            $selectedCharacterId[] = $character->id;
+            $character->image_paths = explode(',', $character->image_paths);
         }
-
-        return view("character.list", compact("characters", "characterImages"));
+        return view("character.list", compact("characters"));
     }
 
 
@@ -159,11 +156,8 @@ class CharacterController extends Controller
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
             $character = Character::fetchCharacterDataByCharacterId($id);
-            $characterImages = CharacterImage::fetchImage($id);
-            foreach ($characterImages as $image) {
-                $characterImage[] = $image->image_path;
-            }
-            return view("character.edit", compact("character", "characterImage", "seasons", "tribes"));
+            $character->image_paths = explode(',', $character->image_paths);
+            return view("character.edit", compact("character", "seasons", "tribes"));
         } catch (\Exception $e) {
             return abort(404);
         }
@@ -227,5 +221,4 @@ class CharacterController extends Controller
             return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
         }
     }
-    
 }
