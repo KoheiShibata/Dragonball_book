@@ -17,6 +17,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class ZukanController extends Controller
 {
+    
     /**
      * ホーム画面をHTMLで出力する
      *
@@ -30,23 +31,20 @@ class ZukanController extends Controller
 
 
     /**
-     * キャラクター図鑑をHTMLで出力（検索あり）
+     * キャラクター図鑑をHTMLで出力
      *
      * @return view
      */
     public function pbook(Request $request)
     {
         try {
-
-            $selectedCharacterId = [];
-            $characterImages = [];
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
             session()->forget(config("filter.character"));
 
             $filter = $request->only(config("filter.character"));
             $characters = Character::searchAll($filter);
-            
+
             foreach ($filter as $key => $sessionData) {
                 if ($key !== "keyword" && !(is_array($sessionData))) {
                     continue;
@@ -55,19 +53,62 @@ class ZukanController extends Controller
             }
 
             if ($characters->isNotEmpty()) {
-                foreach ($characters as $key => $character) {
-                    $characterImages[$character->id][] = $character->formatedImagePath;
-                    if (in_array($character->id, $selectedCharacterId)) {
-                        unset($characters[$key]);
-                        continue;
-                    }
-                    $selectedCharacterId[] = $character->id;
-                }
+                $characters = $this->formatedCharacterImages($characters);
             }
-            return view("/pbook.list", compact("characters", "characterImages", "seasons", "tribes"));
+            return view("/pbook.list", compact("characters", "seasons", "tribes"));
         } catch (\Exception $e) {
+            echo $e;
             return abort(404);
         }
+    }
+
+
+    /**
+     * キャラクター絞り込み
+     *
+     * @param Request $request
+     * @return JSON
+     */
+    public function filtering(Request $request)
+    {
+        session()->forget(config("filter.character"));
+
+        $filter = $request->only(config("filter.character"));
+        $characters = Character::searchAll($filter);
+
+        foreach ($filter as $key => $sessionData) {
+            if ($key !== "keyword" && !(is_array($sessionData))) {
+                continue;
+            }
+            session()->put($key, $sessionData);
+        }
+
+        if ($characters->isNotEmpty()) {
+            $characters = $this->formatedCharacterImages($characters);
+        }
+        return $characters;
+    }
+
+
+    /**
+     * キャラクター画像をフォーマット
+     *
+     * @param [type] $characters
+     * @return object
+     */
+    private function formatedCharacterImages($characters): object
+    {
+        $selectedCharacterId = [];
+
+        foreach ($characters as $key => $character) {
+            $characterImages[$character->id][] = $character->formatedImagePath;
+            if (in_array($character->id, $selectedCharacterId)) {
+                unset($characters[$key]);
+                continue;
+            }
+            $selectedCharacterId[] = $character->id;
+        }
+        return $characters;
     }
 
 
@@ -100,5 +141,4 @@ class ZukanController extends Controller
             return abort(404);
         }
     }
-
 }

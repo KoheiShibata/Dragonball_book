@@ -29,6 +29,7 @@ Route::group(['middleware' => 'basicauth'], function () {
     
     Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
         Route::get("/", "pbook");
+        Route::get("/filtering", "filtering");
         Route::get("/{id}", "detail"); 
     });
 
