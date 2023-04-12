@@ -158,6 +158,7 @@
 @section("js")
 <script src="{{asset('/js/doubleSubmit.js')}}"></script>
 <script src="{{asset('/js/character/modal.js')}}"></script>
+<script src="{{asset('/js/character/adminFilter.js')}}"></script>
 <script src="{{asset('/js/character/loading.js')}}"></script>
 <script src="{{asset('/js/sweetAlert.js')}}"></script>
 
