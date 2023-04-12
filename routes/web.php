@@ -33,7 +33,7 @@ Route::group(['middleware' => 'basicauth'], function () {
         Route::get("/{id}", "detail"); 
     });
 
-    Route::get("/ranking", [RankingController::class, "index"])->name("ranking"); // ランキング画面
+    Route::get("/dragonball-ranking", [RankingController::class, "index"])->name("ranking"); // ランキング画面
     
     Route::controller(LoginController::class)->prefix("login")->group(function () {
         Route::get("/", "loginForm")->name("login.index"); // ログイン画面
@@ -68,6 +68,7 @@ Route::group(['middleware' => 'basicauth'], function () {
     
         Route::controller(CharacterController::class)->prefix("characters")->group(function () {
             Route::get("/", "characterList");
+            Route::get("/filtering", "filtering");
         });
 
         Route::controller(LogoutController::class)->prefix("logout")->group(function () {

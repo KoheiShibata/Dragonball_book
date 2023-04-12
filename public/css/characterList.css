@@ -58,6 +58,16 @@ body {
     cursor: pointer;
 }
 
+#search-btn {
+    display: none;
+    width: 44px;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
 
 /* modal */
 .modal-header {
@@ -213,7 +223,7 @@ body {
         opacity: 0.8;
     }
 
-    
+
     /* modal */
     .modal-body {
         width: 100%;
@@ -234,6 +244,10 @@ body {
 
     .characterInfo p {
         font-size: 10px;
+    }
+
+    #search-btn {
+        display: block;
     }
 
 }

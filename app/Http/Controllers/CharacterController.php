@@ -110,13 +110,14 @@ class CharacterController extends Controller
      */
     public function characterList()
     {
-        $selectedCharacterId = [];
-        $characterImages = [];
         if (empty(session("seasonId")) && empty(session("tribeId"))) {
             session()->push("seasonId", "");
             session()->push("tribeId", "");
         }
         $characters = Character::fetchAll();
+        $seasons = Season::fetchAll();
+        $tribes = Tribe::fetchAll();
+        session()->forget(config("filter.character"));
 
         foreach ($characters as $key => $character) {
             if (!in_array($character->season_id, session("seasonId"))) {
@@ -126,17 +127,68 @@ class CharacterController extends Controller
                 session()->push("tribeId", $character->tribe_id);
             }
 
+
             $character->height = $character->formatedHeight;
             $character->weight = $character->formatedWeight;
-            $characterImages[$character->id][] = $character->formatedImagePath;
-            if (in_array($character->id, $selectedCharacterId)) {
-                unset($characters[$key]);
+            $character->content = nl2br($character->content);
+            $character->image_path = $character->formated_image_path;
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formated_image_path];
                 continue;
             }
-            $selectedCharacterId[] = $character->id;
+            $character->image_paths = explode(',', $character->image_paths);
+        }
+        return view("character.list", compact("characters", "seasons", "tribes"));
+    }
+
+
+    /**
+     * キャラクター絞り込み
+     *
+     * @param Request $request
+     * @return JSON
+     */
+    public function filtering(Request $request)
+    {
+        session()->forget(config("filter.character"));
+
+        $filter = $request->only(config("filter.character"));
+        $characters = Character::fetchFilteringCharacterData($filter);
+
+        foreach ($filter as $key => $sessionData) {
+            if ($key !== "keyword" && !(is_array($sessionData))) {
+                continue;
+            }
+            session()->put($key, $sessionData);
         }
 
-        return view("character.list", compact("characters", "characterImages"));
+        if ($characters->isNotEmpty()) {
+            $characters = $this->formatedCharacterData($characters);
+        }
+        return $characters;
+    }
+
+    /**
+     * キャラクターデータをフォーマット
+     *
+     * @param [type] $characters
+     * @return object
+     */
+    private function formatedCharacterData($characters): object
+    {
+        foreach ($characters as $character) {
+            $character->height = $character->formatedHeight;
+            $character->weight = $character->formatedWeight;
+            $character->content = nl2br($character->content);
+            $character->image_path = $character->formated_image_path;
+
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formated_image_path];
+                continue;
+            }
+            $character->image_paths = explode(',', $character->image_paths);
+        }
+        return $characters;
     }
 
 
@@ -159,11 +211,8 @@ class CharacterController extends Controller
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
             $character = Character::fetchCharacterDataByCharacterId($id);
-            $characterImages = CharacterImage::fetchImage($id);
-            foreach ($characterImages as $image) {
-                $characterImage[] = $image->image_path;
-            }
-            return view("character.edit", compact("character", "characterImage", "seasons", "tribes"));
+            $character->image_paths = explode(',', $character->image_paths);
+            return view("character.edit", compact("character", "seasons", "tribes"));
         } catch (\Exception $e) {
             return abort(404);
         }
@@ -227,5 +276,4 @@ class CharacterController extends Controller
             return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
         }
     }
-    
 }

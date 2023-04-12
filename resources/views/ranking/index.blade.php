@@ -23,7 +23,7 @@
 @section("main")
 <main class="main">
     @foreach ($rankingData as $key => $characters)
-    <section class="ranking__wrap" id="$key">
+    <section class="ranking__wrap" id="{{ $key }}">
         <h2 class="enquete__title"><span>／</span>{{ $characters[0]->title }}<span>／</span></h2>
         <ul class="character__list">
             @foreach($characters as $key => $character)

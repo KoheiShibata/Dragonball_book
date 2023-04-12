@@ -33,10 +33,10 @@
             <div class="input_area" id="inputArea">
                 <div class="image_area">
                     <div id="preview-box">
-                        @if(!empty($characterImage))
-                        @for($i=0;$i<count($characterImage);$i++) <div class="preview-list" id="previewList_{{$i}}">
+                        @if(!empty($character->image_paths[0]))
+                        @for($i=0;$i<count($character->image_paths);$i++) <div class="preview-list" id="previewList_{{$i}}">
                             <a href="javascript:void(0)" class="delete-button" onclick="onClickDeleteImage({{$i}})" id="deleteImage_{{$i}}">×</a>
-                            <img src="{{ asset($characterImage[$i]) }}" class="preview-img" alt="">
+                            <img src="{{ asset($character->image_paths[$i]) }}" class="preview-img" alt="">
                     </div>
                     @endfor
                     @endif

@@ -44,18 +44,6 @@
     margin-bottom: 3px;
 }
 
-.character-none__message  {
-    display: none;
-    width: 100%;
-    position: absolute;
-    color: #EEEEEE;
-    top: 50%;
-    text-align: center;
-}
-
-.message--active {
-    display: block;
-}
 
 @media screen and (max-width: 1280px) {
     .main {

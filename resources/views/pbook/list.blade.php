@@ -21,7 +21,7 @@
 @endsection
 
 @section("main")
-<!-- キャラクターがいないとき -->
+<!-- キャラクターがいないとき、表示 -->
 <div class="character-none__message" id="characterNoneMessage">
     <p>表示できるキャラクタ―がいません。</p>
 </div>
@@ -42,10 +42,10 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-search">
         <div class="modal-content">
             <header class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
+                <h5 class="modal__title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </header>
             <form action="/" method="get" id="search-form" onsubmit="return false;">

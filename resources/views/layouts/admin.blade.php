@@ -40,6 +40,7 @@
                             <a href="javascript:void(0)" onclick="onClickLogout()" id="logoutBtn">logout</a>
                         </form>
                     </li>
+                    <li class="header-nav__item search-btn" id="searchData" data-bs-toggle="modal" data-bs-target="#search-modal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
                 </ul>
             </nav>
 
@@ -72,7 +73,11 @@
     <!--==============JQuery読み込み===============-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script>
+        if ($("#search-modal").length) {
+            $("#searchData").css("display", "block");
+        }
+    </script>
     @yield("js")
     <script src="{{asset('/js/common.js')}}"></script>
 </body>

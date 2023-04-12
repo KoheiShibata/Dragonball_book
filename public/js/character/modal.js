@@ -1,40 +1,50 @@
-function imageClick(jsonData, jsonImages, content) {
-    document.getElementById("exampleModalLabel").innerHTML = `${jsonData.name}`
-    document.getElementById("content").innerHTML = content
-    getHeight().innerHTML = jsonData.height
-    getWeight().innerHTML = jsonData.weight
-    document.getElementById("tribe").innerHTML = jsonData.tribe_name
-    document.getElementById("season").innerHTML = jsonData.season_name
-    document.getElementById("attack").innerHTML = jsonData.attack
-    document.getElementById("defense").innerHTML = jsonData.defense
-    document.getElementById("ability").innerHTML = jsonData.ability
-    document.getElementById("popularity").innerHTML = jsonData.popularity
-    // 編集ボタン
-    getEdit().setAttribute("href", `character/${jsonData.id}`)
-    // 削除ボタン
-    const deleteBtn = getdeleteBtn()
-    deleteBtn.value = jsonData.id
-
-    for (let i = 0; i < 5; i++) {
-        const imgSrc = document.getElementById(`imageList_${i}`)
-        imgSrc.setAttribute("src", "")
-        imgSrc.style.display = "none"
-    }
-
-    // 登録画像表示
-    const images = jsonImages
-    for (let i = 0; i < images.length; i++) {
-        const characterImage = document.getElementById(`imageList_${i}`)
-        characterImage.setAttribute("src", images[i])
-        characterImage.style.display = "block"
-    }
-
+// modal表示
+const characterList = document.querySelectorAll(".character-list__img")
+for (let character of characterList) {
+    character.addEventListener("click", function () {
+        const json = JSON.parse(character.dataset.character)
+        setCharacterModalData(json)
+    })
 }
 
 
+// filter Modal表示
+function onClickCharacterImageModal(character) {
+    const json = character
+    setCharacterModalData(json)
+}
 
 
+// modal値を設定
+function setCharacterModalData(json) {
+    document.getElementById("exampleModalLabel").innerHTML = json.name
+    document.getElementById("content").innerHTML = json.content
+    getHeight().innerHTML = json.height
+    getWeight().innerHTML = json.weight
+    document.getElementById("tribe").innerHTML = json.tribe_name
+    document.getElementById("season").innerHTML = json.season_name
+    document.getElementById("attack").innerHTML = json.attack
+    document.getElementById("defense").innerHTML = json.defense
+    document.getElementById("ability").innerHTML = json.ability
+    document.getElementById("popularity").innerHTML = json.popularity
 
+    // 編集ボタン
+    getEdit().setAttribute("href", `character/${json.id}`)
+    // 削除ボタン
+    const deleteBtn = getdeleteBtn()
+    deleteBtn.value = json.id
+
+    // 画像を生成
+    const imageBox = document.getElementById("imageBox")
+    imageBox.innerHTML = "";
+    for (let imagePath of json.image_paths) {
+        const img = document.createElement("img");
+        img.src = imagePath
+        img.className = "modalImage";
+        img.alt = "画像なし";
+        imageBox.appendChild(img)
+    }
+}
 
 
 // deleteAlert

@@ -131,12 +131,11 @@ class ZukanController extends Controller
             $seasons = Season::fetchAll();
             $tribes = Tribe::fetchAll();
             $character = Character::fetchCharacterDataByCharacterId($id);
-            $characterImages = $characterImages = CharacterImage::fetchImage($id);
-
-            foreach ($characterImages as $path) {
-                $characterImage[] = $path->formatedImagePath;
+            $character->image_paths = explode(',', $character->image_paths);
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formatedImagePath];
             }
-            return view("/pbook.detail", compact("character", "characterImage", "seasons", "tribes"));
+            return view("/pbook.detail", compact("character", "seasons", "tribes"));
         } catch (\Exception $e) {
             return abort(404);
         }
