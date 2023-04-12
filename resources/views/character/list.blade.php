@@ -35,7 +35,9 @@
     </section>
 </main>
 
-<!-- Modal -->
+<img src="{{ asset('/storage/img/dragonballSerch.png') }}" id="search-btn" data-bs-toggle="modal" data-bs-target="#search-modal" data-seasons="{{ json_encode($seasons) }}" alt="">
+
+<!-- character Modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -83,6 +85,64 @@
                 <a href="" class="edit" id="edit">edit</a>
                 <a href="javascript:void(0)" class="delete" id="deleteBtn" onclick="deleteBtnClickAlert()">delete</a>
             </footer>
+        </div>
+    </div>
+</div>
+
+
+<!-- filter Modal -->
+<div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h5 class="modal__title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </header>
+            <form action="/" method="get" id="search-form" onsubmit="return false;">
+                <div class="modal-body">
+                    <section class="search-section">
+                        <div class="search-section__title">
+                            <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                            <p>freeword</p>
+                        </div>
+                        <div class="search-box">
+                            <input type="text" name="keyword" id="keyword" placeholder="名前やシーズンでさがす" value="{{session('keyword') ? session('keyword'): '' }}" maxlength="40">
+                        </div>
+                    </section>
+                    <section class="search-section">
+                        <div class="search-section__title">
+                            <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                            <p>season</p>
+                        </div>
+                        <div class="search-checkbox">
+                            @foreach($seasons as $season)
+                            <label for="{{$season->name}}" id="label{{$season->name}}" class="search-checkbox__label{{ session('season') && in_array($season->id, session('season'))  ? ' search-checkbox__label--checked' : ''}}">
+                                <input type="checkbox" class="checkbox" id="{{$season->name}}" name="season[]" value="{{$season->id}}" onclick="checkboxId('{{$season->name}}')" {{ session("season") && in_array($season->id, session('season'))  ? "checked" : "" }}>{{$season->name}}</label>
+                            @endforeach
+                        </div>
+                    </section>
+                    <section class="search-section">
+                        <div class="search-section__title">
+                            <img src="{{asset('/storage/img/sukauta-1.jpg')}}" alt="">
+                            <p>tribe</p>
+                        </div>
+                        <div class="search-checkbox">
+                            @foreach($tribes as $tribe)
+                            <label for="{{$tribe->name}}" id="label{{$tribe->name}}" class="search-checkbox__label{{ session('tribe') && in_array($tribe->id, session('tribe'))  ? ' search-checkbox__label--checked' : '' }}">
+                                <input type="checkbox" class="checkbox" id="{{$tribe->name}}" name="tribe[]" value="{{$tribe->id}}" onclick="checkboxId('{{$tribe->name}}')" {{ session("tribe") && in_array($tribe->id, session('tribe'))  ? "checked" : "" }}>{{$tribe->name}}</label>
+                            @endforeach
+                        </div>
+                    </section>
+                </div>
+                <footer class="modal-footer">
+                    <button type="button" class="common-btn cancel-btn" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="common-btn serch-btn" id="btnSubmit">検索</button>
+                    <div class="common-loading-area__submit--hide" id="loading-area__submit">
+                        <img src="{{asset('/storage/img/loading-6.gif')}}" alt="">
+                    </div>
+                    <button type="button" class="common-btn reset-btn" onclick="unCheckAll()">リセット</button>
+                </footer>
+            </form>
         </div>
     </div>
 </div>

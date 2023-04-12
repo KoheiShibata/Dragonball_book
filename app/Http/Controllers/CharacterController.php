@@ -115,6 +115,8 @@ class CharacterController extends Controller
             session()->push("tribeId", "");
         }
         $characters = Character::fetchAll();
+        $seasons = Season::fetchAll();
+        $tribes = Tribe::fetchAll();
 
         foreach ($characters as $key => $character) {
             if (!in_array($character->season_id, session("seasonId"))) {
@@ -133,7 +135,7 @@ class CharacterController extends Controller
             }
             $character->image_paths = explode(',', $character->image_paths);
         }
-        return view("character.list", compact("characters"));
+        return view("character.list", compact("characters", "seasons", "tribes"));
     }
 
 

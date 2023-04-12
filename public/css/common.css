@@ -53,16 +53,167 @@ a {
 }
 
 .footer {
-   position: absolute;
-   bottom: 0;
+    position: absolute;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .footer p {
     font-size: 14px;
-    white-space:nowrap;
+    white-space: nowrap;
     color: white;
+}
+
+
+
+/* モーダル検索 */
+.modal-dialog {
+    max-width: 600px;
+}
+
+.modal-content form {
+    margin-bottom: 0;
+}
+
+.modal-body {
+    padding: 10px 20px;
+}
+
+.modal-header {
+    padding: 5px 8px;
+    background-color: #EEEEEE;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 2px;
+    background-color: #EEEEEE;
+}
+
+.modal-footer button {
+    color: white;
+}
+
+.modal__title {
+    font-size: 15px;
+    color: #000000;
+    text-align: center;
+}
+
+.modal__title img {
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+.modal-content {
+    border-radius: 5px;
+}
+
+.search-section__title {
+    display: flex;
+    align-items: center;
+    font-family: 'Saiyan-Sans';
+    margin: 5px 0;
+}
+
+.search-section__title img {
+    width: 40px;
+}
+
+.search-section__title p {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.search-box input {
+    margin: 0 5px;
+    margin-bottom: 10px;
+    width: 98%;
+    border-radius: 6px;
+    border: 1px solid rgb(0, 0, 0, 0.8);
+    font-size: 12px;
+    padding: 4px 2px;
+}
+
+.search-checkbox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-checkbox input {
+    display: none;
+}
+
+.search-checkbox__label {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #434343;
+    border-radius: 6px;
+    box-shadow: 3px 3px 0 0 #DDDDDD;
+    transform: translateY(-3px);
+    font-size: 12px;
+    width: calc(25% - 8px);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.search-checkbox__label:hover {
+    box-shadow: 1px 1px 0 0 #DDDDDD;
+    transform: translateY(-1px);
+}
+
+.search-checkbox__label--checked {
+    border: 1.5px solid rgb(234, 143, 0);
+    transform: translateY(-1px);
+    box-shadow: rgb(221, 221, 221) 1px 1px 0px 0px;
+    background-color: rgb(255, 219, 201);
+}
+
+.modal-footer button {
+    border-radius: 6px;
+    font-size: 12px;
+    width: calc(25% - 8px);
+    padding: 10px;
+    text-align: center;
+    border: none;
+}
+
+.serch-btn {
+    background-color: #EA8F00;
+}
+
+.serch-btn:hover {
+    background-color: #EF7D01;
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.cancel-btn {
+    background-color: #0090D6;
+}
+
+.cancel-btn:hover {
+    background-color: #4A90CA;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.reset-btn {
+    background-color: #DA284C;
+    border: 1px solid #434343;
+}
+
+.reset-btn:hover {
+    background-color: #FF0000;
+    transition: 0.5s;
+}
+
+.btn-close {
+    display: none;
 }
 
 
@@ -80,4 +231,53 @@ a {
 
 .common-loading-area__submit--active img {
     width: 40px;
+}
+
+
+@media screen and (max-width: 640px) {
+
+    /* 検索モーダル */
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .searech-section__title p {
+        margin-bottom: 2px;
+        margin-top: 0px;
+    }
+
+    .search-section__title img {
+        width: 35px;
+    }
+
+    .search-checkbox__label {
+        width: calc(50% - 6px);
+    }
+
+    .modal-footer {
+        padding: 6px 20px;
+        gap: 16px;
+        flex-direction: row-reverse;
+    }
+
+    .modal-footer button {
+        width: calc(50% - 16px);
+    }
+
+    .reset-btn {
+        background-color: #0090D6;
+    }
+
+    .reset-btn:hover {
+        background-color: #4A90CA;
+    }
+
+    .cancel-btn {
+        display: none;
+    }
+
+    .btn-close {
+        display: block;
+        height: 5px;
+    }
 }

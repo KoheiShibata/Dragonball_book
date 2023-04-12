@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Season;
 use Illuminate\Http\Request;
 
 use App\Models\Tribe;
@@ -17,10 +18,11 @@ class TribeController extends Controller
      */
     public function tribeList() {
         $tribes = Tribe::fetchAll();
+        $seasons = Season::fetchAll();
         foreach ($tribes as $tribe) {
             $tribe->name = htmlspecialchars($tribe->name);
         }
-        return view("tribe.list", compact("tribes"));
+        return view("tribe.list", compact("tribes", "seasons"));
     }
     
 

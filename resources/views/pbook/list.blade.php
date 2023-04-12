@@ -45,7 +45,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <header class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
+                <h5 class="modal__title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </header>
             <form action="/" method="get" id="search-form" onsubmit="return false;">
