@@ -216,7 +216,7 @@ class Character extends Model
 
 
     /**
-     * 検索対象のキャラクターを全取得
+     * 検索対象のキャラクターを全取得(ユーザ画面)
      *
      * @param object $query
      * @param array $filter
@@ -240,6 +240,43 @@ class Character extends Model
             ->select("characters.*", "character_images.image_path")
             ->orderBy("season_id", "asc")
             ->orderBy("characters.id", "asc")
+            ->get();
+    }
+
+
+    /**
+     * 検索対象のキャラクターを全取得(管理画面)
+     *
+     * @param object $query
+     * @param array $filter
+     * @return object
+     */
+    public function scopeFetchFilteringCharacterData(object $query, array $filter): object
+    {
+        return $query
+            ->where([
+                "characters.deleted_at" => null,
+                "character_images.deleted_at" => null,
+                "seasons.deleted_at" => null,
+                "tribes.deleted_at" => null,
+            ])
+            ->when(!empty($filter["season"]) && is_array($filter["season"]), function ($query) use ($filter) {
+                return $query->whereIn("season_id", $filter["season"]);
+            })
+            ->when(!empty($filter["tribe"]) && is_array($filter["tribe"]), function ($query) use ($filter) {
+                return $query->whereIn("tribe_id", $filter["tribe"]);
+            })
+            ->when(!empty($filter["keyword"]), function ($query) use ($filter) {
+                return $query->where("characters.name", "LIKE", "%" . $filter["keyword"] . "%");
+            })
+            ->leftJoin("seasons", "characters.season_id", "=", "seasons.id")
+            ->leftJoin("tribes", "characters.tribe_id", "=", "tribes.id")
+            ->leftJoin("character_images", "character_images.character_id", "characters.id")
+            ->select($this->defaultFetchColumns)
+            ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
+            ->groupBy('characters.id')
+            ->orderBy("season_id", "asc")
+            ->orderBy("id", "asc")
             ->get();
     }
 

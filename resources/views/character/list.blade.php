@@ -22,12 +22,17 @@
 
 
 @section("main")
+<!-- キャラクターがいないとき、表示 -->
+<div class="character-none__message" id="characterNoneMessage">
+    <p>表示できるキャラクタ―がいません。</p>
+</div>
+
 <main class="main">
     <section>
-        <ul class="character-list">
+        <ul class="character-list" id="character-list">
             @foreach($characters as $character)
             <li class="character-list__item">
-                <img src="{{ $character->image_path }}" class="character-list__img" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-content="{!! nl2br(e($character->content)) !!}" data-character="{{ $character }}">
+                <img src="{{ $character->image_path }}" class="character-list__img" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-character="{{ $character }}">
                 <p>{{ $character->name }}</p>
             </li>
             @endforeach
@@ -92,7 +97,7 @@
 
 <!-- filter Modal -->
 <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-search">
         <div class="modal-content">
             <header class="modal-header">
                 <h5 class="modal__title" id="exampleModalLabel"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""> シーズンやキーワードで探す</h5>

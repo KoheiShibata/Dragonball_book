@@ -71,10 +71,21 @@ a {
     color: white;
 }
 
+.character-none__message {
+    display: none;
+    width: 100%;
+    position: absolute;
+    color: #EEEEEE;
+    top: 50%;
+    text-align: center;
+}
 
+.message--active {
+    display: block;
+}
 
 /* モーダル検索 */
-.modal-dialog {
+.modal-search {
     max-width: 600px;
 }
 
@@ -243,7 +254,7 @@ a {
 @media screen and (max-width: 640px) {
 
     /* 検索モーダル */
-    .modal-dialog {
+    .modal-search {
         margin: 10px;
     }
 

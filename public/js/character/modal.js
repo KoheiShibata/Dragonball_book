@@ -3,35 +3,47 @@ const characterList = document.querySelectorAll(".character-list__img")
 for (let character of characterList) {
     character.addEventListener("click", function () {
         const json = JSON.parse(character.dataset.character)
-        const content = character.dataset.content
-        document.getElementById("exampleModalLabel").innerHTML = json.name
-        document.getElementById("content").innerHTML = content
-        getHeight().innerHTML = json.height
-        getWeight().innerHTML = json.weight
-        document.getElementById("tribe").innerHTML = json.tribe_name
-        document.getElementById("season").innerHTML = json.season_name
-        document.getElementById("attack").innerHTML = json.attack
-        document.getElementById("defense").innerHTML = json.defense
-        document.getElementById("ability").innerHTML = json.ability
-        document.getElementById("popularity").innerHTML = json.popularity
-
-        // 編集ボタン
-        getEdit().setAttribute("href", `character/${json.id}`)
-        // 削除ボタン
-        const deleteBtn = getdeleteBtn()
-        deleteBtn.value = json.id
-
-        // 画像を生成
-        const imageBox = document.getElementById("imageBox")
-        imageBox.innerHTML = "";
-        for (let imagePath of json.image_paths) {
-            const img = document.createElement("img");
-            img.src = imagePath
-            img.className = "modalImage";
-            img.alt = "画像なし";
-            imageBox.appendChild(img)
-        }
+        setCharacterModalData(json)
     })
+}
+
+
+// filter Modal表示
+function onClickCharacterImageModal(character) {
+    const json = character
+    setCharacterModalData(json)
+}
+
+
+// modal値を設定
+function setCharacterModalData(json) {
+    document.getElementById("exampleModalLabel").innerHTML = json.name
+    document.getElementById("content").innerHTML = json.content
+    getHeight().innerHTML = json.height
+    getWeight().innerHTML = json.weight
+    document.getElementById("tribe").innerHTML = json.tribe_name
+    document.getElementById("season").innerHTML = json.season_name
+    document.getElementById("attack").innerHTML = json.attack
+    document.getElementById("defense").innerHTML = json.defense
+    document.getElementById("ability").innerHTML = json.ability
+    document.getElementById("popularity").innerHTML = json.popularity
+
+    // 編集ボタン
+    getEdit().setAttribute("href", `character/${json.id}`)
+    // 削除ボタン
+    const deleteBtn = getdeleteBtn()
+    deleteBtn.value = json.id
+
+    // 画像を生成
+    const imageBox = document.getElementById("imageBox")
+    imageBox.innerHTML = "";
+    for (let imagePath of json.image_paths) {
+        const img = document.createElement("img");
+        img.src = imagePath
+        img.className = "modalImage";
+        img.alt = "画像なし";
+        imageBox.appendChild(img)
+    }
 }
 
 

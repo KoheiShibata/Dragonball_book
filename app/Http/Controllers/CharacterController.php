@@ -117,6 +117,7 @@ class CharacterController extends Controller
         $characters = Character::fetchAll();
         $seasons = Season::fetchAll();
         $tribes = Tribe::fetchAll();
+        session()->forget(config("filter.character"));
 
         foreach ($characters as $key => $character) {
             if (!in_array($character->season_id, session("seasonId"))) {
@@ -126,8 +127,10 @@ class CharacterController extends Controller
                 session()->push("tribeId", $character->tribe_id);
             }
 
+
             $character->height = $character->formatedHeight;
             $character->weight = $character->formatedWeight;
+            $character->content = nl2br($character->content);
             $character->image_path = $character->formated_image_path;
             if (empty($character->image_paths[0])) {
                 $character->image_paths = [$character->formated_image_path];
@@ -136,6 +139,56 @@ class CharacterController extends Controller
             $character->image_paths = explode(',', $character->image_paths);
         }
         return view("character.list", compact("characters", "seasons", "tribes"));
+    }
+
+
+    /**
+     * キャラクター絞り込み
+     *
+     * @param Request $request
+     * @return JSON
+     */
+    public function filtering(Request $request)
+    {
+        session()->forget(config("filter.character"));
+
+        $filter = $request->only(config("filter.character"));
+        $characters = Character::fetchFilteringCharacterData($filter);
+
+        foreach ($filter as $key => $sessionData) {
+            if ($key !== "keyword" && !(is_array($sessionData))) {
+                continue;
+            }
+            session()->put($key, $sessionData);
+        }
+
+        if ($characters->isNotEmpty()) {
+            $characters = $this->formatedCharacterData($characters);
+        }
+        return $characters;
+    }
+
+    /**
+     * キャラクターデータをフォーマット
+     *
+     * @param [type] $characters
+     * @return object
+     */
+    private function formatedCharacterData($characters): object
+    {
+        foreach ($characters as $character) {
+            $character->height = $character->formatedHeight;
+            $character->weight = $character->formatedWeight;
+            $character->content = nl2br($character->content);
+            $character->image_path = $character->formated_image_path;
+
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formated_image_path];
+                continue;
+            }
+            $character->image_paths = explode(',', $character->image_paths);
+        }
+        return $characters;
     }
 
 

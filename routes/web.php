@@ -68,6 +68,7 @@ Route::group(['middleware' => 'basicauth'], function () {
     
         Route::controller(CharacterController::class)->prefix("characters")->group(function () {
             Route::get("/", "characterList");
+            Route::get("/filtering", "filtering");
         });
 
         Route::controller(LogoutController::class)->prefix("logout")->group(function () {
