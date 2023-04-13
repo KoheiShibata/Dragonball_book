@@ -51,12 +51,15 @@ headerメニューの検索モーダルから条件に合ったキャラクタ�
 3. トップページから閲覧したいシーズンを選択する
 4. headerメニューから検索modalを表示(名前、シーズン、カテゴリーによる絞り込み)
 5. キャラクター詳細情報はキャラクター画像をクリック
+6. ドラゴンボール図鑑ランキング(top3)を閲覧できる
+7. https://docs.google.com/forms/d/e/1FAIpQLSdGL0IHlFC3QxcYnqtLsLjAxtZzJUqOM879IbqBu0KmOd7QFQ/viewform 　googleフォームから投票
 
 - 管理ユーザの場合
 1. Basic認証 & ログイン
 2. headerメニューから移動
 3. 項目に沿って情報を入力すると登録できる（season登録は、既に登録済み or ドラゴンボールに存在しないシーズンは登録できません）
 4. キャラクター画像 or テーブルをクリックでmodal表示 (詳細情報表示 / 編集 / 削除ができる)
+5. キャラクターの検索modalを表示
 5. season or tribe の削除について、ユーザー画面で使用中のモノは、削除できないようにしています。
 
 ## How to install & Start-up
