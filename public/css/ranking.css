@@ -5,7 +5,7 @@
 }
 
 .header-wrapper {
-    justify-content: center;
+    max-width: 1200px;
 }
 
 .ranking__wrap {

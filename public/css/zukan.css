@@ -26,6 +26,7 @@ body {
 .header-nav__list {
     display: flex;
     align-items: center;
+    gap: 24px;
 }
 
 .header-nav__list img {
@@ -40,7 +41,21 @@ body {
     transition-duration: 0.5s;
 }
 
-.header-nav__item {
+.header-nav__item a {
+    font-size: 33px;
+    font-family: 'Saiyan-Sans';
+    transition: 0.5s;
+    color: rgb(234, 143, 0);
+    -webkit-text-stroke: 1px #000;
+    transition: 0.5s;
+}
+
+.header-nav__item a:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.header-nav__item--search {
     display: none;
 }
 

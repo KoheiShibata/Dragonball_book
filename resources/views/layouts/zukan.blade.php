@@ -32,7 +32,8 @@
             </a>
             <nav class="header-nav">
                 <ul class="header-nav__list">
-                    <li class="header-nav__item" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
+                    <li class="header-nav__item"><a href="{{ route('ranking') }}">ranking</a></li>
+                    <li class="header-nav__item header-nav__item--search" id="searchData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
                 </ul>
             </nav>
         </div>
