@@ -53,6 +53,11 @@
                 <input type="text" class="form-control" name="weight" id="weight" value="">
                 <div class="err-msg-weight"></div>
             </div>
+            <div class="form-group">
+                <label class="register-label" for="weight">☆図鑑番号(No.)</label><br>
+                <input type="number" class="form-control" name="number" id="number" value="">
+                <div class="err-msg-number"></div>
+            </div>
             <label for="tribe" class="register-label required">カテゴリー</label>
             <select name="tribe" class="chart" id="tribe" required>
                 <option value="">選択してください</option>
