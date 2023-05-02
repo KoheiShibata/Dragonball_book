@@ -7,9 +7,9 @@
 ## Demo
 ### 一般ユーザー機能
 ### https://kohei-techis.com/
-<Basic認証>
+<!-- <Basic認証>
 - ユーザー名 : dragonball
-- パスワード : pbook
+- パスワード : pbook -->
 <div align="center">
 　<video controls src="https://user-images.githubusercontent.com/115211493/226309265-7a409b9f-8d42-40cf-a544-1f804aeeb6bc.mp4"></video>
 </div>
@@ -18,7 +18,7 @@
 ### https://kohei-techis.com/characters
 <ログイン>　
 - email : dragonball@pbook.com
-- password : ZZ4genen
+<!-- - password : ZZ4genen -->
 <div align="center">
 　<video controls src="https://user-images.githubusercontent.com/115211493/226309596-1f3b1bb3-a124-4ee2-aeef-4fbf1505adef.mp4"></video>
 </div>
