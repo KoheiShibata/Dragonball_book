@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' => 'basicauth'], function () {
+// Route::group(['middleware' => 'basicauth'], function () {
     // 一般利用者画面
     Route::get("/", [ZukanController::class, "home"])->name("home"); // ホーム画面
     
@@ -76,4 +76,4 @@ Route::group(['middleware' => 'basicauth'], function () {
             Route::post("/", "logout")->name("logout"); // ログアウト処理
         });
     });
-});
+// });
