@@ -29,6 +29,11 @@ window.addEventListener('DOMContentLoaded', () => {
             validations = false
         }
 
+        // 図鑑番号バリデーション
+        if (numberValidate() == false) {
+            validations = false
+        }
+
         // カテゴリーバリデーション
         if (tribeValidate() == false) {
             validations = false
@@ -59,7 +64,6 @@ window.addEventListener('DOMContentLoaded', () => {
             validations = false
         }
 
-
         if (validations == false) {
             loadingChangeBtn(btnSubmit, loadingGifSubmit)
             return
@@ -81,6 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 content: getContent(),
                 height: getHeight(),
                 weight: getWeight(),
+                number: getNumber(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -125,6 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 content: getContent(),
                 height: getHeight(),
                 weight: getWeight(),
+                number: getNumber(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),

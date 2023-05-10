@@ -29,6 +29,11 @@ window.addEventListener('DOMContentLoaded', () => {
             validations = false
         }
 
+        // 図鑑番号バリデーション
+        if (numberValidate() == false) {
+            validations = false
+        }
+
         // カテゴリーバリデーション
         if (tribeValidate() == false) {
             validations = false
@@ -59,12 +64,10 @@ window.addEventListener('DOMContentLoaded', () => {
             validations = false
         }
 
-
         if (validations == false) {
             loadingChangeBtn(btnSubmit, loadingGifSubmit)
             return
         }
-
 
         // base64形式で画像データを配列で取得する
         const imageDatas = document.getElementsByClassName("preview-img")
@@ -85,6 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 content: getContent(),
                 height: getHeight(),
                 weight: getWeight(),
+                number: getNumber(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),
@@ -130,6 +134,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 content: getContent(),
                 height: getHeight(),
                 weight: getWeight(),
+                number: getNumber(),
                 tribe_id: getTribe(),
                 season_id: getSeason(),
                 attack: getAttack(),

@@ -44,7 +44,7 @@ function heightValidate() {
         return false
     }
     if (heightDigits > 10) {
-        errorMsgHeight.textContent = "数字は10桁以内で入力してください"
+        errorMsgHeight.textContent = "身長は10桁以内で入力してください"
         return false
     }
     return true
@@ -61,7 +61,24 @@ function weightValidate() {
         return false
     }
     if (weightDigits > 10) {
-        errorMsgWeight.textContent = "数字は10桁以内で入力してください"
+        errorMsgWeight.textContent = "体重は10桁以内で入力してください"
+        return false
+    }
+    return true
+}
+
+function numberValidate() {
+    const number = getNumber()
+    const errorMsgNumber = getErrorMsNumber()
+    const numberDigits = number.toString().length
+    errorMsgNumber.classList.add("form-invalid")
+    errorMsgNumber.textContent = "";
+    if (!number.match(/^[0-9]+$/) && !number == "") {
+        errorMsgNumber.textContent = "半角数字のみを入力してください。"
+        return false
+    }
+    if (numberDigits > 6) {
+        errorMsgNumber.textContent = "図鑑番号は6桁以内で入力してください"
         return false
     }
     return true

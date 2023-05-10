@@ -127,7 +127,6 @@ class CharacterController extends Controller
                 session()->push("tribeId", $character->tribe_id);
             }
 
-
             $character->height = $character->formatedHeight;
             $character->weight = $character->formatedWeight;
             $character->content = nl2br($character->content);

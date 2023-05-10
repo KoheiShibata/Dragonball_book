@@ -46,6 +46,17 @@ function getErrorMsgWeight() {
 }
 
 
+// 図鑑番号
+function getNumber() {
+    const number = document.getElementById("number").value
+    return number
+}
+
+function getErrorMsNumber() {
+    const errorMsNumber = document.querySelector(".err-msg-number")
+    return errorMsNumber
+}
+
 
 // カテゴリー
 function getTribe() {

@@ -45,13 +45,18 @@
             </div>
             <div class="form-group">
                 <label class="register-label" for="height">☆身長</label><br>
-                <input type="text" class="form-control" name="height" id="height" value="">
+                <input type="number" class="form-control" name="height" id="height" value="">
                 <div class="err-msg-height"></div>
             </div>
             <div class="form-group">
                 <label class="register-label" for="weight">☆体重</label><br>
-                <input type="text" class="form-control" name="weight" id="weight" value="">
+                <input type="number" class="form-control" name="weight" id="weight" value="">
                 <div class="err-msg-weight"></div>
+            </div>
+            <div class="form-group">
+                <label class="register-label" for="number">☆図鑑番号</label><br>
+                <input type="number" class="form-control" name="number" id="number" value="" onkeydown="return event.keyCode !== 69">
+                <div class="err-msg-number"></div>
             </div>
             <label for="tribe" class="register-label required">カテゴリー</label>
             <select name="tribe" class="chart" id="tribe" required>
