@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label class="register-label" for="number">☆図鑑番号</label><br>
-                <input type="number" class="form-control" name="number" id="number" value="" onkeydown="return event.keyCode !== 69">
+                <input type="number" class="form-control" name="number" id="number" value="{{ !empty($character->number) ? $character->number : '' }}" onkeydown="return event.keyCode !== 69">
                 <div class="err-msg-number"></div>
             </div>
             <label for="tribe" class="register-label required">カテゴリー</label>
