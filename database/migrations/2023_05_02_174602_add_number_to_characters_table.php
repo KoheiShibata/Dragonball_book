@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('characters', function (Blueprint $table) {
-            $table->integer("number")->length(6)->default(0);
+            $table->integer("number")->length(6)->nullable()->default(0);
         });
     }
 

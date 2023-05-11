@@ -35,7 +35,7 @@ class ZukanController extends Controller
      *
      * @return view
      */
-    public function pbook(Request $request)
+    public function index(Request $request)
     {
         try {
             $seasons = Season::fetchAll();
@@ -55,7 +55,7 @@ class ZukanController extends Controller
             if ($characters->isNotEmpty()) {
                 $characters = $this->formatedCharacterImages($characters);
             }
-            return view("/pbook.list", compact("characters", "seasons", "tribes"));
+            return view("/pbook.index", compact("characters", "seasons", "tribes"));
         } catch (\Exception $e) {
             echo $e;
             return abort(404);

@@ -40,7 +40,7 @@
                             <a href="javascript:void(0)" onclick="onClickLogout()" id="logoutBtn">logout</a>
                         </form>
                     </li>
-                    <li class="header-nav__item search-btn" id="searchData" data-bs-toggle="modal" data-bs-target="#search-modal" data-seasons="{{ json_encode($seasons) }}"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
+                    <li class="header-nav__item search-btn" id="searchData" data-bs-toggle="modal" data-bs-target="#search-modal"><img src="{{asset('/storage/img/dragonballSerch.png')}}" alt=""></li>
                 </ul>
             </nav>
 

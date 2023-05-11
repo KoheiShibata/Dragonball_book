@@ -21,7 +21,7 @@ class CharacterController extends Controller
      *
      * @return view
      */
-    public function createForm()
+    public function create()
     {
         $seasons = Season::fetchAll();
         $tribes = Tribe::fetchAll();
@@ -29,14 +29,13 @@ class CharacterController extends Controller
         return view("/character.form", compact("seasons", "tribes"));
     }
 
-
     /**
      * キャラクターを新規登録
      *
      * @param Request $request
      * @return reidrect
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
 
         try {
@@ -48,15 +47,9 @@ class CharacterController extends Controller
 
             //　画像がpostされたときはアップロードした後、インサート用にフォーマット 
             if (!empty($imagesPath = $this->imageUpload($files))) {
-                $characterImageInsertParam = [];
-                foreach ($imagesPath as $path) {
-                    $characterImageInsertParam[] = [
-                        "character_id" => $characterId,
-                        "image_path" => $path
-                    ];
-                }
-                CharacterImage::insert($characterImageInsertParam);
+                $this->imageInsert($imagesPath, $characterId);
             }
+
             DB::commit();
             return [SUCCESS_MESSAGE => REGISTRATION_SUCCESS_MESSAGE];
         } catch (\Exception $e) {
@@ -65,50 +58,12 @@ class CharacterController extends Controller
         }
     }
 
-
-    /**
-     * 画像アップロード処理
-     *
-     * @param array|null $files
-     * @return array
-     */
-    private function imageUpload($files): array
-    {
-        $res = [];
-        if (empty($files)) {
-            return [];
-        }
-
-        foreach ($files as $file) {
-            // 編集で変更しなかった画像パスを取得
-            if (!preg_match('/data:image\/(\w+);base64,/', $file)) {
-
-                $file = strstr($file, "/storage");
-                $res[] = $file;
-                continue;
-            }
-
-            // base64をデコード
-            preg_match('/data:image\/(\w+);base64,/', $file, $matches);
-            $extension = $matches[1];
-
-            $img = preg_replace('/^data:image.*?base64,/', "", $file);
-            $img = str_replace(' ', '+', $img);
-            $fileName = md5($img);
-            $imagePath = "/storage/character/" . $fileName . "." . $extension;
-            file_put_contents("." . $imagePath, base64_decode($img));
-            $res[] = $imagePath;
-        }
-        return $res;
-    }
-
-
     /**
      * キャラクター一覧をHTMLで出力
      *
      * @return view
      */
-    public function characterList()
+    public function index()
     {
         if (empty(session("seasonId")) && empty(session("tribeId"))) {
             session()->push("seasonId", "");
@@ -137,9 +92,8 @@ class CharacterController extends Controller
             }
             $character->image_paths = explode(',', $character->image_paths);
         }
-        return view("character.list", compact("characters", "seasons", "tribes"));
+        return view("character.index", compact("characters", "seasons", "tribes"));
     }
-
 
     /**
      * キャラクター絞り込み
@@ -168,6 +122,139 @@ class CharacterController extends Controller
     }
 
     /**
+     * キャラクター編集画面をHTMLで出力
+     *
+     * @param Request $request
+     * @return view
+     */
+    public function edit($id)
+    {
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id) ||
+                !Character::isCharacterExists($id)
+            ) {
+                throw new \Exception();
+            }
+            $seasons = Season::fetchAll();
+            $tribes = Tribe::fetchAll();
+            $character = Character::fetchCharacterDataByCharacterId($id);
+            $character->image_paths = explode(',', $character->image_paths);
+            return view("character.edit", compact("character", "seasons", "tribes"));
+        } catch (\Exception $e) {
+            return abort(404);
+        }
+    }
+
+    /**
+     * キャラクターの情報を更新する
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        try {
+            $characterId = $request->id;
+            $files = $request->image;
+            $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
+
+            DB::beginTransaction();
+            Character::updateExecution($param);
+            CharacterImage::deleteImageRow($characterId);
+
+            // 画像の変更があった場合はアップロード・インサート
+            if (!empty($imagesPath = $this->imageUpload($files))) {
+                $this->imageInsert($imagesPath, $characterId);
+            }
+
+            DB::commit();
+            return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return [ERROR_MESSAGE => UPDATE_FAILED_MESSAGE];
+        }
+    }
+
+    /**
+     * キャラクターを削除する
+     *
+     * @param Request $request
+     * @return redirect
+     */
+    public function destory($id)
+    {
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            Character::deleteRow($id);
+            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
+        }
+    }
+
+    /**
+     * 画像アップロード処理
+     *
+     * @param array|null $files
+     * @return array
+     */
+    private function imageUpload($files): array
+    {
+        $res = [];
+        if (empty($files)) {
+            return [];
+        }
+
+        foreach ($files as $file) {
+            // 編集で変更しなかった画像パスを取得
+            if (!preg_match('/data:image\/(\w+);base64,/', $file)) {
+
+                $imagePath = strstr($file, "/storage");
+                $res[] = $imagePath;
+                continue;
+            }
+
+            // base64をデコード
+            preg_match('/data:image\/(\w+);base64,/', $file, $matches);
+            $extension = $matches[1];
+
+            $img = preg_replace('/^data:image.*?base64,/', "", $file);
+            $img = str_replace(' ', '+', $img);
+            $fileName = md5($img);
+            $imagePath = "/storage/character/" . $fileName . "." . $extension;
+            file_put_contents("." . $imagePath, base64_decode($img));
+            $res[] = $imagePath;
+        }
+        return $res;
+    }
+
+    /**
+     * 画像パスをインサート
+     *
+     * @param array $imagePaths
+     * @param integer $characterId
+     * @return void
+     */
+    private function imageInsert(array $imagePaths, int $characterId)
+    {
+        $characterImageInsertParam = [];
+        foreach ($imagePaths as $path) {
+            $characterImageInsertParam[] = [
+                "character_id" => $characterId,
+                "image_path" => $path
+            ];
+        }
+        CharacterImage::insert($characterImageInsertParam);
+    }
+
+    /**
      * キャラクターデータをフォーマット
      *
      * @param [type] $characters
@@ -188,91 +275,5 @@ class CharacterController extends Controller
             $character->image_paths = explode(',', $character->image_paths);
         }
         return $characters;
-    }
-
-
-    /**
-     * キャラクター編集画面をHTMLで出力
-     *
-     * @param Request $request
-     * @return view
-     */
-    public function characterDetail($id)
-    {
-        try {
-            if (
-                empty($id) ||
-                !is_numeric($id) ||
-                !Character::isCharacterExists($id)
-            ) {
-                throw new \Exception();
-            }
-            $seasons = Season::fetchAll();
-            $tribes = Tribe::fetchAll();
-            $character = Character::fetchCharacterDataByCharacterId($id);
-            $character->image_paths = explode(',', $character->image_paths);
-            return view("character.edit", compact("character", "seasons", "tribes"));
-        } catch (\Exception $e) {
-            return abort(404);
-        }
-    }
-
-
-    /**
-     * キャラクターの情報を更新する
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function edit(Request $request)
-    {
-        try {
-            $characterId = $request->id;
-            $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
-
-            DB::beginTransaction();
-            Character::updateExecution($param);
-            CharacterImage::deleteImageRow($characterId);
-
-            $files = $request->image;
-            if (!empty($imagesPath = $this->imageUpload($files))) {
-                $characterImageInsertParam = [];
-                foreach ($imagesPath as $path) {
-                    $characterImageInsertParam[] = [
-                        "character_id" => $characterId,
-                        "image_path" => $path
-                    ];
-                }
-                CharacterImage::insert($characterImageInsertParam);
-            }
-            DB::commit();
-            return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return [ERROR_MESSAGE => UPDATE_FAILED_MESSAGE];
-        }
-    }
-
-
-    /**
-     * キャラクターを削除する
-     *
-     * @param Request $request
-     * @return redirect
-     */
-    public function delete($id)
-    {
-        try {
-            if (
-                empty($id) ||
-                !is_numeric($id)
-            ) {
-                throw new \Exception();
-            }
-            Character::deleteRow($id);
-            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
-        } catch (\Exception $e) {
-            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
-        }
     }
 }

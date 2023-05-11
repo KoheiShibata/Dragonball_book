@@ -17,7 +17,6 @@ function seasonDeleteBtnClick() {
 function tribeDeleteBtnClick() {
     getDeleteBtn().disabled = true
     let notDeleteTribe = getDeleteBtn().dataset.session
-    console.log(notDeleteTribe)
     if (notDeleteTribe.includes(getDeleteId()) === true) {
         Swal.fire({
             icon: 'error',
