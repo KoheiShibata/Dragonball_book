@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
     Route::get("/", [ZukanController::class, "home"])->name("home"); // ホーム画面
     
     Route::controller(ZukanController::class)->prefix("dragonball-pbook")->group(function () {
-        Route::get("/", "pbook");
+        Route::get("/", "index");
         Route::get("/filtering", "filtering");
         Route::get("/{id}", "detail"); 
     });
@@ -43,31 +43,31 @@ use Illuminate\Support\Facades\Route;
     // 以下管理者のみ
     Route::middleware(['AdminAuth'])->group(function () {
         Route::controller(TribeController::class)->prefix("tribe")->group(function () {
-            Route::get("/", "tribeList");
-            Route::post("/", "create");
-            Route::put("/", "edit");
-            Route::delete("/{id}", "delete");
+            Route::get("/", "index");
+            Route::post("/", "store");
+            Route::put("/", "update");
+            Route::delete("/{id}", "destory");
             Route::get("/{id}", "getControl");
         });
     
         Route::controller(SeasonController::class)->prefix("season")->group(function () {
-            Route::get("/", "seasonList");
-            Route::post("/", "create");
-            Route::put("/", "edit");
-            Route::delete("/{id}", "delete");
+            Route::get("/", "index");
+            Route::post("/", "store");
+            Route::put("/", "update");
+            Route::delete("/{id}", "destory");
             Route::get("/{id}", "getControl");
         });
     
         Route::controller(CharacterController::class)->prefix("character")->group(function () {
-            Route::get("/", "createForm");
-            Route::post("/", "create");
-            Route::get("/{id}", "characterDetail");
-            Route::put("/{id}", "edit");
-            Route::delete("/{id}", "delete");
+            Route::get("/", "create");
+            Route::post("/", "store");
+            Route::get("/{id}", "edit");
+            Route::put("/{id}", "update");
+            Route::delete("/{id}", "destory");
         });
     
         Route::controller(CharacterController::class)->prefix("characters")->group(function () {
-            Route::get("/", "characterList");
+            Route::get("/", "index");
             Route::get("/filtering", "filtering");
         });
 

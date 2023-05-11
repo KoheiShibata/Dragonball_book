@@ -16,13 +16,13 @@ class TribeController extends Controller
      *
      * @return view
      */
-    public function tribeList() {
+    public function index() {
         $tribes = Tribe::fetchAll();
         $seasons = Season::fetchAll();
         foreach ($tribes as $tribe) {
             $tribe->name = htmlspecialchars($tribe->name);
         }
-        return view("tribe.list", compact("tribes", "seasons"));
+        return view("tribe.index", compact("tribes", "seasons"));
     }
     
 
@@ -32,7 +32,7 @@ class TribeController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function create(Request $request) 
+    public function store(Request $request) 
     {
         try {
             $param = $request->validate(config(TRIBE_REGISTRATION_VALIDATE));
@@ -50,7 +50,7 @@ class TribeController extends Controller
     * @param Request $request
     * @return redirect
     */
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         try {
             $param = $this->validate($request, config(TRIBE_UPDATE_VALIDATE));
@@ -68,7 +68,7 @@ class TribeController extends Controller
      * @param Request $request
      * @return 
      */
-    public function delete($id) {
+    public function destory($id) {
         try {
             if(empty($id) ||
             !is_numeric($id)

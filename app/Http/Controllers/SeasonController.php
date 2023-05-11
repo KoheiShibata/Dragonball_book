@@ -15,10 +15,10 @@ class SeasonController extends Controller
      *
      * @return view
      */
-    public function seasonList()
+    public function index()
     {
         $seasons = Season::fetchAll();
-        return view("season.list", compact("seasons"));
+        return view("season.index", compact("seasons"));
     }
 
     /**
@@ -27,7 +27,7 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         try {
             $param = $request->validate(config(SEASON_REGISTRATION_VALIDATE));
@@ -51,7 +51,7 @@ class SeasonController extends Controller
      * @param Request $request
      * @return red
      */
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         try {
             $param = $this->validate($request, config(SEASON_UPDATE_VALIDATE));
@@ -75,7 +75,7 @@ class SeasonController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function delete($id)
+    public function destory($id)
     {
         try {
             if (

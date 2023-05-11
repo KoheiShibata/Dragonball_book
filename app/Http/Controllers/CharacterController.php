@@ -21,7 +21,7 @@ class CharacterController extends Controller
      *
      * @return view
      */
-    public function createForm()
+    public function create()
     {
         $seasons = Season::fetchAll();
         $tribes = Tribe::fetchAll();
@@ -29,14 +29,13 @@ class CharacterController extends Controller
         return view("/character.form", compact("seasons", "tribes"));
     }
 
-
     /**
      * キャラクターを新規登録
      *
      * @param Request $request
      * @return reidrect
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
 
         try {
@@ -65,6 +64,151 @@ class CharacterController extends Controller
         }
     }
 
+    /**
+     * キャラクター一覧をHTMLで出力
+     *
+     * @return view
+     */
+    public function index()
+    {
+        if (empty(session("seasonId")) && empty(session("tribeId"))) {
+            session()->push("seasonId", "");
+            session()->push("tribeId", "");
+        }
+        $characters = Character::fetchAll();
+        $seasons = Season::fetchAll();
+        $tribes = Tribe::fetchAll();
+        session()->forget(config("filter.character"));
+
+        foreach ($characters as $key => $character) {
+            if (!in_array($character->season_id, session("seasonId"))) {
+                session()->push("seasonId", $character->season_id);
+            }
+            if (!in_array($character->tribe_id, session("tribeId"))) {
+                session()->push("tribeId", $character->tribe_id);
+            }
+
+            $character->height = $character->formatedHeight;
+            $character->weight = $character->formatedWeight;
+            $character->content = nl2br($character->content);
+            $character->image_path = $character->formated_image_path;
+            if (empty($character->image_paths[0])) {
+                $character->image_paths = [$character->formated_image_path];
+                continue;
+            }
+            $character->image_paths = explode(',', $character->image_paths);
+        }
+        return view("character.index", compact("characters", "seasons", "tribes"));
+    }
+
+    /**
+     * キャラクター絞り込み
+     *
+     * @param Request $request
+     * @return JSON
+     */
+    public function filtering(Request $request)
+    {
+        session()->forget(config("filter.character"));
+
+        $filter = $request->only(config("filter.character"));
+        $characters = Character::fetchFilteringCharacterData($filter);
+
+        foreach ($filter as $key => $sessionData) {
+            if ($key !== "keyword" && !(is_array($sessionData))) {
+                continue;
+            }
+            session()->put($key, $sessionData);
+        }
+
+        if ($characters->isNotEmpty()) {
+            $characters = $this->formatedCharacterData($characters);
+        }
+        return $characters;
+    }
+
+    /**
+     * キャラクター編集画面をHTMLで出力
+     *
+     * @param Request $request
+     * @return view
+     */
+    public function edit($id)
+    {
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id) ||
+                !Character::isCharacterExists($id)
+            ) {
+                throw new \Exception();
+            }
+            $seasons = Season::fetchAll();
+            $tribes = Tribe::fetchAll();
+            $character = Character::fetchCharacterDataByCharacterId($id);
+            $character->image_paths = explode(',', $character->image_paths);
+            return view("character.edit", compact("character", "seasons", "tribes"));
+        } catch (\Exception $e) {
+            return abort(404);
+        }
+    }
+
+    /**
+     * キャラクターの情報を更新する
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        try {
+            $characterId = $request->id;
+            $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
+
+            DB::beginTransaction();
+            Character::updateExecution($param);
+            CharacterImage::deleteImageRow($characterId);
+
+            $files = $request->image;
+            if (!empty($imagesPath = $this->imageUpload($files))) {
+                $characterImageInsertParam = [];
+                foreach ($imagesPath as $path) {
+                    $characterImageInsertParam[] = [
+                        "character_id" => $characterId,
+                        "image_path" => $path
+                    ];
+                }
+                CharacterImage::insert($characterImageInsertParam);
+            }
+            DB::commit();
+            return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return [ERROR_MESSAGE => UPDATE_FAILED_MESSAGE];
+        }
+    }
+
+    /**
+     * キャラクターを削除する
+     *
+     * @param Request $request
+     * @return redirect
+     */
+    public function destory($id)
+    {
+        try {
+            if (
+                empty($id) ||
+                !is_numeric($id)
+            ) {
+                throw new \Exception();
+            }
+            Character::deleteRow($id);
+            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
+        } catch (\Exception $e) {
+            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
+        }
+    }
 
     /**
      * 画像アップロード処理
@@ -103,68 +247,16 @@ class CharacterController extends Controller
     }
 
 
-    /**
-     * キャラクター一覧をHTMLで出力
-     *
-     * @return view
-     */
-    public function characterList()
+    private function imageInsert($imagePaths, $characterId)
     {
-        if (empty(session("seasonId")) && empty(session("tribeId"))) {
-            session()->push("seasonId", "");
-            session()->push("tribeId", "");
+        $characterImageInsertParam = [];
+        foreach ($imagePaths as $path) {
+            $characterImageInsertParam[] = [
+                "character_id" => $characterId,
+                "image_path" => $path
+            ];
         }
-        $characters = Character::fetchAll();
-        $seasons = Season::fetchAll();
-        $tribes = Tribe::fetchAll();
-        session()->forget(config("filter.character"));
-
-        foreach ($characters as $key => $character) {
-            if (!in_array($character->season_id, session("seasonId"))) {
-                session()->push("seasonId", $character->season_id);
-            }
-            if (!in_array($character->tribe_id, session("tribeId"))) {
-                session()->push("tribeId", $character->tribe_id);
-            }
-
-            $character->height = $character->formatedHeight;
-            $character->weight = $character->formatedWeight;
-            $character->content = nl2br($character->content);
-            $character->image_path = $character->formated_image_path;
-            if (empty($character->image_paths[0])) {
-                $character->image_paths = [$character->formated_image_path];
-                continue;
-            }
-            $character->image_paths = explode(',', $character->image_paths);
-        }
-        return view("character.list", compact("characters", "seasons", "tribes"));
-    }
-
-
-    /**
-     * キャラクター絞り込み
-     *
-     * @param Request $request
-     * @return JSON
-     */
-    public function filtering(Request $request)
-    {
-        session()->forget(config("filter.character"));
-
-        $filter = $request->only(config("filter.character"));
-        $characters = Character::fetchFilteringCharacterData($filter);
-
-        foreach ($filter as $key => $sessionData) {
-            if ($key !== "keyword" && !(is_array($sessionData))) {
-                continue;
-            }
-            session()->put($key, $sessionData);
-        }
-
-        if ($characters->isNotEmpty()) {
-            $characters = $this->formatedCharacterData($characters);
-        }
-        return $characters;
+        CharacterImage::insert($characterImageInsertParam);
     }
 
     /**
@@ -188,91 +280,5 @@ class CharacterController extends Controller
             $character->image_paths = explode(',', $character->image_paths);
         }
         return $characters;
-    }
-
-
-    /**
-     * キャラクター編集画面をHTMLで出力
-     *
-     * @param Request $request
-     * @return view
-     */
-    public function characterDetail($id)
-    {
-        try {
-            if (
-                empty($id) ||
-                !is_numeric($id) ||
-                !Character::isCharacterExists($id)
-            ) {
-                throw new \Exception();
-            }
-            $seasons = Season::fetchAll();
-            $tribes = Tribe::fetchAll();
-            $character = Character::fetchCharacterDataByCharacterId($id);
-            $character->image_paths = explode(',', $character->image_paths);
-            return view("character.edit", compact("character", "seasons", "tribes"));
-        } catch (\Exception $e) {
-            return abort(404);
-        }
-    }
-
-
-    /**
-     * キャラクターの情報を更新する
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function edit(Request $request)
-    {
-        try {
-            $characterId = $request->id;
-            $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
-
-            DB::beginTransaction();
-            Character::updateExecution($param);
-            CharacterImage::deleteImageRow($characterId);
-
-            $files = $request->image;
-            if (!empty($imagesPath = $this->imageUpload($files))) {
-                $characterImageInsertParam = [];
-                foreach ($imagesPath as $path) {
-                    $characterImageInsertParam[] = [
-                        "character_id" => $characterId,
-                        "image_path" => $path
-                    ];
-                }
-                CharacterImage::insert($characterImageInsertParam);
-            }
-            DB::commit();
-            return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return [ERROR_MESSAGE => UPDATE_FAILED_MESSAGE];
-        }
-    }
-
-
-    /**
-     * キャラクターを削除する
-     *
-     * @param Request $request
-     * @return redirect
-     */
-    public function delete($id)
-    {
-        try {
-            if (
-                empty($id) ||
-                !is_numeric($id)
-            ) {
-                throw new \Exception();
-            }
-            Character::deleteRow($id);
-            return redirect(CHARACTER_TOP)->with(SUCCESS_MESSAGE, DELETE_SUCCESS_MESSAGE);
-        } catch (\Exception $e) {
-            return redirect(CHARACTER_TOP)->with(ERROR_MESSAGE, DELETE_FAILED_MESSAGE);
-        }
     }
 }
