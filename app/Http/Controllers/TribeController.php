@@ -18,11 +18,10 @@ class TribeController extends Controller
      */
     public function index() {
         $tribes = Tribe::fetchAll();
-        $seasons = Season::fetchAll();
         foreach ($tribes as $tribe) {
             $tribe->name = htmlspecialchars($tribe->name);
         }
-        return view("tribe.index", compact("tribes", "seasons"));
+        return view("tribe.index", compact("tribes"));
     }
     
 

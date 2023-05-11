@@ -11,13 +11,16 @@ class SeasonController extends Controller
 {
 
     /**
-     * シーズンの新規登録をHTMLで出力
+     * シーズンの新規登録/シーズン一覧をHTMLで出力
      *
      * @return view
      */
     public function index()
     {
         $seasons = Season::fetchAll();
+        foreach ($seasons as $season) {
+            $season->name = htmlspecialchars($season->name);
+        }
         return view("season.index", compact("seasons"));
     }
 
