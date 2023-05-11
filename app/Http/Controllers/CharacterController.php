@@ -47,15 +47,9 @@ class CharacterController extends Controller
 
             //　画像がpostされたときはアップロードした後、インサート用にフォーマット 
             if (!empty($imagesPath = $this->imageUpload($files))) {
-                $characterImageInsertParam = [];
-                foreach ($imagesPath as $path) {
-                    $characterImageInsertParam[] = [
-                        "character_id" => $characterId,
-                        "image_path" => $path
-                    ];
-                }
-                CharacterImage::insert($characterImageInsertParam);
+                $this->imageInsert($imagesPath, $characterId);
             }
+
             DB::commit();
             return [SUCCESS_MESSAGE => REGISTRATION_SUCCESS_MESSAGE];
         } catch (\Exception $e) {
@@ -163,23 +157,18 @@ class CharacterController extends Controller
     {
         try {
             $characterId = $request->id;
+            $files = $request->image;
             $param = $request->validate(config(CHARACTER_UPDATE_VALIDATE));
 
             DB::beginTransaction();
             Character::updateExecution($param);
             CharacterImage::deleteImageRow($characterId);
 
-            $files = $request->image;
+            // 画像の変更があった場合はアップロード・インサート
             if (!empty($imagesPath = $this->imageUpload($files))) {
-                $characterImageInsertParam = [];
-                foreach ($imagesPath as $path) {
-                    $characterImageInsertParam[] = [
-                        "character_id" => $characterId,
-                        "image_path" => $path
-                    ];
-                }
-                CharacterImage::insert($characterImageInsertParam);
+                $this->imageInsert($imagesPath, $characterId);
             }
+
             DB::commit();
             return [SUCCESS_MESSAGE => UPDATE_SUCCESS_MESSAGE];
         } catch (\Exception $e) {
@@ -227,8 +216,8 @@ class CharacterController extends Controller
             // 編集で変更しなかった画像パスを取得
             if (!preg_match('/data:image\/(\w+);base64,/', $file)) {
 
-                $file = strstr($file, "/storage");
-                $res[] = $file;
+                $imagePath = strstr($file, "/storage");
+                $res[] = $imagePath;
                 continue;
             }
 
@@ -246,8 +235,14 @@ class CharacterController extends Controller
         return $res;
     }
 
-
-    private function imageInsert($imagePaths, $characterId)
+    /**
+     * 画像パスをインサート
+     *
+     * @param array $imagePaths
+     * @param integer $characterId
+     * @return void
+     */
+    private function imageInsert(array $imagePaths, int $characterId)
     {
         $characterImageInsertParam = [];
         foreach ($imagePaths as $path) {

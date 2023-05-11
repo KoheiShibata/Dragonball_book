@@ -135,7 +135,6 @@ class Character extends Model
             ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
             ->groupBy('characters.id')
             ->orderBy("season_id", "asc")
-            ->orderBy("number", "asc")
             ->orderBy("id", "asc")
             ->get();
     }
@@ -240,7 +239,6 @@ class Character extends Model
             ->leftJoin("character_images", "character_images.character_id", "characters.id")
             ->select("characters.*", "character_images.image_path")
             ->orderBy("season_id", "asc")
-            ->orderBy("characters.number", "asc")
             ->orderBy("characters.id", "asc")
             ->get();
     }
@@ -278,7 +276,6 @@ class Character extends Model
             ->selectRaw('GROUP_CONCAT(DISTINCT character_images.image_path ORDER BY character_images.id) AS image_paths')
             ->groupBy('characters.id')
             ->orderBy("season_id", "asc")
-            ->orderBy("number", "asc")
             ->orderBy("id", "asc")
             ->get();
     }
